@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Vercel
+.vercel
+
+# Debug
+npm-debug.log*
+
+# Local env files
+.env*.local
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Reference/design files (not needed in production)
+figma_design/
+figma_reference/
+old_website_reference/
+LOGO/
+Old_website_screenshot.png

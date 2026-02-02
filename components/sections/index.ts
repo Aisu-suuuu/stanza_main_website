@@ -1,0 +1,7 @@
+export { AboutUs } from './AboutUs'
+export { Stats } from './Stats'
+export { Products } from './Products'
+export { AISolutions } from './AISolutions'
+export { Steps } from './Steps'
+export { FAQ } from './FAQ'
+export { CTA } from './CTA'

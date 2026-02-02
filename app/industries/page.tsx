@@ -1,0 +1,432 @@
+'use client'
+
+import Link from 'next/link'
+import { motion } from 'framer-motion'
+import {
+  ArrowRight,
+  Heart,
+  Landmark,
+  ShoppingCart,
+  Factory,
+  Truck,
+  Cpu,
+} from 'lucide-react'
+import Header from '@/components/layout/Header'
+import Footer from '@/components/layout/Footer'
+import { Button } from '@/components/ui/Button'
+import { Card } from '@/components/ui/Card'
+import { cn } from '@/lib/utils'
+
+// Industries data
+const industries = [
+  {
+    icon: Heart,
+    title: 'Healthcare',
+    description:
+      'Transforming patient care with AI-powered diagnostics, electronic health records, telemedicine platforms, and healthcare analytics solutions.',
+    features: ['EHR Integration', 'Telehealth Solutions', 'AI Diagnostics', 'HIPAA Compliance'],
+    color: 'from-red-500/20 to-pink-500/20',
+    iconColor: 'text-red-400',
+  },
+  {
+    icon: Landmark,
+    title: 'Finance',
+    description:
+      'Empowering financial institutions with secure payment systems, fraud detection, regulatory compliance tools, and automated trading platforms.',
+    features: ['Fraud Detection', 'Risk Management', 'Regulatory Compliance', 'Digital Banking'],
+    color: 'from-green-500/20 to-emerald-500/20',
+    iconColor: 'text-green-400',
+  },
+  {
+    icon: ShoppingCart,
+    title: 'Retail',
+    description:
+      'Revolutionizing retail experiences with omnichannel commerce, inventory management, personalized recommendations, and supply chain optimization.',
+    features: ['E-commerce Platforms', 'Inventory Management', 'Customer Analytics', 'POS Systems'],
+    color: 'from-blue-500/20 to-cyan-500/20',
+    iconColor: 'text-blue-400',
+  },
+  {
+    icon: Factory,
+    title: 'Manufacturing',
+    description:
+      'Driving Industry 4.0 with smart factory solutions, predictive maintenance, quality control automation, and real-time production monitoring.',
+    features: ['IoT Integration', 'Predictive Maintenance', 'Quality Control', 'Supply Chain'],
+    color: 'from-orange-500/20 to-amber-500/20',
+    iconColor: 'text-orange-400',
+  },
+  {
+    icon: Truck,
+    title: 'Logistics',
+    description:
+      'Optimizing supply chains with route planning, fleet management, warehouse automation, and real-time tracking solutions.',
+    features: ['Route Optimization', 'Fleet Management', 'Warehouse Automation', 'Real-time Tracking'],
+    color: 'from-purple-500/20 to-violet-500/20',
+    iconColor: 'text-purple-400',
+  },
+  {
+    icon: Cpu,
+    title: 'Technology',
+    description:
+      'Enabling tech companies with cloud infrastructure, DevOps automation, AI/ML platforms, and scalable SaaS solutions.',
+    features: ['Cloud Architecture', 'DevOps', 'AI/ML Platforms', 'SaaS Development'],
+    color: 'from-cyan-500/20 to-teal-500/20',
+    iconColor: 'text-cyan-400',
+  },
+]
+
+// Animation variants
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.25, 0.4, 0.25, 1],
+    },
+  },
+}
+
+export default function IndustriesPage() {
+  return (
+    <>
+      <Header />
+      <main className="pt-20">
+        {/* Hero Section */}
+        <section className="relative py-24 md:py-32 overflow-hidden">
+          {/* Background gradient */}
+          <div className="absolute inset-0 bg-gradient-to-b from-primary/10 via-transparent to-transparent" />
+
+          {/* Decorative orbs */}
+          <motion.div
+            className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle at 30% 30%, #8B5CF6 0%, #A855F7 40%, transparent 70%)',
+              filter: 'blur(80px)',
+            }}
+            animate={{
+              scale: [1, 1.1, 1],
+              opacity: [0.3, 0.5, 0.3],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+          <motion.div
+            className="absolute -bottom-40 -right-40 w-[400px] h-[400px] rounded-full pointer-events-none"
+            style={{
+              background: 'radial-gradient(circle at 70% 70%, #06B6D4 0%, #A855F7 50%, transparent 70%)',
+              filter: 'blur(80px)',
+            }}
+            animate={{
+              scale: [1, 0.9, 1],
+              opacity: [0.2, 0.4, 0.2],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: 'easeInOut',
+            }}
+          />
+
+          <div className="container-custom relative z-10">
+            <motion.div
+              className="max-w-4xl mx-auto text-center"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7 }}
+            >
+              <motion.span
+                className="inline-block px-4 py-2 mb-6 text-sm font-medium text-primary bg-primary/10 rounded-full"
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                Industries
+              </motion.span>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                Industries{' '}
+                <span className="gradient-text">We Serve</span>
+              </h1>
+              <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto leading-relaxed">
+                We bring deep domain expertise and innovative solutions to help
+                businesses across diverse industries achieve digital transformation.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Industries Grid Section */}
+        <section className="py-20 md:py-28">
+          <div className="container-custom">
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: '-50px' }}
+            >
+              {industries.map((industry, index) => (
+                <motion.div key={industry.title} variants={itemVariants}>
+                  <Card
+                    className={cn(
+                      'h-full p-8 group cursor-pointer',
+                      'bg-[#1A1A1A] rounded-3xl border-border/50',
+                      'hover:border-primary/50 transition-all duration-500',
+                      'hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10'
+                    )}
+                  >
+                    {/* Icon */}
+                    <div
+                      className={cn(
+                        'w-16 h-16 mb-6 rounded-2xl flex items-center justify-center',
+                        'bg-gradient-to-br transition-transform duration-300',
+                        'group-hover:scale-110',
+                        industry.color
+                      )}
+                    >
+                      <industry.icon className={cn('w-8 h-8', industry.iconColor)} />
+                    </div>
+
+                    {/* Title */}
+                    <h3 className="text-2xl font-semibold mb-4 group-hover:text-primary transition-colors duration-300">
+                      {industry.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-muted leading-relaxed mb-6">
+                      {industry.description}
+                    </p>
+
+                    {/* Features */}
+                    <div className="space-y-2 mb-6">
+                      {industry.features.map((feature) => (
+                        <div key={feature} className="flex items-center gap-2">
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                          <span className="text-sm text-muted">{feature}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Learn more link */}
+                    <div className="flex items-center gap-2 text-primary font-medium group/link">
+                      <span className="text-sm">Learn more</span>
+                      <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
+                    </div>
+                  </Card>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Stats Section */}
+        <section className="py-20 md:py-28 bg-card/50">
+          <div className="container-custom">
+            <motion.div
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Trusted Across Industries
+              </h2>
+              <p className="text-muted text-lg max-w-2xl mx-auto">
+                Our track record speaks for itself with successful implementations
+                across multiple sectors.
+              </p>
+            </motion.div>
+
+            <motion.div
+              className="bg-[#1A1A1A] rounded-3xl border border-border/50 p-8 lg:p-12"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+                {[
+                  { value: '50+', label: 'Enterprise Clients' },
+                  { value: '6', label: 'Industries Served' },
+                  { value: '95%', label: 'Client Retention' },
+                  { value: '200+', label: 'Projects Delivered' },
+                ].map((stat, index) => (
+                  <motion.div
+                    key={stat.label}
+                    className="text-center"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                  >
+                    <div className="text-4xl md:text-5xl font-bold gradient-text mb-2">
+                      {stat.value}
+                    </div>
+                    <div className="text-muted text-sm">{stat.label}</div>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Why Choose Us Section */}
+        <section className="py-20 md:py-28">
+          <div className="container-custom">
+            <div className="bg-[#1A1A1A] rounded-3xl border border-border/50 p-8 lg:p-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+              <motion.div
+                className="space-y-6"
+                initial={{ opacity: 0, x: -40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+              >
+                <h2 className="text-3xl md:text-4xl font-bold">
+                  Why Industry Leaders Choose Us
+                </h2>
+                <p className="text-muted text-lg leading-relaxed">
+                  Our deep understanding of industry-specific challenges combined with
+                  technical expertise allows us to deliver solutions that truly make
+                  a difference.
+                </p>
+                <div className="space-y-4">
+                  {[
+                    'Domain expertise with certified professionals',
+                    'Compliance-ready solutions for regulated industries',
+                    'Scalable architectures for enterprise needs',
+                    'Proven methodologies with measurable outcomes',
+                    '24/7 support and maintenance',
+                  ].map((item, index) => (
+                    <motion.div
+                      key={item}
+                      className="flex items-start gap-3"
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                    >
+                      <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <div className="w-2 h-2 rounded-full bg-primary" />
+                      </div>
+                      <span className="text-muted">{item}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div
+                className="relative"
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7 }}
+              >
+                <div className="grid grid-cols-2 gap-4">
+                  {[
+                    { icon: Heart, label: 'Healthcare', color: 'from-red-500/20 to-pink-500/20' },
+                    { icon: Landmark, label: 'Finance', color: 'from-green-500/20 to-emerald-500/20' },
+                    { icon: Factory, label: 'Manufacturing', color: 'from-orange-500/20 to-amber-500/20' },
+                    { icon: Cpu, label: 'Technology', color: 'from-cyan-500/20 to-teal-500/20' },
+                  ].map((item, index) => (
+                    <motion.div
+                      key={item.label}
+                      className={cn(
+                        'p-6 rounded-2xl bg-[#1A1A1A] border border-border/50',
+                        'hover:border-primary/50 transition-all duration-300'
+                      )}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: index * 0.1 }}
+                    >
+                      <div className={cn('w-12 h-12 rounded-xl mb-4 flex items-center justify-center bg-gradient-to-br', item.color)}>
+                        <item.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <span className="font-medium">{item.label}</span>
+                    </motion.div>
+                  ))}
+                </div>
+                {/* Decorative element */}
+                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl -z-10" />
+              </motion.div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section
+          className={cn(
+            'relative py-24 md:py-32 overflow-hidden',
+            'bg-gradient-to-br from-[#8B5CF6] via-[#A855F7] to-[#7C3AED]'
+          )}
+        >
+          {/* Background decorative elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div
+              className={cn(
+                'absolute -top-1/2 -right-1/4 w-[800px] h-[800px]',
+                'bg-white/10 rounded-full blur-3xl'
+              )}
+            />
+            <div
+              className={cn(
+                'absolute -bottom-1/2 -left-1/4 w-[600px] h-[600px]',
+                'bg-white/5 rounded-full blur-3xl'
+              )}
+            />
+          </div>
+
+          <div className="container-custom relative z-10">
+            <motion.div
+              className="flex flex-col items-center text-center max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+                Ready to Transform Your Industry?
+              </h2>
+              <p className="text-white/80 text-lg mb-8 max-w-xl">
+                Let's explore how our industry-specific solutions can drive
+                innovation and growth for your business.
+              </p>
+              <Link href="/contact">
+                <Button
+                  size="lg"
+                  className={cn(
+                    'bg-white text-[#8B5CF6] hover:bg-white/90',
+                    'shadow-2xl shadow-black/20',
+                    'px-10 py-4 text-lg font-semibold',
+                    'hover:scale-105 transition-transform duration-300'
+                  )}
+                >
+                  Start Your Journey
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            </motion.div>
+          </div>
+        </section>
+      </main>
+      <Footer />
+    </>
+  )
+}
