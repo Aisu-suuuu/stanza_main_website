@@ -494,7 +494,7 @@ function CTASection() {
             <div className="relative bg-surface-card rounded-3xl px-8 py-16 md:px-16 md:py-20">
               <div className="flex flex-col items-center text-center">
                 {/* Headline */}
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
                   Let AI do the Work so you can{' '}
                   <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
                     Scale Faster
@@ -502,7 +502,7 @@ function CTASection() {
                 </h2>
 
                 {/* Subtitle */}
-                <p className="text-white/60 text-lg md:text-xl mb-10 max-w-xl">
+                <p className="text-muted text-lg md:text-xl mb-10 max-w-xl">
                   Book a Call Today and Start Automating
                 </p>
 
