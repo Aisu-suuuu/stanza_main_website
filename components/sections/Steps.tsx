@@ -58,41 +58,21 @@ const steps: Step[] = [
   },
 ]
 
-// Individual Card Component with scroll-based activation
-function StepCard({ step, index, totalCards }: { step: Step; index: number; totalCards: number }) {
-  const cardRef = useRef<HTMLDivElement>(null)
-  const [isActive, setIsActive] = useState(index === 0)
-
-  // Track scroll position to determine if this card is active
-  const { scrollYProgress } = useScroll({
-    target: cardRef,
-    offset: ['start 0.6', 'start 0.2'],
-  })
-
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on('change', (value) => {
-      // Card is active when in the middle of its scroll range (30% to 70%)
-      setIsActive(value > 0.3 && value < 0.7)
-    })
-    return () => unsubscribe()
-  }, [scrollYProgress])
-
-  const stickyTop = 100 + index * 44
+// Individual Card Component - receives active state from parent
+function StepCard({ step, index, isActive }: { step: Step; index: number; isActive: boolean }) {
+  const stickyTop = 100 + index * 40
 
   return (
     <div
-      ref={cardRef}
       className="sticky pb-5"
       style={{ top: stickyTop, zIndex: index + 1 }}
     >
       <div
         className={cn(
-          'rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 shadow-2xl transition-all duration-500',
-          // Active card: purple gradient
+          'rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 shadow-2xl transition-all duration-500 bg-surface-card',
           isActive
-            ? 'bg-gradient-to-br from-[#814AC8] to-[#DF7AFE] border border-[#DF7AFE]/30'
-            // Inactive card: light border style for dark mode, subtle bg for light mode
-            : 'bg-surface-card border border-foreground/20 dark:border-foreground/10'
+            ? 'border-2 border-[#DF7AFE]'
+            : 'border border-foreground/20 dark:border-foreground/10'
         )}
       >
         <div className="grid lg:grid-cols-[auto_1fr_1fr] gap-4 sm:gap-6 lg:gap-8 items-center">
@@ -100,7 +80,7 @@ function StepCard({ step, index, totalCards }: { step: Step; index: number; tota
           <span
             className={cn(
               'text-7xl lg:text-8xl font-bold leading-none hidden lg:block transition-colors duration-500',
-              isActive ? 'text-white/10' : 'text-foreground/10'
+              isActive ? 'text-[#DF7AFE]/20' : 'text-foreground/10'
             )}
           >
             {step.number}.
@@ -113,7 +93,7 @@ function StepCard({ step, index, totalCards }: { step: Step; index: number; tota
               className={cn(
                 'inline-block px-3 py-1 backdrop-blur-sm rounded-full text-sm font-medium transition-colors duration-500',
                 isActive
-                  ? 'bg-white/20 text-white'
+                  ? 'bg-[#814AC8]/15 text-[#DF7AFE]'
                   : 'bg-foreground/10 text-foreground/90'
               )}
             >
@@ -125,7 +105,7 @@ function StepCard({ step, index, totalCards }: { step: Step; index: number; tota
               <span
                 className={cn(
                   'text-4xl sm:text-5xl font-bold transition-colors duration-500',
-                  isActive ? 'text-white/30' : 'text-foreground/30'
+                  isActive ? 'text-[#DF7AFE]/30' : 'text-foreground/30'
                 )}
               >
                 {step.number}.
@@ -135,20 +115,14 @@ function StepCard({ step, index, totalCards }: { step: Step; index: number; tota
             {/* Title */}
             <h3
               className={cn(
-                'text-2xl lg:text-3xl font-bold transition-colors duration-500',
-                isActive ? 'text-white' : 'text-foreground'
+                'text-2xl lg:text-3xl font-bold transition-colors duration-500 text-foreground'
               )}
             >
               {step.title}
             </h3>
 
             {/* Description */}
-            <p
-              className={cn(
-                'text-base lg:text-lg leading-relaxed transition-colors duration-500',
-                isActive ? 'text-white/70' : 'text-muted'
-              )}
-            >
+            <p className="text-base lg:text-lg leading-relaxed transition-colors duration-500 text-muted">
               {step.description}
             </p>
 
@@ -160,7 +134,7 @@ function StepCard({ step, index, totalCards }: { step: Step; index: number; tota
                   className={cn(
                     'px-3 py-1.5 rounded-full text-sm transition-colors duration-500',
                     isActive
-                      ? 'border border-white/30 text-white/90'
+                      ? 'border border-[#DF7AFE]/40 text-[#DF7AFE]'
                       : 'border border-foreground/30 text-foreground/90'
                   )}
                 >
@@ -175,7 +149,7 @@ function StepCard({ step, index, totalCards }: { step: Step; index: number; tota
               className={cn(
                 'inline-flex items-center gap-2 transition-colors duration-300 mt-2',
                 isActive
-                  ? 'text-white/70 hover:text-white'
+                  ? 'text-[#DF7AFE] hover:text-[#814AC8]'
                   : 'text-muted hover:text-foreground'
               )}
             >
@@ -204,6 +178,8 @@ function StepCard({ step, index, totalCards }: { step: Step; index: number; tota
 export function Steps() {
   const cardCount = steps.length
   const ref = useRef<HTMLDivElement>(null)
+  const cardsRef = useRef<HTMLDivElement>(null)
+  const [activeIndex, setActiveIndex] = useState(0)
 
   // Scroll-driven blur effect
   const { scrollYProgress } = useScroll({
@@ -212,6 +188,34 @@ export function Steps() {
   })
   const blurValue = useTransform(scrollYProgress, [0, 1], [8, 0])
   const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+
+  // Track which card has reached its sticky position (last one wins)
+  useEffect(() => {
+    const container = cardsRef.current
+    if (!container) return
+
+    const handleScroll = () => {
+      const cards = container.children
+      let latestStickyIndex = 0
+
+      // Find the last card that has reached its sticky top position
+      for (let i = 0; i < cards.length; i++) {
+        const card = cards[i] as HTMLElement
+        const rect = card.getBoundingClientRect()
+        const stickyTop = 100 + i * 40
+        // Card is sticky or past sticky when its top is at or near the sticky position
+        if (rect.top <= stickyTop + 10) {
+          latestStickyIndex = i
+        }
+      }
+
+      setActiveIndex(latestStickyIndex)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    handleScroll()
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <section ref={ref} className="bg-background py-16 lg:py-24">
@@ -248,15 +252,16 @@ export function Steps() {
 
         {/* Stacking Cards */}
         <div
+          ref={cardsRef}
           className="relative"
-          style={{ height: `${cardCount * 100}vh` }}
+          style={{ height: `${cardCount * 55}vh` }}
         >
           {steps.map((step, index) => (
             <StepCard
               key={step.number}
               step={step}
               index={index}
-              totalCards={cardCount}
+              isActive={index === activeIndex}
             />
           ))}
         </div>
