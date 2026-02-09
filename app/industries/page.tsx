@@ -371,7 +371,7 @@ export default function IndustriesPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="relative py-24 lg:py-32 overflow-hidden bg-[#0a0a0a]">
+        <section className="relative py-24 lg:py-32 overflow-hidden bg-background">
           <div className="container-custom relative z-10">
             <motion.div
               className="max-w-4xl mx-auto"
@@ -405,7 +405,7 @@ export default function IndustriesPage() {
                 </div>
 
                 {/* Inner card content */}
-                <div className="relative bg-[#1a1a1a] rounded-3xl px-8 py-16 md:px-16 md:py-20">
+                <div className="relative bg-surface-card rounded-3xl px-8 py-16 md:px-16 md:py-20">
                   <div className="flex flex-col items-center text-center">
                     {/* Headline */}
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">

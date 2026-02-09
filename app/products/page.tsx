@@ -457,7 +457,7 @@ function CTASection() {
   return (
     <section
       ref={ref}
-      className="relative py-24 lg:py-32 overflow-hidden bg-[#0a0a0a]"
+      className="relative py-24 lg:py-32 overflow-hidden bg-background"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div
@@ -491,7 +491,7 @@ function CTASection() {
             </div>
 
             {/* Inner card content */}
-            <div className="relative bg-[#1a1a1a] rounded-3xl px-8 py-16 md:px-16 md:py-20">
+            <div className="relative bg-surface-card rounded-3xl px-8 py-16 md:px-16 md:py-20">
               <div className="flex flex-col items-center text-center">
                 {/* Headline */}
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
