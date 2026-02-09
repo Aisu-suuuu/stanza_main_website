@@ -69,18 +69,26 @@ function StepCard({ step, index, isActive }: { step: Step; index: number; isActi
     >
       <div
         className={cn(
-          'rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 shadow-2xl transition-all duration-500 bg-surface-card',
+          'rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 shadow-2xl transition-all duration-500',
           isActive
-            ? 'border-2 border-[#DF7AFE]'
-            : 'border border-foreground/20 dark:border-foreground/10'
+            ? 'border-2 border-transparent'
+            : 'border border-foreground/20 dark:border-foreground/10 bg-surface-card'
         )}
+        style={
+          isActive
+            ? {
+                background:
+                  'linear-gradient(var(--surface-card), var(--surface-card)) padding-box, linear-gradient(135deg, rgba(255,255,255,0.95), rgba(155,111,212,0.8)) border-box',
+              }
+            : undefined
+        }
       >
         <div className="grid lg:grid-cols-[auto_1fr_1fr] gap-4 sm:gap-6 lg:gap-8 items-center">
           {/* Large Number */}
           <span
             className={cn(
               'text-7xl lg:text-8xl font-bold leading-none hidden lg:block transition-colors duration-500',
-              isActive ? 'text-[#DF7AFE]/20' : 'text-foreground/10'
+              isActive ? 'text-[#9B6FD4]/20' : 'text-foreground/10'
             )}
           >
             {step.number}.
@@ -93,7 +101,7 @@ function StepCard({ step, index, isActive }: { step: Step; index: number; isActi
               className={cn(
                 'inline-block px-3 py-1 backdrop-blur-sm rounded-full text-sm font-medium transition-colors duration-500',
                 isActive
-                  ? 'bg-[#814AC8]/15 text-[#DF7AFE]'
+                  ? 'bg-[#9B6FD4]/10 text-[#9B6FD4]'
                   : 'bg-foreground/10 text-foreground/90'
               )}
             >
@@ -105,7 +113,7 @@ function StepCard({ step, index, isActive }: { step: Step; index: number; isActi
               <span
                 className={cn(
                   'text-4xl sm:text-5xl font-bold transition-colors duration-500',
-                  isActive ? 'text-[#DF7AFE]/30' : 'text-foreground/30'
+                  isActive ? 'text-[#9B6FD4]/30' : 'text-foreground/30'
                 )}
               >
                 {step.number}.
@@ -134,7 +142,7 @@ function StepCard({ step, index, isActive }: { step: Step; index: number; isActi
                   className={cn(
                     'px-3 py-1.5 rounded-full text-sm transition-colors duration-500',
                     isActive
-                      ? 'border border-[#DF7AFE]/40 text-[#DF7AFE]'
+                      ? 'border border-[#9B6FD4]/30 text-[#9B6FD4]'
                       : 'border border-foreground/30 text-foreground/90'
                   )}
                 >
@@ -149,7 +157,7 @@ function StepCard({ step, index, isActive }: { step: Step; index: number; isActi
               className={cn(
                 'inline-flex items-center gap-2 transition-colors duration-300 mt-2',
                 isActive
-                  ? 'text-[#DF7AFE] hover:text-[#814AC8]'
+                  ? 'text-[#9B6FD4] hover:text-[#7B52B4]'
                   : 'text-muted hover:text-foreground'
               )}
             >
