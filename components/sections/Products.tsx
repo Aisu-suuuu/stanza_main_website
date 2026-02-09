@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
@@ -56,7 +56,7 @@ function ProductRow({ product, index, isInView }: ProductRowProps) {
       <div
         className={cn(
           'grid md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center',
-          'bg-[#1A1A1A]/50 rounded-3xl p-6 md:p-8',
+          'bg-surface-card/50 rounded-3xl p-6 md:p-8',
           'hover:-translate-y-1 transition-transform duration-300',
           'overflow-hidden'
         )}
@@ -85,7 +85,7 @@ function ProductRow({ product, index, isInView }: ProductRowProps) {
 
         {/* Content */}
         <div className={cn('py-2 md:py-4', isReversed && 'md:order-1')}>
-          <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
+          <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4">
             {product.title}
           </h3>
           {product.description.map((paragraph, idx) => (
@@ -114,9 +114,17 @@ export function Products() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
+  // Scroll-driven blur effect
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'start center'],
+  })
+  const blurValue = useTransform(scrollYProgress, [0, 1], [8, 0])
+  const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+
   return (
-    <section ref={ref} className="relative bg-[#0D0D0D] py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section ref={ref} className="relative bg-background py-24 lg:py-32">
+      <motion.div className="mx-auto max-w-7xl px-6 lg:px-8" style={{ filter: filterBlur }}>
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -124,12 +132,9 @@ export function Products() {
           transition={{ duration: 0.6, ease: 'easeOut' }}
           className="text-center mb-16 lg:mb-20"
         >
-          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+          <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Our Products
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted">
-            Innovative solutions designed to transform your business and drive growth
-          </p>
         </motion.div>
 
         {/* Products - Alternating Layout */}
@@ -157,12 +162,12 @@ export function Products() {
               size="lg"
               className="rounded-full px-8"
             >
-              Our Services
+              View more
               <ArrowRight className="w-4 h-4 ml-2" />
             </Button>
           </Link>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Decorative background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">

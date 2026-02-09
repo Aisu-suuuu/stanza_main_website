@@ -21,3 +21,4 @@ export {
   type AnimatedTextProps,
   type AnimatedCharactersProps,
 } from './AnimatedText'
+export { ThemeToggle } from './ThemeToggle'

@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { Linkedin, Twitter, Mail, Phone, MapPin } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
@@ -33,12 +32,17 @@ export default function Footer() {
           {/* Column 1: Logo & Tagline */}
           <div className="lg:col-span-1">
             <Link href="/" className="inline-block mb-4">
-              <Image
-                src="/images/logo-dark.png"
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/logo-light.svg"
                 alt="Stanzasoft"
-                width={150}
-                height={40}
-                className="h-8 w-auto"
+                className="h-8 sm:h-9 md:h-10 lg:h-11 w-auto dark:hidden"
+              />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/images/logo-dark.svg"
+                alt="Stanzasoft"
+                className="h-8 sm:h-9 md:h-10 lg:h-11 w-auto hidden dark:block"
               />
             </Link>
             <p className="text-muted text-sm leading-relaxed mb-6">
@@ -59,7 +63,7 @@ export default function Footer() {
 
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-foreground font-semibold text-sm uppercase tracking-wider mb-4">
               Quick Links
             </h3>
             <ul className="space-y-3">
@@ -67,7 +71,7 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-muted text-sm hover:text-white transition-colors duration-200"
+                    className="text-muted text-sm hover:text-foreground transition-colors duration-200"
                   >
                     {link.label}
                   </Link>
@@ -78,7 +82,7 @@ export default function Footer() {
 
           {/* Column 3: Services */}
           <div>
-            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-foreground font-semibold text-sm uppercase tracking-wider mb-4">
               Services
             </h3>
             <ul className="space-y-3">
@@ -86,7 +90,7 @@ export default function Footer() {
                 <li key={service.href}>
                   <Link
                     href={service.href}
-                    className="text-muted text-sm hover:text-white transition-colors duration-200"
+                    className="text-muted text-sm hover:text-foreground transition-colors duration-200"
                   >
                     {service.label}
                   </Link>
@@ -97,14 +101,14 @@ export default function Footer() {
 
           {/* Column 4: Contact Info */}
           <div>
-            <h3 className="text-white font-semibold text-sm uppercase tracking-wider mb-4">
+            <h3 className="text-foreground font-semibold text-sm uppercase tracking-wider mb-4">
               Contact
             </h3>
             <ul className="space-y-3">
               <li>
                 <a
                   href="mailto:hello@stanzasoft.com"
-                  className="flex items-center gap-2 text-muted text-sm hover:text-white transition-colors duration-200"
+                  className="flex items-center gap-2 text-muted text-sm hover:text-foreground transition-colors duration-200"
                 >
                   <Mail className="h-4 w-4 flex-shrink-0 text-primary" />
                   <span>hello@stanzasoft.com</span>
@@ -113,7 +117,7 @@ export default function Footer() {
               <li>
                 <a
                   href="tel:+919000888055"
-                  className="flex items-center gap-2 text-muted text-sm hover:text-white transition-colors duration-200"
+                  className="flex items-center gap-2 text-muted text-sm hover:text-foreground transition-colors duration-200"
                 >
                   <Phone className="h-4 w-4 flex-shrink-0 text-primary" />
                   <span>+91 9000888055</span>

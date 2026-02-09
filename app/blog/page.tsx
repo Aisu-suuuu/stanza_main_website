@@ -97,7 +97,7 @@ function BlogCard({
       <div
         className={cn(
           'group relative h-full',
-          'bg-[#1A1A1A] rounded-3xl border border-border/50',
+          'bg-surface-card rounded-3xl border border-border/50',
           'hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10',
           'transition-all duration-300 ease-out',
           'hover:-translate-y-1',
@@ -118,7 +118,7 @@ function BlogCard({
               'flex items-center justify-center'
             )}
           >
-            <span className="text-white/50 text-sm font-medium">Image Coming Soon</span>
+            <span className="text-muted text-sm font-medium">Image Coming Soon</span>
           </div>
           {/* Category Tag */}
           <div className="absolute top-4 left-4">
@@ -126,7 +126,7 @@ function BlogCard({
               className={cn(
                 'inline-flex items-center gap-1.5 px-3 py-1.5',
                 'text-xs font-medium text-primary',
-                'bg-[#1A1A1A]/80 backdrop-blur-sm rounded-full',
+                'bg-surface-card/80 backdrop-blur-sm rounded-full',
                 'border border-primary/20'
               )}
             >
@@ -291,7 +291,7 @@ export default function BlogPage() {
         </section>
 
         {/* Blog Grid Section */}
-        <section className="py-16 md:py-24 bg-[#0D0D0D]">
+        <section className="py-16 md:py-24 bg-background">
           <div className="container mx-auto px-4 md:px-6">
             {/* Section Header */}
             <motion.div
@@ -331,7 +331,7 @@ export default function BlogPage() {
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <motion.div
-              className="bg-[#1A1A1A] rounded-3xl p-8 lg:p-12"
+              className="bg-surface-card rounded-3xl p-8 lg:p-12"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -362,7 +362,7 @@ export default function BlogPage() {
                     placeholder="Enter your email"
                     className={cn(
                       'flex-1 px-6 py-4 rounded-xl',
-                      'bg-[#0D0D0D] border border-border/50',
+                      'bg-background border border-border/50',
                       'text-foreground placeholder:text-muted',
                       'focus:outline-none focus:border-primary/50',
                       'transition-colors duration-300'
@@ -381,97 +381,74 @@ export default function BlogPage() {
         </section>
 
         {/* CTA Section */}
-        <section
-          className={cn(
-            'relative py-24 md:py-32 overflow-hidden',
-            'bg-gradient-to-br from-[#8B5CF6] via-[#A855F7] to-[#7C3AED]'
-          )}
-        >
-          {/* Background decorative elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div
-              className={cn(
-                'absolute -top-1/2 -right-1/4 w-[800px] h-[800px]',
-                'bg-white/10 rounded-full blur-3xl'
-              )}
-            />
-            <div
-              className={cn(
-                'absolute -bottom-1/2 -left-1/4 w-[600px] h-[600px]',
-                'bg-white/5 rounded-full blur-3xl'
-              )}
-            />
-          </div>
-
+        <section className="relative py-24 lg:py-32 overflow-hidden bg-[#0a0a0a]">
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <motion.div
-              className="flex flex-col items-center text-center max-w-4xl mx-auto"
+              className="max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6 }}
             >
-              {/* Headline */}
-              <motion.h2
-                className={cn(
-                  'text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold',
-                  'text-white leading-tight mb-6'
-                )}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              >
-                Have a Question?
-              </motion.h2>
+              {/* Card with animated gradient border */}
+              <div className="relative p-[2px] rounded-3xl overflow-hidden">
+                {/* Animated gradient border */}
+                <motion.div
+                  className="absolute inset-0"
+                  style={{
+                    background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
+                  }}
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                />
 
-              {/* Subtext */}
-              <motion.p
-                className="text-white/80 text-lg md:text-xl mb-8 max-w-2xl"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.15 }}
-              >
-                Our team of experts is here to help. Reach out to discuss your
-                specific technology challenges and goals.
-              </motion.p>
+                {/* Glow effect */}
+                <div className="absolute inset-0 blur-xl opacity-50">
+                  <motion.div
+                    className="absolute inset-0"
+                    style={{
+                      background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
+                    }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                  />
+                </div>
 
-              {/* CTA Buttons */}
-              <motion.div
-                className="flex flex-col sm:flex-row gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                <Link href="/contact">
-                  <Button
-                    size="lg"
-                    className={cn(
-                      'bg-white text-[#8B5CF6] hover:bg-white/90',
-                      'shadow-2xl shadow-black/20',
-                      'px-8 py-4 text-lg font-semibold',
-                      'hover:scale-105 transition-transform duration-300'
-                    )}
-                  >
-                    Contact Us
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </Link>
-                <Link href="/services">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className={cn(
-                      'border-white/30 text-white hover:bg-white/10',
-                      'px-8 py-4 text-lg font-semibold'
-                    )}
-                  >
-                    Explore Services
-                  </Button>
-                </Link>
-              </motion.div>
+                {/* Inner card content */}
+                <div className="relative bg-[#1a1a1a] rounded-3xl px-8 py-16 md:px-16 md:py-20">
+                  <div className="flex flex-col items-center text-center">
+                    {/* Headline */}
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+                      Let AI do the Work so you can{' '}
+                      <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
+                        Scale Faster
+                      </span>
+                    </h2>
+
+                    {/* Subtitle */}
+                    <p className="text-white/60 text-lg md:text-xl mb-10 max-w-xl">
+                      Book a Call Today and Start Automating
+                    </p>
+
+                    {/* CTA Button */}
+                    <Link href="/contact">
+                      <Button
+                        size="lg"
+                        className={cn(
+                          'bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8]',
+                          'text-white font-semibold',
+                          'px-10 py-5 text-lg rounded-xl',
+                          'shadow-2xl shadow-[#814AC8]/30',
+                          'hover:shadow-[#814AC8]/50 hover:scale-105',
+                          'transition-all duration-300'
+                        )}
+                      >
+                        Book a free call
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>

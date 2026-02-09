@@ -129,7 +129,7 @@ export default function CareersPage() {
             className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full opacity-30"
             style={{
               background:
-                'radial-gradient(circle at center, #8B5CF6 0%, transparent 70%)',
+                'radial-gradient(circle at center, #814AC8 0%, transparent 70%)',
               filter: 'blur(80px)',
             }}
           />
@@ -150,7 +150,7 @@ export default function CareersPage() {
                 We're Hiring
               </motion.span>
               <motion.h1
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
@@ -182,7 +182,7 @@ export default function CareersPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Why Work With Us
               </h2>
               <p className="text-muted text-lg max-w-2xl mx-auto">
@@ -203,14 +203,14 @@ export default function CareersPage() {
                   key={index}
                   variants={itemVariants}
                   className={cn(
-                    'relative p-6 rounded-3xl bg-[#1A1A1A] border border-white/10',
+                    'relative p-6 rounded-3xl bg-surface-card border border-foreground/10',
                     'hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300'
                   )}
                 >
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
                     <benefit.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">
+                  <h3 className="text-lg font-semibold text-foreground mb-2">
                     {benefit.title}
                   </h3>
                   <p className="text-sm text-muted leading-relaxed">
@@ -223,7 +223,7 @@ export default function CareersPage() {
         </section>
 
         {/* Open Positions Section */}
-        <section className="py-20 md:py-28 bg-[#0D0D0D]">
+        <section className="py-20 md:py-28 bg-background">
           <div className="container-custom">
             <motion.div
               className="text-center mb-16"
@@ -232,7 +232,7 @@ export default function CareersPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Open Positions
               </h2>
               <p className="text-muted text-lg max-w-2xl mx-auto">
@@ -252,7 +252,7 @@ export default function CareersPage() {
                   key={position.id}
                   variants={itemVariants}
                   className={cn(
-                    'group relative p-6 rounded-3xl bg-[#1A1A1A] border border-white/10',
+                    'group relative p-6 rounded-3xl bg-surface-card border border-foreground/10',
                     'hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1 transition-all duration-300'
                   )}
                 >
@@ -263,7 +263,7 @@ export default function CareersPage() {
                           {position.department}
                         </span>
                       </div>
-                      <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-primary transition-colors">
+                      <h3 className="text-xl font-semibold text-foreground mb-3 group-hover:text-primary transition-colors">
                         {position.title}
                       </h3>
                       <div className="flex flex-wrap items-center gap-4 text-sm text-muted">
@@ -302,7 +302,7 @@ export default function CareersPage() {
                 animate={{ opacity: 1 }}
               >
                 <Briefcase className="w-16 h-16 text-muted mx-auto mb-4" />
-                <h3 className="text-xl font-semibold text-white mb-2">
+                <h3 className="text-xl font-semibold text-foreground mb-2">
                   No Open Positions
                 </h3>
                 <p className="text-muted">
@@ -323,7 +323,7 @@ export default function CareersPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
                 Our Culture
               </h2>
               <p className="text-muted text-lg max-w-2xl mx-auto">
@@ -343,7 +343,7 @@ export default function CareersPage() {
                 <motion.div
                   key={index}
                   variants={itemVariants}
-                  className="relative rounded-3xl bg-[#1A1A1A] border border-white/10 p-2 overflow-hidden group"
+                  className="relative rounded-3xl bg-surface-card border border-foreground/10 p-2 overflow-hidden group"
                 >
                   <div className="relative aspect-[3/2] rounded-2xl overflow-hidden">
                     <Image
@@ -378,42 +378,74 @@ export default function CareersPage() {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 md:py-28 bg-gradient-to-br from-[#8B5CF6] via-[#A855F7] to-[#7C3AED] relative overflow-hidden">
-          {/* Background decorative elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-1/2 -right-1/4 w-[800px] h-[800px] bg-white/10 rounded-full blur-3xl" />
-            <div className="absolute -bottom-1/2 -left-1/4 w-[600px] h-[600px] bg-white/5 rounded-full blur-3xl" />
-          </div>
-
+        <section className="relative py-24 lg:py-32 overflow-hidden bg-[#0a0a0a]">
           <div className="container-custom relative z-10">
             <motion.div
-              className="text-center max-w-3xl mx-auto"
+              className="max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-                Ready to Start Your Journey?
-              </h2>
-              <p className="text-white/80 text-lg mb-8">
-                Don't see a position that fits? We're always looking for talented
-                people. Send us your resume and let's talk.
-              </p>
-              <Link href="/contact">
-                <Button
-                  size="lg"
-                  className={cn(
-                    'bg-white text-[#8B5CF6] hover:bg-white/90',
-                    'shadow-2xl shadow-black/20',
-                    'px-10 py-4 text-lg font-semibold',
-                    'hover:scale-105 transition-transform duration-300'
-                  )}
-                >
-                  Get in Touch
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
+              {/* Card with animated gradient border */}
+              <div className="relative p-[2px] rounded-3xl overflow-hidden">
+                {/* Animated gradient border */}
+                <motion.div
+                  className="absolute inset-0"
+                  style={{
+                    background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
+                  }}
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                />
+
+                {/* Glow effect */}
+                <div className="absolute inset-0 blur-xl opacity-50">
+                  <motion.div
+                    className="absolute inset-0"
+                    style={{
+                      background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
+                    }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                  />
+                </div>
+
+                {/* Inner card content */}
+                <div className="relative bg-[#1a1a1a] rounded-3xl px-8 py-16 md:px-16 md:py-20">
+                  <div className="flex flex-col items-center text-center">
+                    {/* Headline */}
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+                      Let AI do the Work so you can{' '}
+                      <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
+                        Scale Faster
+                      </span>
+                    </h2>
+
+                    {/* Subtitle */}
+                    <p className="text-white/60 text-lg md:text-xl mb-10 max-w-xl">
+                      Book a Call Today and Start Automating
+                    </p>
+
+                    {/* CTA Button */}
+                    <Link href="/contact">
+                      <Button
+                        size="lg"
+                        className={cn(
+                          'bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8]',
+                          'text-white font-semibold',
+                          'px-10 py-5 text-lg rounded-xl',
+                          'shadow-2xl shadow-[#814AC8]/30',
+                          'hover:shadow-[#814AC8]/50 hover:scale-105',
+                          'transition-all duration-300'
+                        )}
+                      >
+                        Book a free call
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>

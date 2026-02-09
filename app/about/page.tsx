@@ -3,45 +3,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { ArrowRight, Lightbulb, Shield, Users, Target } from 'lucide-react'
+import { Lightbulb, Shield, Users, Target } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
-
-// Team members data
-const teamMembers = [
-  {
-    name: 'Sarah Chen',
-    role: 'CEO & Founder',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=400&fit=crop&crop=face',
-  },
-  {
-    name: 'Michael Torres',
-    role: 'CTO',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face',
-  },
-  {
-    name: 'Priya Sharma',
-    role: 'Head of Engineering',
-    image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&h=400&fit=crop&crop=face',
-  },
-  {
-    name: 'David Kim',
-    role: 'Head of Design',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&h=400&fit=crop&crop=face',
-  },
-  {
-    name: 'Emily Rodriguez',
-    role: 'VP of Operations',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face',
-  },
-  {
-    name: 'James Wilson',
-    role: 'Lead Architect',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face',
-  },
-]
 
 // Values data
 const values = [
@@ -104,7 +70,7 @@ export default function AboutPage() {
           <motion.div
             className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full pointer-events-none"
             style={{
-              background: 'radial-gradient(circle at 30% 30%, #8B5CF6 0%, #A855F7 40%, #EC4899 70%, transparent 100%)',
+              background: 'radial-gradient(circle at 30% 30%, #814AC8 0%, #DF7AFE 40%, #DF7AFE 70%, transparent 100%)',
               filter: 'blur(80px)',
             }}
             animate={{
@@ -149,7 +115,7 @@ export default function AboutPage() {
         <section className="py-20 md:py-28">
           <div className="container-custom">
             <motion.div
-              className="bg-[#1A1A1A] rounded-3xl p-8 lg:p-12"
+              className="bg-surface-card rounded-3xl p-8 lg:p-12"
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -171,7 +137,7 @@ export default function AboutPage() {
                       className="object-cover"
                       sizes="(max-width: 1024px) 100vw, 50vw"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A]/60 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-surface-card/60 via-transparent to-transparent" />
                   </div>
                 </motion.div>
 
@@ -182,7 +148,7 @@ export default function AboutPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.7, delay: 0.3 }}
                 >
-                  <h2 className="text-3xl md:text-4xl font-bold text-white">
+                  <h2 className="text-3xl md:text-4xl font-bold text-foreground">
                     Our Mission
                   </h2>
                   <p className="text-muted text-lg leading-relaxed">
@@ -224,7 +190,7 @@ export default function AboutPage() {
         </section>
 
         {/* Values Section - Gray Card Styling */}
-        <section className="py-20 md:py-28 bg-[#0D0D0D]">
+        <section className="py-20 md:py-28 bg-background">
           <div className="container-custom">
             <motion.div
               className="text-center mb-16"
@@ -252,7 +218,7 @@ export default function AboutPage() {
                 <motion.div key={value.title} variants={itemVariants}>
                   <div
                     className={cn(
-                      'h-full p-6 text-center bg-[#1A1A1A] rounded-3xl',
+                      'h-full p-6 text-center bg-surface-card rounded-3xl',
                       'border border-border/50',
                       'hover:border-primary/50 transition-all duration-300',
                       'hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10'
@@ -261,7 +227,7 @@ export default function AboutPage() {
                     <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
                       <value.icon className="w-7 h-7 text-primary" />
                     </div>
-                    <h3 className="text-xl font-semibold mb-3 text-white">{value.title}</h3>
+                    <h3 className="text-xl font-semibold mb-3 text-foreground">{value.title}</h3>
                     <p className="text-muted text-sm leading-relaxed">{value.description}</p>
                   </div>
                 </motion.div>
@@ -270,111 +236,113 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Team Section - Gray Card Backgrounds */}
+        {/* Team Section */}
         <section className="py-20 md:py-28">
           <div className="container-custom">
             <motion.div
-              className="text-center mb-16"
+              className="bg-surface-card rounded-3xl p-8 lg:p-12"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Meet Our Team
-              </h2>
-              <p className="text-muted text-lg max-w-2xl mx-auto">
-                The talented individuals driving innovation and excellence at Stanzasoft.
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              {teamMembers.map((member) => (
-                <motion.div
-                  key={member.name}
-                  variants={itemVariants}
-                  className="group"
-                >
-                  <div className="relative overflow-hidden rounded-3xl bg-[#1A1A1A] border border-border/50 transition-all duration-300 hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1">
-                    <div className="aspect-[4/5] relative overflow-hidden">
-                      <Image
-                        src={member.image}
-                        alt={member.name}
-                        fill
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-[#1A1A1A] via-[#1A1A1A]/20 to-transparent" />
-                    </div>
-                    <div className="absolute bottom-0 left-0 right-0 p-6">
-                      <h3 className="text-xl font-semibold mb-1 text-white">{member.name}</h3>
-                      <p className="text-primary text-sm">{member.role}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
+              <div className="max-w-4xl mx-auto text-center">
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                  Meet Our Team
+                </h2>
+                <p className="text-muted text-lg leading-relaxed mb-6">
+                  At Stanzasoft, our strength lies in our people. We are a diverse group of engineers,
+                  designers, strategists, and problem-solvers united by a shared passion for innovation
+                  and excellence. Our team brings together decades of combined experience across AI/ML,
+                  cloud architecture, enterprise software, and digital transformation.
+                </p>
+                <p className="text-muted text-lg leading-relaxed mb-6">
+                  We believe in fostering a culture of continuous learning, collaboration, and
+                  creativity. Every team member is empowered to contribute ideas, take ownership,
+                  and make a meaningful impact on the projects we deliver. This collaborative spirit
+                  is what enables us to tackle complex challenges and deliver exceptional results
+                  for our clients.
+                </p>
+                <p className="text-muted text-lg leading-relaxed">
+                  Whether working remotely or from our offices in San Francisco and Hyderabad,
+                  our team stays connected and aligned through shared values: integrity, innovation,
+                  and an unwavering commitment to client success. Together, we're building the
+                  future of technology—one solution at a time.
+                </p>
+              </div>
             </motion.div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section
-          className={cn(
-            'relative py-24 md:py-32 overflow-hidden',
-            'bg-gradient-to-br from-[#8B5CF6] via-[#A855F7] to-[#7C3AED]'
-          )}
-        >
-          {/* Background decorative elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div
-              className={cn(
-                'absolute -top-1/2 -right-1/4 w-[800px] h-[800px]',
-                'bg-white/10 rounded-full blur-3xl'
-              )}
-            />
-            <div
-              className={cn(
-                'absolute -bottom-1/2 -left-1/4 w-[600px] h-[600px]',
-                'bg-white/5 rounded-full blur-3xl'
-              )}
-            />
-          </div>
-
+        <section className="relative py-24 lg:py-32 overflow-hidden bg-[#0a0a0a]">
           <div className="container-custom relative z-10">
             <motion.div
-              className="flex flex-col items-center text-center max-w-3xl mx-auto"
+              className="max-w-4xl mx-auto"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
-                Ready to Transform Your Business?
-              </h2>
-              <p className="text-white/80 text-lg mb-8 max-w-xl">
-                Let's discuss how Stanzasoft can help you achieve your goals with
-                innovative technology solutions.
-              </p>
-              <Link href="/contact">
-                <Button
-                  size="lg"
-                  className={cn(
-                    'bg-white text-[#8B5CF6] hover:bg-white/90',
-                    'shadow-2xl shadow-black/20',
-                    'px-10 py-4 text-lg font-semibold',
-                    'hover:scale-105 transition-transform duration-300'
-                  )}
-                >
-                  Get in Touch
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
+              {/* Card with animated gradient border */}
+              <div className="relative p-[2px] rounded-3xl overflow-hidden">
+                {/* Animated gradient border */}
+                <motion.div
+                  className="absolute inset-0"
+                  style={{
+                    background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
+                  }}
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                />
+
+                {/* Glow effect */}
+                <div className="absolute inset-0 blur-xl opacity-50">
+                  <motion.div
+                    className="absolute inset-0"
+                    style={{
+                      background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
+                    }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+                  />
+                </div>
+
+                {/* Inner card content */}
+                <div className="relative bg-[#1a1a1a] rounded-3xl px-8 py-16 md:px-16 md:py-20">
+                  <div className="flex flex-col items-center text-center">
+                    {/* Headline */}
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-6">
+                      Let AI do the Work so you can{' '}
+                      <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
+                        Scale Faster
+                      </span>
+                    </h2>
+
+                    {/* Subtitle */}
+                    <p className="text-white/60 text-lg md:text-xl mb-10 max-w-xl">
+                      Book a Call Today and Start Automating
+                    </p>
+
+                    {/* CTA Button */}
+                    <Link href="/contact">
+                      <Button
+                        size="lg"
+                        className={cn(
+                          'bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8]',
+                          'text-white font-semibold',
+                          'px-10 py-5 text-lg rounded-xl',
+                          'shadow-2xl shadow-[#814AC8]/30',
+                          'hover:shadow-[#814AC8]/50 hover:scale-105',
+                          'transition-all duration-300'
+                        )}
+                      >
+                        Book a free call
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
             </motion.div>
           </div>
         </section>

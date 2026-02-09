@@ -57,9 +57,9 @@ export function AnimatedText({
   staggerChildren = 0.08,
   gradient = true,
   gradientColors = {
-    from: '#8B5CF6',
-    via: '#A855F7',
-    to: '#EC4899',
+    from: '#814AC8',
+    via: '#DF7AFE',
+    to: '#DF7AFE',
   },
   as: Component = 'span',
 }: AnimatedTextProps) {
@@ -125,9 +125,9 @@ export function AnimatedCharacters({
   staggerChildren = 0.02,
   gradient = true,
   gradientColors = {
-    from: '#8B5CF6',
-    via: '#A855F7',
-    to: '#EC4899',
+    from: '#814AC8',
+    via: '#DF7AFE',
+    to: '#DF7AFE',
   },
   as: Component = 'span',
 }: AnimatedCharactersProps) {

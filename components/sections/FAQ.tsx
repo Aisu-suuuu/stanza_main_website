@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import * as Accordion from '@radix-ui/react-accordion'
 import { ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -48,27 +49,26 @@ function FAQAccordionItem({
   return (
     <Accordion.Item
       value={value}
-      className={cn(
-        'border-b border-white/10',
-        'group'
-      )}
+      className="group mb-3"
     >
       <Accordion.Header>
         <Accordion.Trigger
           className={cn(
-            'flex w-full items-center justify-between py-6',
-            'text-left text-lg md:text-xl font-medium text-foreground',
-            'transition-colors duration-200',
-            'hover:text-primary',
-            'group-data-[state=open]:text-primary',
-            'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-background'
+            'flex w-full items-center justify-between',
+            'px-6 py-5 rounded-xl',
+            'bg-surface-card border border-foreground/10',
+            'text-left text-base md:text-lg font-medium text-foreground',
+            'transition-all duration-200',
+            'hover:border-foreground/20',
+            'group-data-[state=open]:rounded-b-none group-data-[state=open]:border-b-0',
+            'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50'
           )}
         >
           {item.question}
           <ChevronDown
             className={cn(
-              'h-5 w-5 shrink-0 text-muted transition-transform duration-300',
-              'group-data-[state=open]:rotate-180 group-data-[state=open]:text-primary'
+              'h-5 w-5 shrink-0 text-foreground/50 transition-transform duration-300',
+              'group-data-[state=open]:rotate-180'
             )}
           />
         </Accordion.Trigger>
@@ -77,11 +77,10 @@ function FAQAccordionItem({
         className={cn(
           'overflow-hidden',
           'data-[state=open]:animate-accordion-down',
-          'data-[state=closed]:animate-accordion-up',
-          'transition-all duration-300'
+          'data-[state=closed]:animate-accordion-up'
         )}
       >
-        <div className="p-4 pt-0 pb-6 text-muted leading-relaxed">
+        <div className="px-6 py-5 bg-surface-card border border-t-0 border-foreground/10 rounded-b-xl text-muted leading-relaxed">
           {item.answer}
         </div>
       </Accordion.Content>
@@ -90,9 +89,19 @@ function FAQAccordionItem({
 }
 
 export function FAQ() {
+  const ref = useRef<HTMLDivElement>(null)
+
+  // Scroll-driven blur effect
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'start center'],
+  })
+  const blurValue = useTransform(scrollYProgress, [0, 1], [8, 0])
+  const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+
   return (
-    <section className="bg-[#0D0D0D] py-24 md:py-32">
-      <div className="container mx-auto px-4 md:px-6">
+    <section ref={ref} className="bg-background py-24 md:py-32">
+      <motion.div className="container mx-auto px-4 md:px-6" style={{ filter: filterBlur }}>
         {/* Header */}
         <motion.div
           className="text-center max-w-3xl mx-auto mb-16"
@@ -112,7 +121,7 @@ export function FAQ() {
             transition={{ duration: 0.5, delay: 0.1 }}
           >
             We've Got the Answers You're{' '}
-            <span className="bg-gradient-text bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
               Looking For
             </span>
           </motion.h2>
@@ -149,7 +158,7 @@ export function FAQ() {
             ))}
           </Accordion.Root>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   )
 }

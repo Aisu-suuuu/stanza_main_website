@@ -6,24 +6,25 @@ const config: Config = {
     './components/**/*.{js,ts,jsx,tsx,mdx}',
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
-        background: '#0D0D0D',
-        foreground: '#FFFFFF',
-        muted: '#A1A1AA',
-        'muted-foreground': '#71717A',
-        border: '#27272A',
+        background: 'var(--background)',
+        foreground: 'var(--foreground)',
+        muted: 'var(--muted)',
+        'muted-foreground': 'var(--muted-foreground)',
+        border: 'var(--border)',
         card: {
-          DEFAULT: '#18181B',
-          foreground: '#FFFFFF',
+          DEFAULT: 'var(--card)',
+          foreground: 'var(--card-foreground)',
         },
         primary: {
-          DEFAULT: '#8B5CF6',
+          DEFAULT: '#814AC8',
           foreground: '#FFFFFF',
         },
         secondary: {
-          DEFAULT: '#A855F7',
+          DEFAULT: '#DF7AFE',
           foreground: '#FFFFFF',
         },
         accent: {
@@ -36,16 +37,16 @@ const config: Config = {
         },
         brand: {
           'purple-primary': '#814AC8',
-          'purple-violet': '#8B5CF6',
-          'purple-light': '#A855F7',
-          'purple-dark': '#7C3AED',
-          'pink-accent': '#EC4899',
+          'purple-violet': '#814AC8',
+          'purple-light': '#DF7AFE',
+          'purple-dark': '#814AC8',
+          'pink-accent': '#DF7AFE',
         },
         surface: {
-          dark: '#0D0D0D',
-          card: '#1A1A1A',
+          dark: 'var(--surface-dark)',
+          card: 'var(--surface-card)',
         },
-        cream: '#FFFFE6',
+        cream: 'var(--cream)',
       },
       fontFamily: {
         sans: ['var(--font-dm-sans)', 'system-ui', 'sans-serif'],
@@ -54,8 +55,8 @@ const config: Config = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'gradient-purple': 'linear-gradient(135deg, #8B5CF6 0%, #A855F7 50%, #EC4899 100%)',
-        'gradient-text': 'linear-gradient(90deg, #8B5CF6 0%, #A855F7 50%, #EC4899 100%)',
+        'gradient-purple': 'linear-gradient(135deg, #814AC8 0%, #DF7AFE 50%, #DF7AFE 100%)',
+        'gradient-text': 'linear-gradient(90deg, #814AC8 0%, #DF7AFE 50%, #DF7AFE 100%)',
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -64,6 +65,7 @@ const config: Config = {
         'gradient': 'gradient 8s linear infinite',
         'accordion-down': 'accordion-down 0.3s ease-out',
         'accordion-up': 'accordion-up 0.3s ease-out',
+        'marquee': 'marquee 25s linear infinite',
       },
       keyframes: {
         float: {
@@ -71,8 +73,8 @@ const config: Config = {
           '50%': { transform: 'translateY(-20px)' },
         },
         glow: {
-          '0%': { boxShadow: '0 0 20px rgba(139, 92, 246, 0.3)' },
-          '100%': { boxShadow: '0 0 40px rgba(139, 92, 246, 0.6)' },
+          '0%': { boxShadow: '0 0 20px rgba(129, 74, 200, 0.3)' },
+          '100%': { boxShadow: '0 0 40px rgba(129, 74, 200, 0.6)' },
         },
         gradient: {
           '0%, 100%': { backgroundPosition: '0% 50%' },
@@ -85,6 +87,10 @@ const config: Config = {
         'accordion-up': {
           from: { height: 'var(--radix-accordion-content-height)' },
           to: { height: '0' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
     },

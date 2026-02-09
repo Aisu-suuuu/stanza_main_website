@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useEffect, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 interface StatItemProps {
@@ -59,7 +59,7 @@ function AnimatedCounter({ value, suffix, label, delay, isInView }: StatItemProp
       className="flex flex-col items-center text-center"
     >
       <div className="flex items-baseline">
-        <span className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
+        <span className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
           {displayValue}
         </span>
         <span className="ml-1 text-3xl font-bold text-primary sm:text-4xl lg:text-5xl">
@@ -84,12 +84,20 @@ export function Stats() {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
+  // Scroll-driven blur effect
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'start center'],
+  })
+  const blurValue = useTransform(scrollYProgress, [0, 1], [8, 0])
+  const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+
   return (
     <section
       ref={ref}
-      className="relative bg-[#0D0D0D] py-24 lg:py-32 overflow-hidden"
+      className="relative bg-background py-24 lg:py-32 overflow-hidden"
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <motion.div className="mx-auto max-w-7xl px-6 lg:px-8" style={{ filter: filterBlur }}>
         <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4 lg:gap-12">
           {stats.map((stat, index) => (
             <AnimatedCounter
@@ -102,7 +110,7 @@ export function Stats() {
             />
           ))}
         </div>
-      </div>
+      </motion.div>
 
       {/* Decorative elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">

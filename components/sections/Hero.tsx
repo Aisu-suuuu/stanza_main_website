@@ -5,106 +5,166 @@ import { motion, useInView, useAnimation } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useTheme } from 'next-themes'
 
-// Animated particles/stars background
-const ParticlesBackground = () => {
+// Canvas-based particles: small white dots that drift toward/away from center
+const FlowingParticles = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+
+  useEffect(() => {
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    let animationId: number
+    let w = 0
+    let h = 0
+
+    interface Particle {
+      x: number
+      y: number
+      size: number
+      opacity: number
+      speed: number
+      direction: number
+    }
+
+    const particles: Particle[] = []
+    const getCx = () => w / 2
+    const getCy = () => h * 0.44
+
+    const resize = () => {
+      const dpr = window.devicePixelRatio || 1
+      w = canvas.offsetWidth
+      h = canvas.offsetHeight
+      canvas.width = w * dpr
+      canvas.height = h * dpr
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
+    }
+
+    const spawn = (forceDir?: number): Particle => {
+      const angle = Math.random() * Math.PI * 2
+      const dir = forceDir ?? (Math.random() > 0.5 ? 1 : -1)
+      const dist =
+        dir === 1
+          ? 150 + Math.random() * Math.max(w, h) * 0.45
+          : 50 + Math.random() * 120
+      return {
+        x: getCx() + Math.cos(angle) * dist,
+        y: getCy() + Math.sin(angle) * dist,
+        size: 0.5 + Math.random() * 1.5,
+        opacity: 0.1 + Math.random() * 0.5,
+        speed: 0.08 + Math.random() * 0.25,
+        direction: dir,
+      }
+    }
+
+    const init = () => {
+      particles.length = 0
+      for (let i = 0; i < 80; i++) particles.push(spawn())
+    }
+
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h)
+      const cxv = getCx()
+      const cyv = getCy()
+      const maxDist = Math.max(w, h) * 0.5
+
+      for (const p of particles) {
+        const dx = cxv - p.x
+        const dy = cyv - p.y
+        const dist = Math.sqrt(dx * dx + dy * dy)
+        const ang = Math.atan2(dy, dx)
+
+        p.x += Math.cos(ang) * p.speed * p.direction
+        p.y += Math.sin(ang) * p.speed * p.direction
+
+        if (p.direction === 1 && dist < 35) {
+          Object.assign(p, spawn(1))
+        } else if (p.direction === -1 && dist > maxDist * 1.1) {
+          Object.assign(p, spawn(-1))
+        }
+
+        const fade = Math.max(0, Math.min(1, 1 - dist / maxDist))
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
+        ctx.fillStyle = `rgba(255,255,255,${p.opacity * fade})`
+        ctx.fill()
+      }
+
+      animationId = requestAnimationFrame(draw)
+    }
+
+    resize()
+    init()
+    draw()
+
+    const onResize = () => {
+      resize()
+      init()
+    }
+    window.addEventListener('resize', onResize)
+    return () => {
+      cancelAnimationFrame(animationId)
+      window.removeEventListener('resize', onResize)
+    }
+  }, [])
+
   return (
-    <div className="absolute inset-0 overflow-hidden">
-      {/* Base dark gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black via-[#0a0a0a] to-[#0d0d0d]" />
-
-      {/* Starfield effect with CSS */}
-      <div
-        className="absolute inset-0 opacity-40"
-        style={{
-          backgroundImage: `
-            radial-gradient(1px 1px at 20px 30px, white, transparent),
-            radial-gradient(1px 1px at 40px 70px, rgba(255,255,255,0.8), transparent),
-            radial-gradient(1px 1px at 50px 160px, rgba(255,255,255,0.6), transparent),
-            radial-gradient(1px 1px at 90px 40px, white, transparent),
-            radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.7), transparent),
-            radial-gradient(1px 1px at 160px 120px, white, transparent),
-            radial-gradient(1.5px 1.5px at 200px 50px, rgba(255,255,255,0.9), transparent),
-            radial-gradient(1px 1px at 250px 90px, white, transparent),
-            radial-gradient(1px 1px at 300px 150px, rgba(255,255,255,0.6), transparent),
-            radial-gradient(1px 1px at 350px 30px, white, transparent),
-            radial-gradient(1px 1px at 400px 100px, rgba(255,255,255,0.8), transparent),
-            radial-gradient(1.5px 1.5px at 450px 180px, white, transparent),
-            radial-gradient(1px 1px at 500px 60px, rgba(255,255,255,0.7), transparent),
-            radial-gradient(1px 1px at 550px 130px, white, transparent),
-            radial-gradient(1px 1px at 600px 20px, rgba(255,255,255,0.6), transparent),
-            radial-gradient(1px 1px at 650px 170px, white, transparent),
-            radial-gradient(1.5px 1.5px at 700px 80px, rgba(255,255,255,0.9), transparent),
-            radial-gradient(1px 1px at 750px 140px, white, transparent),
-            radial-gradient(1px 1px at 800px 50px, rgba(255,255,255,0.7), transparent),
-            radial-gradient(1px 1px at 850px 110px, white, transparent),
-            radial-gradient(1px 1px at 900px 160px, rgba(255,255,255,0.8), transparent),
-            radial-gradient(1px 1px at 950px 40px, white, transparent),
-            radial-gradient(1.5px 1.5px at 1000px 90px, white, transparent),
-            radial-gradient(1px 1px at 1050px 150px, rgba(255,255,255,0.6), transparent),
-            radial-gradient(1px 1px at 1100px 70px, white, transparent),
-            radial-gradient(1px 1px at 1150px 120px, rgba(255,255,255,0.7), transparent),
-            radial-gradient(1px 1px at 1200px 30px, white, transparent),
-            radial-gradient(1px 1px at 1250px 180px, rgba(255,255,255,0.8), transparent),
-            radial-gradient(1.5px 1.5px at 1300px 100px, white, transparent),
-            radial-gradient(1px 1px at 1350px 60px, rgba(255,255,255,0.6), transparent),
-            radial-gradient(1px 1px at 1400px 140px, white, transparent)
-          `,
-          backgroundSize: '1440px 200px',
-          backgroundRepeat: 'repeat',
-        }}
-      />
-    </div>
+    <canvas
+      ref={canvasRef}
+      className="absolute inset-0 w-full h-full"
+      style={{ pointerEvents: 'none' }}
+    />
   )
 }
 
-// Purple gradient orb/sphere component
+// Background gradients + flowing particles
+const ParticlesBackground = () => (
+  <div className="absolute inset-0 overflow-hidden">
+    {/* Light mode */}
+    <div className="absolute inset-0 bg-gradient-to-b from-white via-[#F5F3FF] to-[#EDE9FE] dark:hidden" />
+    {/* Dark mode */}
+    <div className="absolute inset-0 hidden dark:block">
+      <div className="absolute inset-0 bg-gradient-to-b from-[#080808] via-[#0a0a0a] to-[#0d0d0d]" />
+      <FlowingParticles />
+    </div>
+  </div>
+)
+
+// Subtle purple orbit ring behind text
 const PurpleOrb = () => {
+  const { resolvedTheme } = useTheme()
+  const isLight = resolvedTheme === 'light'
+
   return (
-    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-      {/* Black void center */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[410px] md:h-[410px] rounded-full bg-black" />
-
-      {/* Gradient rings with blur */}
-      <motion.div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] md:w-[400px] md:h-[400px] opacity-60 blur-[5px]"
-        animate={{
-          rotate: [0, 360],
-        }}
-        transition={{
-          duration: 30,
-          repeat: Infinity,
-          ease: 'linear',
-        }}
-      >
-        {/* Large ring */}
-        <div
-          className="absolute inset-0 rounded-full"
-          style={{
-            background: 'linear-gradient(229deg, rgb(223, 122, 254) 13%, rgba(223, 122, 254, 0) 35%, rgba(223, 122, 254, 0) 64%, rgb(129, 74, 200) 88%)',
-          }}
-        />
-      </motion.div>
-
-      <motion.div
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[200px] h-[200px] md:w-[300px] md:h-[300px] opacity-60 blur-[5px]"
-        animate={{
-          rotate: [360, 0],
-        }}
-        transition={{
-          duration: 25,
-          repeat: Infinity,
-          ease: 'linear',
-        }}
-      >
-        {/* Small ring */}
-        <div
-          className="absolute inset-0 rounded-full"
-          style={{
-            background: 'linear-gradient(141deg, rgb(223, 122, 254) 13%, rgba(223, 122, 254, 0) 35%, rgba(223, 122, 254, 0) 64%, rgb(129, 74, 200) 88%)',
-          }}
-        />
-      </motion.div>
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="absolute left-1/2 top-[44%] -translate-x-1/2 -translate-y-1/2 w-[350px] h-[350px] md:w-[480px] md:h-[480px]">
+        <motion.div
+          className="absolute inset-0"
+          animate={{ rotate: [0, 360] }}
+          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+        >
+          <div
+            className="absolute inset-0 rounded-full"
+            style={{
+              background: `conic-gradient(
+                from 180deg,
+                transparent 0%,
+                rgba(168,85,247,${isLight ? 0.06 : 0.15}) 10%,
+                rgba(160,100,240,${isLight ? 0.12 : 0.3}) 22%,
+                rgba(180,120,255,${isLight ? 0.18 : 0.4}) 34%,
+                rgba(168,85,247,${isLight ? 0.12 : 0.3}) 46%,
+                rgba(129,74,200,${isLight ? 0.04 : 0.1}) 56%,
+                transparent 64%,
+                transparent 100%
+              )`,
+              filter: 'blur(25px)',
+            }}
+          />
+        </motion.div>
+      </div>
     </div>
   )
 }
@@ -133,7 +193,7 @@ export default function Hero() {
 
       {/* Content */}
       <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
-        {/* Headline */}
+        {/* Headline — no glow effects */}
         <motion.h1
           className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] font-display font-bold leading-[0.95] tracking-[-0.05em] mb-6"
           initial={{ opacity: 0, y: 30 }}
@@ -141,35 +201,28 @@ export default function Hero() {
           transition={{ duration: 0.7, delay: 0.2 }}
         >
           <span className="block sm:inline">
-            <span className="text-[#FFFFE6]">We </span>
-            <span
-              className="bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-[#EC4899] bg-clip-text text-transparent"
-              style={{
-                filter: 'drop-shadow(0 0 8px rgba(139, 92, 246, 0.5)) drop-shadow(0 0 16px rgba(168, 85, 247, 0.3))',
-                textShadow: '0 0 20px rgba(139, 92, 246, 0.4), 0 0 40px rgba(168, 85, 247, 0.2)',
-              }}
-            >think</span>
-            <span className="text-[#FFFFE6]">, you </span>
-            <span
-              className="bg-gradient-to-r from-[#8B5CF6] via-[#A855F7] to-[#EC4899] bg-clip-text text-transparent"
-              style={{
-                filter: 'drop-shadow(0 0 8px rgba(139, 92, 246, 0.5)) drop-shadow(0 0 16px rgba(168, 85, 247, 0.3))',
-                textShadow: '0 0 20px rgba(139, 92, 246, 0.4), 0 0 40px rgba(168, 85, 247, 0.2)',
-              }}
-            >grow</span>
+            <span className="text-cream">We </span>
+            <span className="text-[#DF7AFE]">
+              think
+            </span>
+            <span className="text-cream">, you </span>
+            <span className="text-[#DF7AFE]">
+              grow
+            </span>
           </span>
           <br className="hidden sm:block" />
-          <span className="text-[#FFFFE6]">— that's the deal</span>
+          <span className="text-cream">— that&apos;s the deal</span>
         </motion.h1>
 
         {/* Subheadline */}
         <motion.p
-          className="text-[#CCCCCC] text-base sm:text-lg md:text-xl tracking-[-0.02em] mb-10 max-w-2xl mx-auto"
+          className="text-muted text-base sm:text-lg md:text-xl tracking-[-0.02em] mb-10 max-w-2xl mx-auto"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          Stanzasoft brings AI automation to your fingertips & streamlines tasks.
+          Stanzasoft brings AI automation to your fingertips & streamlines
+          tasks.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -200,10 +253,10 @@ export default function Hero() {
             <button
               className={cn(
                 'inline-flex items-center gap-2 px-5 py-2.5',
-                'bg-[#0D0D0D]/80 text-white text-[15px] font-medium',
-                'rounded-md border border-white/10',
+                'bg-foreground/10 text-foreground dark:bg-background/80 dark:text-white text-[15px] font-medium',
+                'rounded-md border border-foreground/10',
                 'shadow-[0px_0.7px_0.7px_-0.6px_rgba(0,0,0,0.15),0px_1.8px_1.8px_-1.25px_rgba(0,0,0,0.14),0px_3.6px_3.6px_-1.9px_rgba(0,0,0,0.14),0px_6.9px_6.9px_-2.5px_rgba(0,0,0,0.13),0px_13.6px_13.6px_-3.1px_rgba(0,0,0,0.11),0px_30px_30px_-3.75px_rgba(0,0,0,0.05)]',
-                'hover:bg-[#1a1a1a] transition-colors duration-200'
+                'hover:bg-foreground/15 dark:hover:bg-surface-card transition-colors duration-200'
               )}
             >
               View services

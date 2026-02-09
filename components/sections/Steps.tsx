@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import { ArrowRight } from 'lucide-react'
@@ -13,8 +13,6 @@ interface Step {
   description: string
   tags: string[]
   imageUrl: string
-  gradient?: string
-  isGray?: boolean
 }
 
 const steps: Step[] = [
@@ -27,7 +25,6 @@ const steps: Step[] = [
     tags: ['Summarize', 'Scheduling', 'Easy mode'],
     imageUrl:
       'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80',
-    gradient: 'from-[#8B5CF6] to-[#6D28D9]',
   },
   {
     number: '02',
@@ -38,7 +35,6 @@ const steps: Step[] = [
     tags: ['Analytics', 'Insights', 'Real-time'],
     imageUrl:
       'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80',
-    isGray: true,
   },
   {
     number: '03',
@@ -49,7 +45,6 @@ const steps: Step[] = [
     tags: ['Scalability', 'Growth', 'Flexibility'],
     imageUrl:
       'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&auto=format&fit=crop&q=80',
-    isGray: true,
   },
   {
     number: '04',
@@ -60,87 +55,114 @@ const steps: Step[] = [
     tags: ['Integration', 'Workflow', 'Unified'],
     imageUrl:
       'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&auto=format&fit=crop&q=80',
-    isGray: true,
   },
 ]
 
-interface StepCardProps {
-  step: Step
-  index: number
-  total: number
-}
-
-function StepCard({ step, index, total }: StepCardProps) {
+// Individual Card Component with scroll-based activation
+function StepCard({ step, index, totalCards }: { step: Step; index: number; totalCards: number }) {
   const cardRef = useRef<HTMLDivElement>(null)
+  const [isActive, setIsActive] = useState(index === 0)
+
+  // Track scroll position to determine if this card is active
   const { scrollYProgress } = useScroll({
     target: cardRef,
-    offset: ['start start', 'end start'],
+    offset: ['start 0.6', 'start 0.2'],
   })
 
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.92])
-  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.6])
+  useEffect(() => {
+    const unsubscribe = scrollYProgress.on('change', (value) => {
+      // Card is active when in the middle of its scroll range (30% to 70%)
+      setIsActive(value > 0.3 && value < 0.7)
+    })
+    return () => unsubscribe()
+  }, [scrollYProgress])
 
-  const bgClass = step.isGray
-    ? 'bg-[#1A1A1A]'
-    : `bg-gradient-to-br ${step.gradient}`
+  const stickyTop = 100 + index * 44
 
   return (
-    <motion.div
+    <div
       ref={cardRef}
-      className="sticky top-24 mb-8"
-      style={{
-        scale,
-        opacity,
-        zIndex: total - index,
-      }}
+      className="sticky pb-5"
+      style={{ top: stickyTop, zIndex: index + 1 }}
     >
-      <div className={cn(bgClass, 'rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 shadow-2xl')}>
+      <div
+        className={cn(
+          'rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-12 shadow-2xl transition-all duration-500',
+          // Active card: purple gradient
+          isActive
+            ? 'bg-gradient-to-br from-[#814AC8] to-[#DF7AFE] border border-[#DF7AFE]/30'
+            // Inactive card: light border style for dark mode, subtle bg for light mode
+            : 'bg-surface-card border border-foreground/20 dark:border-foreground/10'
+        )}
+      >
         <div className="grid lg:grid-cols-[auto_1fr_1fr] gap-4 sm:gap-6 lg:gap-8 items-center">
           {/* Large Number */}
-          <motion.span
-            className="text-7xl lg:text-8xl font-bold text-white/10 leading-none hidden lg:block"
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+          <span
+            className={cn(
+              'text-7xl lg:text-8xl font-bold leading-none hidden lg:block transition-colors duration-500',
+              isActive ? 'text-white/10' : 'text-foreground/10'
+            )}
           >
             {step.number}.
-          </motion.span>
+          </span>
 
           {/* Content */}
-          <motion.div
-            className="space-y-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-          >
+          <div className="space-y-3 lg:space-y-4">
             {/* Badge */}
-            <span className="inline-block px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-sm text-white/90 font-medium">
+            <span
+              className={cn(
+                'inline-block px-3 py-1 backdrop-blur-sm rounded-full text-sm font-medium transition-colors duration-500',
+                isActive
+                  ? 'bg-white/20 text-white'
+                  : 'bg-foreground/10 text-foreground/90'
+              )}
+            >
               {step.badge}
             </span>
 
             {/* Mobile Number */}
             <div className="flex items-center gap-3 lg:hidden">
-              <span className="text-4xl sm:text-5xl font-bold text-white/30">{step.number}.</span>
+              <span
+                className={cn(
+                  'text-4xl sm:text-5xl font-bold transition-colors duration-500',
+                  isActive ? 'text-white/30' : 'text-foreground/30'
+                )}
+              >
+                {step.number}.
+              </span>
             </div>
 
             {/* Title */}
-            <h3 className="text-2xl lg:text-3xl font-bold text-white">
+            <h3
+              className={cn(
+                'text-2xl lg:text-3xl font-bold transition-colors duration-500',
+                isActive ? 'text-white' : 'text-foreground'
+              )}
+            >
               {step.title}
             </h3>
 
             {/* Description */}
-            <p className="text-white/60 text-base lg:text-lg leading-relaxed">
+            <p
+              className={cn(
+                'text-base lg:text-lg leading-relaxed transition-colors duration-500',
+                isActive ? 'text-white/70' : 'text-muted'
+              )}
+            >
               {step.description}
             </p>
 
             {/* Tags */}
-            <div className="flex flex-wrap gap-2 pt-2">
+            <div className="flex flex-wrap gap-2 pt-1">
               {step.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="px-3 py-1.5 border border-white/30 rounded-full text-sm text-white/90"
+                  className={cn(
+                    'px-3 py-1.5 rounded-full text-sm transition-colors duration-500',
+                    isActive
+                      ? 'border border-white/30 text-white/90'
+                      : 'border border-foreground/30 text-foreground/90'
+                  )}
                 >
                   {tag}
                 </span>
@@ -150,21 +172,20 @@ function StepCard({ step, index, total }: StepCardProps) {
             {/* Know More Link */}
             <a
               href="#"
-              className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors duration-300 mt-4"
+              className={cn(
+                'inline-flex items-center gap-2 transition-colors duration-300 mt-2',
+                isActive
+                  ? 'text-white/70 hover:text-white'
+                  : 'text-muted hover:text-foreground'
+              )}
             >
               Know more
               <ArrowRight className="w-4 h-4" />
             </a>
-          </motion.div>
+          </div>
 
           {/* Image */}
-          <motion.div
-            className="relative aspect-[4/3] rounded-2xl overflow-hidden"
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
+          <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
             <Image
               src={step.imageUrl}
               alt={step.title}
@@ -172,47 +193,74 @@ function StepCard({ step, index, total }: StepCardProps) {
               className="object-cover"
               sizes="(max-width: 1024px) 100vw, 33vw"
             />
-            {/* Subtle overlay */}
             <div className="absolute inset-0 bg-gradient-to-tr from-black/20 to-transparent" />
-          </motion.div>
+          </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
 export function Steps() {
+  const cardCount = steps.length
+  const ref = useRef<HTMLDivElement>(null)
+
+  // Scroll-driven blur effect
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'start center'],
+  })
+  const blurValue = useTransform(scrollYProgress, [0, 1], [8, 0])
+  const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+
   return (
-    <section className="bg-background py-16 lg:py-24 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+    <section ref={ref} className="bg-background py-16 lg:py-24">
+      <motion.div className="mx-auto max-w-7xl px-6 lg:px-8" style={{ filter: filterBlur }}>
         {/* Section Header */}
         <motion.div
-          className="text-center mb-12 lg:mb-16"
+          className="flex flex-col items-center text-center max-w-4xl mx-auto mb-12 lg:mb-16"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            How It Works
+          <span
+            className={cn(
+              'inline-block px-4 py-1.5 mb-6',
+              'text-sm font-medium text-primary',
+              'bg-primary/10 rounded-full',
+              'border border-primary/20'
+            )}
+          >
+            Our Services
+          </span>
+          <h2 className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl leading-tight mb-6">
+            AI Solutions That Take Your Business to the{' '}
+            <span className="bg-gradient-text bg-clip-text text-transparent">
+              Next Level
+            </span>
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg text-muted">
-            Our streamlined process takes you from idea to implementation in four simple steps
+          <p className="text-lg md:text-xl text-muted max-w-2xl leading-relaxed">
+            We design, develop, and implement automated tools that help you work
+            smarter, not harder.
           </p>
         </motion.div>
 
-        {/* Parallax Cards Container */}
-        <div className="relative">
+        {/* Stacking Cards */}
+        <div
+          className="relative"
+          style={{ height: `${cardCount * 100}vh` }}
+        >
           {steps.map((step, index) => (
             <StepCard
               key={step.number}
               step={step}
               index={index}
-              total={steps.length}
+              totalCards={cardCount}
             />
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   )
 }

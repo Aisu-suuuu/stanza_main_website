@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Menu, X } from 'lucide-react'
+import { ThemeToggle } from '@/components/ui/ThemeToggle'
 import { cn } from '@/lib/utils'
 
 const navLinks = [
@@ -56,13 +56,17 @@ export default function Header() {
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <Link href="/" className="flex-shrink-0">
-            <Image
-              src="/images/logo-dark.png"
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/logo-light.svg"
               alt="Stanzasoft"
-              width={150}
-              height={40}
-              className="h-8 md:h-10 w-auto"
-              priority
+              className="h-8 sm:h-9 md:h-11 lg:h-12 w-auto dark:hidden"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/images/logo-dark.svg"
+              alt="Stanzasoft"
+              className="h-8 sm:h-9 md:h-11 lg:h-12 w-auto hidden dark:block"
             />
           </Link>
 
@@ -75,8 +79,8 @@ export default function Header() {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    'text-sm font-medium transition-colors duration-200 relative group',
-                    isActive ? 'text-white' : 'text-white/90 hover:text-white'
+                    'text-lg font-medium transition-colors duration-200 relative group',
+                    isActive ? 'text-foreground' : 'text-foreground/80 hover:text-foreground'
                   )}
                 >
                   {link.label}
@@ -91,11 +95,12 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Desktop Contact Button */}
-          <div className="hidden md:block">
+          {/* Desktop Contact Button + Theme Toggle */}
+          <div className="hidden md:flex items-center gap-3">
+            <ThemeToggle />
             <Link
               href="/contact"
-              className="inline-flex items-center justify-center px-6 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-primary to-secondary rounded-full hover:opacity-90 transition-opacity duration-200 shadow-lg shadow-primary/25"
+              className="inline-flex items-center justify-center px-7 py-3 text-lg font-semibold text-white bg-gradient-to-r from-primary to-secondary rounded-full hover:opacity-90 transition-opacity duration-200 shadow-lg shadow-primary/25"
             >
               Contact Us
             </Link>
@@ -104,7 +109,7 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-white hover:bg-white/10 transition-colors"
+            className="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-foreground hover:bg-foreground/10 transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
           >
@@ -147,7 +152,7 @@ export default function Header() {
                       href={link.href}
                       className={cn(
                         'block py-3 text-lg font-medium transition-colors border-b border-border/30',
-                        isActive ? 'text-white border-primary/50' : 'text-white/80 hover:text-white'
+                        isActive ? 'text-foreground border-primary/50' : 'text-foreground/80 hover:text-foreground'
                       )}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >

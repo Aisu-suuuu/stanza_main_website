@@ -32,9 +32,9 @@ export function GradientOrb({
   blur = 60,
   opacity = 0.4,
   colors = {
-    from: '#8B5CF6',
-    via: '#A855F7',
-    to: '#EC4899',
+    from: '#814AC8',
+    via: '#DF7AFE',
+    to: '#DF7AFE',
   },
   animationDuration = 6,
   animationDelay = 0,
@@ -46,16 +46,16 @@ export function GradientOrb({
     radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 20%, transparent 50%),
     radial-gradient(circle at 70% 70%, rgba(0,0,0,0.3) 0%, transparent 40%),
     radial-gradient(ellipse at 40% 40%, ${colors.from} 0%, transparent 50%),
-    radial-gradient(ellipse at center, ${colors.from} 0%, ${colors.via || colors.from} 35%, ${colors.to || colors.via || colors.from} 60%, rgba(124, 58, 237, 0.8) 80%, transparent 100%)
+    radial-gradient(ellipse at center, ${colors.from} 0%, ${colors.via || colors.from} 35%, ${colors.to || colors.via || colors.from} 60%, rgba(129, 74, 200, 0.8) 80%, transparent 100%)
   `
 
   const simpleBackground = `radial-gradient(circle at center, ${colors.from} 0%, ${colors.via || colors.from} 40%, ${colors.to || colors.via || colors.from} 100%)`
 
   // 3D glow effect with multiple shadow layers
   const threeDBoxShadow = `
-    0 0 60px rgba(139, 92, 246, 0.6),
-    0 0 120px rgba(168, 85, 247, 0.4),
-    0 0 180px rgba(236, 72, 153, 0.2),
+    0 0 60px rgba(129, 74, 200, 0.6),
+    0 0 120px rgba(223, 122, 254, 0.4),
+    0 0 180px rgba(223, 122, 254, 0.2),
     inset 0 0 60px rgba(255,255,255,0.15),
     inset -20px -20px 60px rgba(0,0,0,0.3)
   `
@@ -163,9 +163,9 @@ export function PrimaryOrb({ className, ...props }: Partial<GradientOrbProps>) {
     <GradientOrb
       size={500}
       colors={{
-        from: '#8B5CF6',
-        via: '#A855F7',
-        to: '#EC4899',
+        from: '#814AC8',
+        via: '#DF7AFE',
+        to: '#DF7AFE',
       }}
       blur={80}
       opacity={0.3}
@@ -182,7 +182,7 @@ export function SecondaryOrb({ className, ...props }: Partial<GradientOrbProps>)
       colors={{
         from: '#06B6D4',
         via: '#3B82F6',
-        to: '#8B5CF6',
+        to: '#814AC8',
       }}
       blur={60}
       opacity={0.25}
@@ -198,7 +198,7 @@ export function AccentOrb({ className, ...props }: Partial<GradientOrbProps>) {
     <GradientOrb
       size={200}
       colors={{
-        from: '#EC4899',
+        from: '#DF7AFE',
         via: '#F43F5E',
         to: '#F97316',
       }}
@@ -217,9 +217,9 @@ export function Sphere3D({ className, ...props }: Partial<GradientOrbProps>) {
     <GradientOrb
       size={400}
       colors={{
-        from: '#8B5CF6',
-        via: '#A855F7',
-        to: '#EC4899',
+        from: '#814AC8',
+        via: '#DF7AFE',
+        to: '#DF7AFE',
       }}
       blur={20}
       opacity={0.9}
@@ -237,9 +237,9 @@ export function Sphere3DSimple({ className, ...props }: Partial<GradientOrbProps
     <GradientOrb
       size={350}
       colors={{
-        from: '#8B5CF6',
-        via: '#A855F7',
-        to: '#EC4899',
+        from: '#814AC8',
+        via: '#DF7AFE',
+        to: '#DF7AFE',
       }}
       blur={15}
       opacity={0.85}

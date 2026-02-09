@@ -4,8 +4,8 @@ import Hero from '@/components/sections/Hero'
 import { AboutUs } from '@/components/sections/AboutUs'
 import { Stats } from '@/components/sections/Stats'
 import { Products } from '@/components/sections/Products'
-import { AISolutions } from '@/components/sections/AISolutions'
 import { Steps } from '@/components/sections/Steps'
+import { Process } from '@/components/sections/Process'
 import { FAQ } from '@/components/sections/FAQ'
 import { CTA } from '@/components/sections/CTA'
 
@@ -18,8 +18,8 @@ export default function Home() {
         <AboutUs />
         <Stats />
         <Products />
-        <AISolutions />
         <Steps />
+        <Process />
         <FAQ />
         <CTA />
       </main>

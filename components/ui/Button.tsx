@@ -13,20 +13,20 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary: cn(
-    'bg-gradient-to-r from-[#8B5CF6] to-[#A855F7] text-white',
-    'hover:from-[#7C3AED] hover:to-[#9333EA]',
+    'bg-gradient-to-r from-[#814AC8] to-[#DF7AFE] text-white',
+    'hover:from-[#6E3EAD] hover:to-[#D066E8]',
     'shadow-lg shadow-primary/25 hover:shadow-primary/40',
     'border border-transparent'
   ),
   outline: cn(
-    'bg-transparent text-white',
+    'bg-transparent text-foreground',
     'border border-primary hover:border-secondary',
     'hover:bg-primary/10'
   ),
   ghost: cn(
-    'bg-transparent text-white',
+    'bg-transparent text-foreground',
     'border border-transparent',
-    'hover:bg-white/5'
+    'hover:bg-foreground/5'
   ),
 }
 

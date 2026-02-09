@@ -117,7 +117,7 @@ export default function ContactPage() {
             className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full opacity-30"
             style={{
               background:
-                'radial-gradient(circle at center, #8B5CF6 0%, transparent 70%)',
+                'radial-gradient(circle at center, #814AC8 0%, transparent 70%)',
               filter: 'blur(100px)',
             }}
           />
@@ -138,7 +138,7 @@ export default function ContactPage() {
                 Contact Us
               </motion.span>
               <motion.h1
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6"
+                className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.5 }}
@@ -170,8 +170,8 @@ export default function ContactPage() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                <div className="bg-[#1A1A1A] rounded-3xl border border-white/10 p-6 md:p-8">
-                  <h2 className="text-2xl font-bold text-white mb-2">
+                <div className="bg-surface-card rounded-3xl border border-foreground/10 p-6 md:p-8">
+                  <h2 className="text-2xl font-bold text-foreground mb-2">
                     Send us a message
                   </h2>
                   <p className="text-muted mb-8">
@@ -196,7 +196,7 @@ export default function ContactPage() {
                       <div>
                         <label
                           htmlFor="name"
-                          className="block text-sm font-medium text-white mb-2"
+                          className="block text-sm font-medium text-foreground mb-2"
                         >
                           Name <span className="text-primary">*</span>
                         </label>
@@ -207,7 +207,7 @@ export default function ContactPage() {
                           value={formData.name}
                           onChange={handleInputChange}
                           required
-                          className="w-full bg-[#1A1A1A] border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/40 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-colors min-h-[48px]"
+                          className="w-full bg-surface-card border border-foreground/10 rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-colors min-h-[48px]"
                           placeholder="Your name"
                         />
                       </div>
@@ -216,7 +216,7 @@ export default function ContactPage() {
                       <div>
                         <label
                           htmlFor="email"
-                          className="block text-sm font-medium text-white mb-2"
+                          className="block text-sm font-medium text-foreground mb-2"
                         >
                           Email <span className="text-primary">*</span>
                         </label>
@@ -227,7 +227,7 @@ export default function ContactPage() {
                           value={formData.email}
                           onChange={handleInputChange}
                           required
-                          className="w-full bg-[#1A1A1A] border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/40 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-colors min-h-[48px]"
+                          className="w-full bg-surface-card border border-foreground/10 rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-colors min-h-[48px]"
                           placeholder="your@email.com"
                         />
                       </div>
@@ -238,7 +238,7 @@ export default function ContactPage() {
                       <div>
                         <label
                           htmlFor="company"
-                          className="block text-sm font-medium text-white mb-2"
+                          className="block text-sm font-medium text-foreground mb-2"
                         >
                           Company
                         </label>
@@ -248,7 +248,7 @@ export default function ContactPage() {
                           name="company"
                           value={formData.company}
                           onChange={handleInputChange}
-                          className="w-full bg-[#1A1A1A] border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/40 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-colors min-h-[48px]"
+                          className="w-full bg-surface-card border border-foreground/10 rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-colors min-h-[48px]"
                           placeholder="Company name"
                         />
                       </div>
@@ -257,7 +257,7 @@ export default function ContactPage() {
                       <div>
                         <label
                           htmlFor="phone"
-                          className="block text-sm font-medium text-white mb-2"
+                          className="block text-sm font-medium text-foreground mb-2"
                         >
                           Phone
                         </label>
@@ -267,7 +267,7 @@ export default function ContactPage() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleInputChange}
-                          className="w-full bg-[#1A1A1A] border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/40 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-colors min-h-[48px]"
+                          className="w-full bg-surface-card border border-foreground/10 rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-colors min-h-[48px]"
                           placeholder="+1 (555) 000-0000"
                         />
                       </div>
@@ -277,7 +277,7 @@ export default function ContactPage() {
                     <div>
                       <label
                         htmlFor="message"
-                        className="block text-sm font-medium text-white mb-2"
+                        className="block text-sm font-medium text-foreground mb-2"
                       >
                         Message <span className="text-primary">*</span>
                       </label>
@@ -288,7 +288,7 @@ export default function ContactPage() {
                         onChange={handleInputChange}
                         required
                         rows={5}
-                        className="w-full bg-[#1A1A1A] border border-white/10 rounded-xl px-4 py-3.5 text-white placeholder:text-white/40 focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-colors resize-none"
+                        className="w-full bg-surface-card border border-foreground/10 rounded-xl px-4 py-3.5 text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-colors resize-none"
                         placeholder="Tell us about your project or inquiry..."
                       />
                     </div>
@@ -353,9 +353,9 @@ export default function ContactPage() {
                 {/* Contact Details Card */}
                 <motion.div
                   variants={itemVariants}
-                  className="bg-[#1A1A1A] rounded-3xl border border-white/10 p-6"
+                  className="bg-surface-card rounded-3xl border border-foreground/10 p-6"
                 >
-                  <h3 className="text-lg font-semibold text-white mb-6">
+                  <h3 className="text-lg font-semibold text-foreground mb-6">
                     Contact Information
                   </h3>
                   <div className="space-y-4">
@@ -373,7 +373,7 @@ export default function ContactPage() {
                         </div>
                         <div>
                           <p className="text-sm text-muted">{info.label}</p>
-                          <p className="text-white font-medium group-hover:text-primary transition-colors">
+                          <p className="text-foreground font-medium group-hover:text-primary transition-colors">
                             {info.value}
                           </p>
                         </div>
@@ -384,7 +384,7 @@ export default function ContactPage() {
 
                 {/* Locations Cards */}
                 <motion.div variants={itemVariants}>
-                  <h3 className="text-lg font-semibold text-white mb-4 px-1">
+                  <h3 className="text-lg font-semibold text-foreground mb-4 px-1">
                     Our Locations
                   </h3>
                   <div className="space-y-4">
@@ -392,7 +392,7 @@ export default function ContactPage() {
                       <div
                         key={index}
                         className={cn(
-                          'bg-[#1A1A1A] rounded-3xl border border-white/10 p-5',
+                          'bg-surface-card rounded-3xl border border-foreground/10 p-5',
                           'hover:border-primary/50 transition-all duration-300'
                         )}
                       >
@@ -401,7 +401,7 @@ export default function ContactPage() {
                             <MapPin className="w-5 h-5 text-primary" />
                           </div>
                           <div className="flex-1">
-                            <h4 className="text-white font-semibold mb-1">
+                            <h4 className="text-foreground font-semibold mb-1">
                               {location.city}, {location.country}
                             </h4>
                             <p className="text-sm text-muted mb-2">
@@ -420,7 +420,7 @@ export default function ContactPage() {
                 {/* Map Placeholder */}
                 <motion.div
                   variants={itemVariants}
-                  className="bg-[#1A1A1A] rounded-3xl border border-white/10 overflow-hidden"
+                  className="bg-surface-card rounded-3xl border border-foreground/10 overflow-hidden"
                 >
                   <div className="aspect-[4/3] relative bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/20">
                     {/* Map placeholder with decorative elements */}
@@ -429,7 +429,7 @@ export default function ContactPage() {
                         <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
                           <Globe className="w-8 h-8 text-primary" />
                         </div>
-                        <p className="text-white font-medium">Global Presence</p>
+                        <p className="text-foreground font-medium">Global Presence</p>
                         <p className="text-sm text-muted mt-1">
                           Serving clients worldwide
                         </p>
@@ -447,7 +447,7 @@ export default function ContactPage() {
         </section>
 
         {/* FAQ CTA Section */}
-        <section className="py-16 md:py-24 bg-[#0D0D0D]">
+        <section className="py-16 md:py-24 bg-background">
           <div className="container-custom">
             <motion.div
               className="text-center max-w-2xl mx-auto"
@@ -456,7 +456,7 @@ export default function ContactPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
             >
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4">
                 Have Questions?
               </h2>
               <p className="text-muted mb-6">
@@ -479,7 +479,7 @@ export default function ContactPage() {
                   href="tel:+919000888055"
                   className={cn(
                     'inline-flex items-center gap-2 px-6 py-3 rounded-xl',
-                    'bg-card border border-border text-white font-medium',
+                    'bg-card border border-border text-foreground font-medium',
                     'hover:border-primary/50 transition-colors duration-200'
                   )}
                 >
