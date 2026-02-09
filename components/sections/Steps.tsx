@@ -189,27 +189,26 @@ export function Steps() {
   const blurValue = useTransform(scrollYProgress, [0, 1], [8, 0])
   const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
 
-  // Track which card has reached its sticky position (last one wins)
+  // Track which card is frontmost by checking which card's top is in the upper portion of viewport
   useEffect(() => {
     const container = cardsRef.current
     if (!container) return
 
     const handleScroll = () => {
       const cards = container.children
-      let latestStickyIndex = 0
+      let latestVisibleIndex = 0
+      const viewportMid = window.innerHeight * 0.5
 
-      // Find the last card that has reached its sticky top position
+      // The last card whose top is above the middle of the viewport is the active one
       for (let i = 0; i < cards.length; i++) {
         const card = cards[i] as HTMLElement
         const rect = card.getBoundingClientRect()
-        const stickyTop = 100 + i * 40
-        // Card is sticky or past sticky when its top is at or near the sticky position
-        if (rect.top <= stickyTop + 10) {
-          latestStickyIndex = i
+        if (rect.top < viewportMid) {
+          latestVisibleIndex = i
         }
       }
 
-      setActiveIndex(latestStickyIndex)
+      setActiveIndex(latestVisibleIndex)
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true })
@@ -254,7 +253,7 @@ export function Steps() {
         <div
           ref={cardsRef}
           className="relative"
-          style={{ height: `${cardCount * 55}vh` }}
+          style={{ height: `${cardCount * 65}vh` }}
         >
           {steps.map((step, index) => (
             <StepCard
