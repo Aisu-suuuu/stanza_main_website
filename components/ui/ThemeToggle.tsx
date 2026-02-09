@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 
 export function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
-  const { theme, setTheme } = useTheme()
+  const { setTheme, resolvedTheme } = useTheme()
 
   useEffect(() => {
     setMounted(true)
@@ -19,7 +19,7 @@ export function ThemeToggle() {
 
   return (
     <button
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
       className={cn(
         'inline-flex items-center justify-center w-9 h-9 rounded-lg',
         'text-foreground/80 hover:text-foreground',
@@ -29,7 +29,7 @@ export function ThemeToggle() {
       )}
       aria-label="Toggle theme"
     >
-      {theme === 'dark' ? (
+      {resolvedTheme === 'dark' ? (
         <Sun className="h-5 w-5" />
       ) : (
         <Moon className="h-5 w-5" />
