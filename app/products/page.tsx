@@ -13,36 +13,36 @@ import { cn } from '@/lib/utils'
 // Product data
 const products = [
   {
-    id: 'alpha-agentic-ai',
-    title: 'ALPHA Agentic AI',
-    description:
-      'Intelligent AI agents that work autonomously to accomplish complex tasks. Our cutting-edge AI technology learns, adapts, and executes with precision to transform your business operations.',
-    features: [
-      'Autonomous workflow automation',
-      'Natural language processing',
-      'Decision making AI',
-      'Real-time data analysis',
-      'Seamless integration capabilities',
-    ],
-    imageUrl:
-      'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&auto=format&fit=crop&q=80',
-    gradient: 'from-primary via-secondary to-accent',
-  },
-  {
     id: 'prepmonkey',
     title: 'PrepMonkey',
     description:
-      'EdTech platform for exam preparation and learning. Empowering students with personalized learning paths, comprehensive practice materials, and real-time performance insights.',
+      'An AI-powered EdTech platform designed to optimize competitive exam preparation through structured learning paths, performance tracking, and intelligent study assistance.',
     features: [
-      'Interactive learning modules',
+      'Structured learning paths',
+      'Performance tracking & analytics',
+      'Intelligent study assistance',
       'Practice tests & mock exams',
-      'Progress tracking dashboard',
       'AI-powered recommendations',
-      'Gamified learning experience',
     ],
     imageUrl:
       'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&auto=format&fit=crop&q=80',
     gradient: 'from-accent via-primary to-secondary',
+  },
+  {
+    id: 'agentic-ai-platform',
+    title: 'Agentic AI Platform',
+    description:
+      'A comprehensive AI automation platform built to transform operational workflows, reduce inefficiencies, and accelerate business performance.',
+    features: [
+      'Autonomous workflow automation',
+      'Operational efficiency optimization',
+      'Decision-making acceleration',
+      'Scalable AI infrastructure',
+      'Seamless system integration',
+    ],
+    imageUrl:
+      'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&auto=format&fit=crop&q=80',
+    gradient: 'from-primary via-secondary to-accent',
   },
 ]
 
@@ -50,7 +50,7 @@ const products = [
 const testimonials = [
   {
     quote:
-      'ALPHA Agentic AI transformed our workflow completely. Tasks that took hours now complete in minutes with remarkable accuracy.',
+      'The Agentic AI Platform transformed our workflow completely. Tasks that took hours now complete in minutes with remarkable accuracy.',
     author: 'Sarah Chen',
     role: 'CTO, TechFlow Solutions',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
@@ -58,7 +58,7 @@ const testimonials = [
   },
   {
     quote:
-      'PrepMonkey helped our students improve their test scores by an average of 35%. The interactive learning approach is a game-changer.',
+      'PrepMonkey helped our students improve their test scores by an average of 35%. The structured learning paths and intelligent study assistance are game-changers.',
     author: 'Dr. Michael Rivera',
     role: 'Director, Apex Academy',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80',
@@ -66,7 +66,7 @@ const testimonials = [
   },
   {
     quote:
-      'The decision-making capabilities of ALPHA AI have given us a competitive edge we never thought possible.',
+      'Stanzasoft\'s AI solutions have given us a competitive edge we never thought possible. Their outcome-focused approach delivers real results.',
     author: 'Emily Watson',
     role: 'VP Operations, DataDrive Inc',
     avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&auto=format&fit=crop&q=80',
@@ -124,8 +124,8 @@ function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            Discover our suite of cutting-edge products designed to revolutionize
-            how you work, learn, and grow. Built with innovation at the core.
+            Purpose-built platforms that solve real business and education
+            challenges — from AI automation to competitive exam preparation.
           </motion.p>
         </motion.div>
       </div>

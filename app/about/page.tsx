@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Lightbulb, Shield, Users, Target } from 'lucide-react'
+import { Cpu, Layers, Handshake, Target } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
@@ -12,24 +12,24 @@ import { cn } from '@/lib/utils'
 // Values data
 const values = [
   {
-    icon: Lightbulb,
-    title: 'Innovation',
-    description: 'We embrace cutting-edge technologies and creative solutions to solve complex problems and drive progress.',
+    icon: Cpu,
+    title: 'Scalable AI-Driven Systems',
+    description: 'We build intelligent, production-ready AI systems designed to scale with your business and deliver measurable impact.',
   },
   {
-    icon: Shield,
-    title: 'Quality',
-    description: 'Excellence is our standard. We deliver robust, scalable solutions that exceed expectations every time.',
+    icon: Layers,
+    title: 'Integrated Technology & Talent',
+    description: 'From product development to recruitment, we provide end-to-end solutions that combine technology and talent under one roof.',
   },
   {
-    icon: Users,
-    title: 'Partnership',
-    description: 'We build lasting relationships with our clients, working as an extension of their team to achieve shared goals.',
+    icon: Handshake,
+    title: 'Long-Term Strategic Partnerships',
+    description: 'We invest in lasting relationships with our clients, working as an extension of their team to achieve shared goals.',
   },
   {
     icon: Target,
-    title: 'Integrity',
-    description: 'Honesty and transparency guide everything we do. We maintain the highest ethical standards in all interactions.',
+    title: 'Outcome-Focused Delivery',
+    description: 'Every solution we build is tied to clear business outcomes — efficiency gains, cost savings, and accelerated growth.',
   },
 ]
 
@@ -104,8 +104,8 @@ export default function AboutPage() {
                 <span className="gradient-text">Stanzasoft</span>
               </h1>
               <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto leading-relaxed">
-                We are a team of passionate innovators dedicated to transforming businesses
-                through cutting-edge technology solutions and exceptional talent.
+                Engineering intelligent solutions for modern enterprises — delivering
+                enterprise-grade digital solutions and AI-powered platforms.
               </p>
             </motion.div>
           </div>
@@ -149,19 +149,18 @@ export default function AboutPage() {
                   transition={{ duration: 0.7, delay: 0.3 }}
                 >
                   <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                    Our Mission
+                    About Us
                   </h2>
                   <p className="text-muted text-lg leading-relaxed">
-                    At Stanzasoft, we believe technology should empower businesses to achieve
-                    their full potential. Founded with a vision to bridge the gap between
-                    complex technology and practical business solutions, we have grown into
-                    a trusted partner for companies worldwide.
+                    Stanzasoft is a product-centric technology company delivering enterprise-grade
+                    digital solutions and AI-powered platforms. We specialize in building scalable,
+                    production-ready systems that enable organizations to operate more efficiently,
+                    intelligently, and competitively.
                   </p>
                   <p className="text-muted text-lg leading-relaxed">
-                    Our journey began with a simple idea: make enterprise-grade technology
-                    accessible to businesses of all sizes. Today, we continue to innovate
-                    and push boundaries, helping our clients navigate the ever-evolving
-                    digital landscape with confidence.
+                    With expertise spanning product development, AI automation, and strategic HR
+                    consulting, Stanzasoft partners with businesses to design, develop, and deploy
+                    high-impact solutions that drive measurable outcomes.
                   </p>
                   <div className="flex flex-wrap gap-4 pt-4">
                     <div className="flex items-center gap-3">
@@ -200,10 +199,10 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Our Core Values
+                Why <span className="gradient-text">Stanzasoft</span>
               </h2>
               <p className="text-muted text-lg max-w-2xl mx-auto">
-                These principles guide everything we do and define who we are as a company.
+                What sets us apart as a technology and talent partner.
               </p>
             </motion.div>
 
@@ -248,26 +247,23 @@ export default function AboutPage() {
             >
               <div className="max-w-4xl mx-auto text-center">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                  Meet Our Team
+                  Our Team
                 </h2>
                 <p className="text-muted text-lg leading-relaxed mb-6">
-                  At Stanzasoft, our strength lies in our people. We are a diverse group of engineers,
-                  designers, strategists, and problem-solvers united by a shared passion for innovation
-                  and excellence. Our team brings together decades of combined experience across AI/ML,
-                  cloud architecture, enterprise software, and digital transformation.
+                  At Stanzasoft, our strength lies in our people. We are a team of engineers,
+                  designers, strategists, and problem-solvers united by a shared commitment to
+                  building enterprise-grade solutions. Our team brings together deep expertise
+                  across product development, AI/ML, cloud architecture, and digital transformation.
                 </p>
                 <p className="text-muted text-lg leading-relaxed mb-6">
-                  We believe in fostering a culture of continuous learning, collaboration, and
-                  creativity. Every team member is empowered to contribute ideas, take ownership,
-                  and make a meaningful impact on the projects we deliver. This collaborative spirit
-                  is what enables us to tackle complex challenges and deliver exceptional results
-                  for our clients.
+                  We foster a culture of continuous learning, collaboration, and accountability.
+                  Every team member is empowered to contribute ideas, take ownership, and make
+                  a meaningful impact on the solutions we deliver for our clients.
                 </p>
                 <p className="text-muted text-lg leading-relaxed">
                   Whether working remotely or from our offices in San Francisco and Hyderabad,
-                  our team stays connected and aligned through shared values: integrity, innovation,
-                  and an unwavering commitment to client success. Together, we're building the
-                  future of technology—one solution at a time.
+                  our team stays connected through shared values: integrity, innovation, and an
+                  unwavering commitment to client success.
                 </p>
               </div>
             </motion.div>

@@ -17,19 +17,19 @@ interface Product {
 
 const products: Product[] = [
   {
-    title: 'Ed Tech Project',
+    title: 'PrepMonkey',
     description: [
-      'Stanzasoft is revolutionizing education through innovative technology solutions. Our EdTech platform provides personalized learning experiences and interactive content delivery.',
-      'We believe education should be accessible, engaging, and effective for all learners. Our solutions help institutions achieve their educational goals while empowering students to succeed.',
+      'An AI-powered EdTech platform designed to optimize competitive exam preparation through structured learning paths, performance tracking, and intelligent study assistance.',
+      'PrepMonkey empowers students with personalized learning experiences, comprehensive practice materials, and real-time performance insights to achieve their academic goals.',
     ],
     imageUrl: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&auto=format&fit=crop&q=60',
     imageOnLeft: true,
   },
   {
-    title: 'Agentic AI',
+    title: 'Agentic AI Platform',
     description: [
-      'Intelligent AI agents that work autonomously to accomplish complex tasks. Our Agentic AI solutions leverage cutting-edge language models and reasoning capabilities.',
-      'From automating workflows to enhancing decision-making, our AI-powered solutions help businesses drive efficiency and innovation at scale.',
+      'A comprehensive AI automation platform built to transform operational workflows, reduce inefficiencies, and accelerate business performance.',
+      'Our platform develops intelligent AI systems designed to automate workflows, optimize business processes, and enhance operational efficiency at scale.',
     ],
     imageUrl: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=60',
     imageOnLeft: false,

@@ -65,14 +65,14 @@ export function AboutUs() {
                 About Us
               </h2>
               <p className="text-foreground text-base md:text-lg leading-relaxed mb-4">
-                Stanzasoft is a team of builders, designers, and talent experts. We help companies
-                design, develop, and hire - all in one place.
+                Stanzasoft is a product-centric technology company delivering enterprise-grade digital
+                solutions and AI-powered platforms. We specialize in building scalable, production-ready
+                systems that enable organizations to operate more efficiently, intelligently, and competitively.
               </p>
               <p className="text-muted text-base md:text-lg leading-relaxed">
-                From end-to-end product design and development to HR consulting and talent acquisition,
-                we provide comprehensive solutions that help businesses scale with scalable products
-                and strong teams. We believe great products are built by the right people, and we make
-                both happen.
+                With expertise spanning product development, AI automation, and strategic HR consulting,
+                Stanzasoft partners with businesses to design, develop, and deploy high-impact solutions
+                that drive measurable outcomes.
               </p>
             </motion.div>
           </div>

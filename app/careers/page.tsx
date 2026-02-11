@@ -164,9 +164,9 @@ export default function CareersPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
               >
-                Be part of a team that's shaping the future of technology. We're
-                looking for passionate individuals who want to make an impact and
-                grow with us.
+                Be part of a product-centric technology company building
+                enterprise-grade solutions. We&#39;re looking for talented individuals
+                who want to make an impact and grow with us.
               </motion.p>
             </motion.div>
           </div>

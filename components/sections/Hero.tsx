@@ -221,8 +221,8 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          Stanzasoft brings AI automation to your fingertips & streamlines
-          tasks.
+          Engineering intelligent solutions for modern enterprises — from
+          product development to AI automation.
         </motion.p>
 
         {/* CTA Buttons */}

@@ -3,14 +3,10 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
-  Brain,
-  Cloud,
-  Database,
-  FileSignature,
-  Server,
-  Shield,
+  Layers,
+  Bot,
+  MessageSquareText,
   Users,
-  Workflow,
   ArrowRight,
   MessageSquare,
   Lightbulb,
@@ -22,63 +18,53 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
 
-// Services data
+// Core Capabilities data
 const services = [
   {
-    icon: Brain,
-    title: 'AI/ML',
+    icon: Layers,
+    title: 'End-to-End Product Development',
     description:
-      'Harness the power of Artificial Intelligence and Machine Learning to automate processes, gain predictive insights, and drive innovation across your organization.',
-    href: '/services/ai-ml',
+      'We transform concepts into robust, scalable digital products through a structured and strategic development lifecycle — from ideation and UX architecture to full-stack engineering and deployment.',
+    href: '/contact',
+    bulletPoints: [
+      'Product Strategy & Roadmapping',
+      'UI/UX Design & System Architecture',
+      'Application Development',
+      'Quality Assurance & Optimization',
+      'Production Deployment & Scaling',
+    ],
   },
   {
-    icon: Cloud,
-    title: 'Salesforce',
+    icon: Bot,
+    title: 'Agentic AI Solutions',
     description:
-      'End-to-end Salesforce CRM implementation, customization, and optimization to transform your customer relationships and sales processes.',
-    href: '/services/salesforce',
+      'We develop intelligent AI platforms designed to automate workflows, optimize business processes, and enhance operational efficiency.',
+    href: '/contact',
+    bulletPoints: [
+      'Reduce manual dependency',
+      'Improve decision-making speed',
+      'Streamline internal operations',
+      'Enhance productivity at scale',
+    ],
   },
   {
-    icon: FileSignature,
-    title: 'DocuSign CLM+',
+    icon: MessageSquareText,
+    title: 'AI-Driven Chatbots',
     description:
-      'Streamline contract lifecycle management with DocuSign CLM+ integration, automating workflows from creation to execution and renewal.',
-    href: '/services/docusign-clm',
-  },
-  {
-    icon: Server,
-    title: 'Oracle Services',
-    description:
-      'Comprehensive Oracle ERP solutions for enterprise resource planning, helping you optimize operations and make data-driven decisions.',
-    href: '/services/oracle',
-  },
-  {
-    icon: Shield,
-    title: 'Cloud Security & Services',
-    description:
-      'Secure cloud infrastructure across AWS, Azure, and GCP with robust security frameworks, compliance management, and 24/7 monitoring.',
-    href: '/services/cloud',
-  },
-  {
-    icon: Database,
-    title: 'Data Integration',
-    description:
-      'Build robust ETL pipelines and data integration solutions to unify your data sources and enable seamless information flow across systems.',
-    href: '/services/data-integration',
+      'We design advanced conversational AI systems that enhance customer engagement and automate support processes while maintaining high-quality interactions.',
+    href: '/contact',
+    bulletPoints: [],
   },
   {
     icon: Users,
-    title: 'Workday ERP',
+    title: 'HR Consulting & Recruitment',
     description:
-      'Transform your HR and finance operations with Workday ERP implementation, delivering unified solutions for workforce and financial management.',
-    href: '/services/workday',
-  },
-  {
-    icon: Workflow,
-    title: 'SAP',
-    description:
-      'Enterprise-grade SAP solutions to streamline business processes, enhance productivity, and drive digital transformation at scale.',
-    href: '/services/sap',
+      'Stanzasoft provides strategic HR and recruitment solutions, enabling organizations to acquire high-quality talent aligned with their operational and growth objectives.',
+    href: '/contact',
+    bulletPoints: [
+      'Talent Acquisition',
+      'Recruitment Strategy',
+    ],
   },
 ]
 
@@ -175,7 +161,19 @@ function ServiceCard({
         </h3>
 
         {/* Description */}
-        <p className="text-muted leading-relaxed mb-6">{service.description}</p>
+        <p className="text-muted leading-relaxed mb-4">{service.description}</p>
+
+        {/* Bullet Points */}
+        {service.bulletPoints && service.bulletPoints.length > 0 && (
+          <ul className="space-y-2 mb-6">
+            {service.bulletPoints.map((point, idx) => (
+              <li key={idx} className="flex items-start gap-2 text-sm text-muted">
+                <span className="text-primary mt-1 flex-shrink-0">&#9670;</span>
+                <span>{point}</span>
+              </li>
+            ))}
+          </ul>
+        )}
 
         {/* Learn More Link */}
         <Link
@@ -186,7 +184,7 @@ function ServiceCard({
             'hover:gap-3 transition-all duration-300'
           )}
         >
-          Learn More
+          Get Started
           <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
@@ -305,7 +303,7 @@ export default function ServicesPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
               >
-                What We Offer
+                Our Core Capabilities
               </motion.span>
 
               {/* Headline with gradient */}
@@ -318,8 +316,8 @@ export default function ServicesPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <span className="text-foreground">Our </span>
-                <span className="gradient-text">Services</span>
+                <span className="text-foreground">What We </span>
+                <span className="gradient-text">Build</span>
               </motion.h1>
 
               {/* Subtext */}
@@ -329,9 +327,9 @@ export default function ServicesPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                We deliver comprehensive technology solutions tailored to your
-                business needs. From AI-powered automation to enterprise
-                integrations, we help you thrive in the digital age.
+                From end-to-end product development to AI automation and
+                strategic HR consulting — we deliver high-impact solutions
+                that drive measurable outcomes.
               </motion.p>
             </motion.div>
           </div>
@@ -341,7 +339,7 @@ export default function ServicesPage() {
         <section className="py-16 md:py-24 bg-background">
           <div className="container mx-auto px-4 md:px-6">
             <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8"
+              className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
