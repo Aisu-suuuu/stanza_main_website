@@ -4,11 +4,11 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import {
   ArrowRight,
-  Heart,
+  GraduationCap,
   Landmark,
   ShoppingCart,
-  Factory,
-  Truck,
+  Stethoscope,
+  Building2,
   Cpu,
 } from 'lucide-react'
 import Header from '@/components/layout/Header'
@@ -20,58 +20,58 @@ import { cn } from '@/lib/utils'
 // Industries data
 const industries = [
   {
-    icon: Heart,
-    title: 'Healthcare',
+    icon: GraduationCap,
+    title: 'Education & EdTech',
     description:
-      'Transforming patient care with AI-powered diagnostics, electronic health records, telemedicine platforms, and healthcare analytics solutions.',
-    features: ['EHR Integration', 'Telehealth Solutions', 'AI Diagnostics', 'HIPAA Compliance'],
-    color: 'from-red-500/20 to-pink-500/20',
-    iconColor: 'text-red-400',
-  },
-  {
-    icon: Landmark,
-    title: 'Finance',
-    description:
-      'Empowering financial institutions with secure payment systems, fraud detection, regulatory compliance tools, and automated trading platforms.',
-    features: ['Fraud Detection', 'Risk Management', 'Regulatory Compliance', 'Digital Banking'],
-    color: 'from-green-500/20 to-emerald-500/20',
-    iconColor: 'text-green-400',
-  },
-  {
-    icon: ShoppingCart,
-    title: 'Retail',
-    description:
-      'Revolutionizing retail experiences with omnichannel commerce, inventory management, personalized recommendations, and supply chain optimization.',
-    features: ['E-commerce Platforms', 'Inventory Management', 'Customer Analytics', 'POS Systems'],
-    color: 'from-blue-500/20 to-cyan-500/20',
-    iconColor: 'text-blue-400',
-  },
-  {
-    icon: Factory,
-    title: 'Manufacturing',
-    description:
-      'Driving Industry 4.0 with smart factory solutions, predictive maintenance, quality control automation, and real-time production monitoring.',
-    features: ['IoT Integration', 'Predictive Maintenance', 'Quality Control', 'Supply Chain'],
-    color: 'from-orange-500/20 to-amber-500/20',
-    iconColor: 'text-orange-400',
-  },
-  {
-    icon: Truck,
-    title: 'Logistics',
-    description:
-      'Optimizing supply chains with route planning, fleet management, warehouse automation, and real-time tracking solutions.',
-    features: ['Route Optimization', 'Fleet Management', 'Warehouse Automation', 'Real-time Tracking'],
+      'Building intelligent learning platforms and AI-powered test preparation tools that personalize education and improve student outcomes at scale.',
+    features: ['Adaptive Learning', 'AI Test Preparation', 'Performance Analytics', 'LMS Integration'],
     color: 'from-[#814AC8]/20 to-[#DF7AFE]/20',
     iconColor: 'text-[#DF7AFE]',
   },
   {
     icon: Cpu,
-    title: 'Technology',
+    title: 'Technology & SaaS',
     description:
-      'Enabling tech companies with cloud infrastructure, DevOps automation, AI/ML platforms, and scalable SaaS solutions.',
-    features: ['Cloud Architecture', 'DevOps', 'AI/ML Platforms', 'SaaS Development'],
+      'Enabling technology companies with scalable product development, cloud-native architecture, and AI-driven automation platforms.',
+    features: ['Product Engineering', 'Cloud Architecture', 'AI/ML Platforms', 'SaaS Development'],
     color: 'from-cyan-500/20 to-teal-500/20',
     iconColor: 'text-cyan-400',
+  },
+  {
+    icon: Stethoscope,
+    title: 'Healthcare',
+    description:
+      'Developing digital health solutions that streamline patient engagement, automate administrative workflows, and support data-driven clinical decisions.',
+    features: ['Patient Portals', 'Workflow Automation', 'Health Data Analytics', 'Compliance Solutions'],
+    color: 'from-red-500/20 to-pink-500/20',
+    iconColor: 'text-red-400',
+  },
+  {
+    icon: Landmark,
+    title: 'Finance & Banking',
+    description:
+      'Delivering secure, intelligent platforms for financial services — from automated compliance tools to customer-facing digital banking applications.',
+    features: ['Process Automation', 'Compliance Tools', 'Digital Banking', 'Data-Driven Insights'],
+    color: 'from-green-500/20 to-emerald-500/20',
+    iconColor: 'text-green-400',
+  },
+  {
+    icon: ShoppingCart,
+    title: 'Retail & E-Commerce',
+    description:
+      'Building modern commerce experiences with AI-powered recommendations, intelligent inventory systems, and seamless omnichannel platforms.',
+    features: ['E-commerce Platforms', 'AI Recommendations', 'Inventory Automation', 'Customer Analytics'],
+    color: 'from-blue-500/20 to-cyan-500/20',
+    iconColor: 'text-blue-400',
+  },
+  {
+    icon: Building2,
+    title: 'Enterprise & Professional Services',
+    description:
+      'Supporting enterprises and consulting firms with custom internal tools, workflow automation, and strategic talent acquisition solutions.',
+    features: ['Custom Platforms', 'HR & Recruitment', 'Workflow Automation', 'Internal Tools'],
+    color: 'from-orange-500/20 to-amber-500/20',
+    iconColor: 'text-orange-400',
   },
 ]
 
@@ -162,8 +162,9 @@ export default function IndustriesPage() {
                 <span className="gradient-text">We Serve</span>
               </h1>
               <p className="text-lg md:text-xl text-muted max-w-2xl mx-auto leading-relaxed">
-                We bring deep domain expertise and innovative solutions to help
-                businesses across diverse industries achieve digital transformation.
+                We bring product-centric thinking and AI-driven solutions to
+                organizations across high-impact sectors — helping them innovate,
+                automate, and scale.
               </p>
             </motion.div>
           </div>
@@ -233,7 +234,7 @@ export default function IndustriesPage() {
           </div>
         </section>
 
-        {/* Stats Section */}
+        {/* Our Approach Section */}
         <section className="py-20 md:py-28 bg-card/50">
           <div className="container-custom">
             <motion.div
@@ -244,11 +245,11 @@ export default function IndustriesPage() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                Trusted Across Industries
+                Our Industry <span className="gradient-text">Approach</span>
               </h2>
               <p className="text-muted text-lg max-w-2xl mx-auto">
-                Our track record speaks for itself with successful implementations
-                across multiple sectors.
+                We go beyond generic solutions — understanding each industry&#39;s
+                unique challenges to deliver tailored, high-impact results.
               </p>
             </motion.div>
 
@@ -259,25 +260,25 @@ export default function IndustriesPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 {[
-                  { value: '50+', label: 'Enterprise Clients' },
-                  { value: '6', label: 'Industries Served' },
-                  { value: '95%', label: 'Client Retention' },
-                  { value: '200+', label: 'Projects Delivered' },
-                ].map((stat, index) => (
+                  { title: 'Domain Discovery', description: 'Deep-dive into industry-specific pain points and workflows before building.' },
+                  { title: 'AI-First Thinking', description: 'Every solution is designed with intelligent automation at its core.' },
+                  { title: 'Scalable Architecture', description: 'Built to grow with your business — from startup to enterprise scale.' },
+                  { title: 'Outcome-Driven', description: 'We measure success by the real business impact our solutions deliver.' },
+                ].map((item, index) => (
                   <motion.div
-                    key={stat.label}
+                    key={item.title}
                     className="text-center"
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                   >
-                    <div className="text-4xl md:text-5xl font-bold gradient-text mb-2">
-                      {stat.value}
+                    <div className="text-lg font-semibold text-foreground mb-2">
+                      {item.title}
                     </div>
-                    <div className="text-muted text-sm">{stat.label}</div>
+                    <div className="text-muted text-sm leading-relaxed">{item.description}</div>
                   </motion.div>
                 ))}
               </div>
@@ -298,20 +299,19 @@ export default function IndustriesPage() {
                 transition={{ duration: 0.7 }}
               >
                 <h2 className="text-3xl md:text-4xl font-bold">
-                  Why Industry Leaders Choose Us
+                  Why Organizations <span className="gradient-text">Trust Us</span>
                 </h2>
                 <p className="text-muted text-lg leading-relaxed">
-                  Our deep understanding of industry-specific challenges combined with
-                  technical expertise allows us to deliver solutions that truly make
-                  a difference.
+                  Our product-centric approach and deep domain understanding allow us
+                  to build solutions that create real, measurable business impact.
                 </p>
                 <div className="space-y-4">
                   {[
-                    'Domain expertise with certified professionals',
-                    'Compliance-ready solutions for regulated industries',
-                    'Scalable architectures for enterprise needs',
-                    'Proven methodologies with measurable outcomes',
-                    '24/7 support and maintenance',
+                    'Scalable AI-driven systems built for enterprise needs',
+                    'Integrated technology and talent solutions',
+                    'Long-term strategic partnerships, not just projects',
+                    'Outcome-focused delivery with measurable results',
+                    'Cross-functional expertise in engineering, design, and AI',
                   ].map((item, index) => (
                     <motion.div
                       key={item}
@@ -339,10 +339,10 @@ export default function IndustriesPage() {
               >
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    { icon: Heart, label: 'Healthcare', color: 'from-red-500/20 to-pink-500/20' },
-                    { icon: Landmark, label: 'Finance', color: 'from-green-500/20 to-emerald-500/20' },
-                    { icon: Factory, label: 'Manufacturing', color: 'from-orange-500/20 to-amber-500/20' },
+                    { icon: GraduationCap, label: 'Education', color: 'from-[#814AC8]/20 to-[#DF7AFE]/20' },
                     { icon: Cpu, label: 'Technology', color: 'from-cyan-500/20 to-teal-500/20' },
+                    { icon: Stethoscope, label: 'Healthcare', color: 'from-red-500/20 to-pink-500/20' },
+                    { icon: Building2, label: 'Enterprise', color: 'from-orange-500/20 to-amber-500/20' },
                   ].map((item, index) => (
                     <motion.div
                       key={item.label}

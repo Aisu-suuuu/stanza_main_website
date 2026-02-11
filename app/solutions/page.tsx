@@ -3,12 +3,12 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import {
-  Building2,
-  Cog,
-  LineChart,
-  ShieldCheck,
-  Zap,
-  Globe,
+  Layers,
+  Bot,
+  MessageSquareText,
+  UserCheck,
+  Rocket,
+  Settings2,
   ArrowRight,
   CheckCircle2,
 } from 'lucide-react'
@@ -20,51 +20,51 @@ import { Button } from '@/components/ui/Button'
 // Solutions data
 const solutions = [
   {
-    icon: Building2,
-    title: 'Enterprise Resource Planning',
+    icon: Layers,
+    title: 'End-to-End Product Development',
     description:
-      'Unified ERP solutions that streamline your operations, finance, HR, and supply chain into one cohesive platform for maximum efficiency.',
-    features: ['Financial Management', 'Supply Chain Optimization', 'HR Integration', 'Real-time Analytics'],
+      'We transform concepts into robust, scalable digital products through a structured development lifecycle — from ideation and UX architecture to full-stack engineering and deployment.',
+    features: ['Product Strategy & Roadmapping', 'UI/UX Design & Architecture', 'Full-Stack Engineering', 'Quality Assurance & Deployment'],
     href: '/contact',
   },
   {
-    icon: LineChart,
-    title: 'Business Intelligence & Analytics',
+    icon: Bot,
+    title: 'Agentic AI Solutions',
     description:
-      'Transform raw data into actionable insights with our advanced BI solutions, enabling data-driven decision making across your organization.',
-    features: ['Custom Dashboards', 'Predictive Analytics', 'Data Visualization', 'Automated Reporting'],
+      'We develop intelligent AI platforms designed to automate workflows, optimize business processes, and enhance operational efficiency across your organization.',
+    features: ['Workflow Automation', 'Decision-Making Acceleration', 'Operational Streamlining', 'Scalable AI Infrastructure'],
     href: '/contact',
   },
   {
-    icon: Cog,
-    title: 'Process Automation',
+    icon: MessageSquareText,
+    title: 'AI-Driven Chatbots',
     description:
-      'Automate repetitive tasks and complex workflows to reduce costs, minimize errors, and free your team to focus on strategic initiatives.',
-    features: ['Workflow Automation', 'RPA Integration', 'Document Processing', 'Task Orchestration'],
+      'We design advanced conversational AI systems that enhance customer engagement and automate support processes while maintaining high-quality, natural interactions.',
+    features: ['Natural Language Processing', 'Multi-Channel Deployment', 'Contextual Understanding', 'Analytics & Insights'],
     href: '/contact',
   },
   {
-    icon: ShieldCheck,
-    title: 'Compliance & Security',
+    icon: UserCheck,
+    title: 'HR Consulting & Recruitment',
     description:
-      'Comprehensive security solutions to protect your data, ensure regulatory compliance, and maintain customer trust in an evolving threat landscape.',
-    features: ['Risk Assessment', 'Compliance Management', 'Security Audits', 'Data Protection'],
+      'Strategic HR and recruitment solutions enabling organizations to acquire high-quality talent aligned with their operational and growth objectives.',
+    features: ['Talent Acquisition', 'Recruitment Strategy', 'Workforce Planning', 'Onboarding Solutions'],
     href: '/contact',
   },
   {
-    icon: Zap,
-    title: 'Digital Transformation',
+    icon: Rocket,
+    title: 'PrepMonkey — AI Test Prep',
     description:
-      'End-to-end digital transformation services to modernize legacy systems, adopt cloud technologies, and build agile, future-ready organizations.',
-    features: ['Legacy Modernization', 'Cloud Migration', 'API Development', 'Change Management'],
+      'Our flagship AI-powered test preparation platform that delivers adaptive learning paths, real-time performance tracking, and intelligent practice for standardized exams.',
+    features: ['Adaptive Question Engine', 'Performance Analytics', 'Personalized Study Plans', 'Real-Time Feedback'],
     href: '/contact',
   },
   {
-    icon: Globe,
-    title: 'Integration Services',
+    icon: Settings2,
+    title: 'Custom Enterprise Platforms',
     description:
-      'Seamlessly connect your applications, data sources, and business processes with our enterprise integration solutions for unified operations.',
-    features: ['API Integration', 'Data Synchronization', 'System Connectivity', 'Middleware Solutions'],
+      'Tailored enterprise software solutions built to address your unique operational challenges — from internal tools and dashboards to customer-facing applications.',
+    features: ['Custom Dashboards', 'API Integrations', 'Cloud-Native Architecture', 'Scalable Infrastructure'],
     href: '/contact',
   },
 ]
@@ -200,7 +200,7 @@ export default function SolutionsPage() {
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
               >
-                Enterprise Solutions
+                What We Deliver
               </motion.span>
 
               {/* Headline with gradient */}
@@ -224,9 +224,9 @@ export default function SolutionsPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
               >
-                Comprehensive enterprise solutions designed to solve complex business
-                challenges. We help organizations streamline operations, drive innovation,
-                and achieve sustainable growth.
+                From product development and AI automation to talent acquisition — we
+                deliver high-impact solutions that drive measurable outcomes for modern
+                enterprises.
               </motion.p>
             </motion.div>
           </div>
@@ -244,11 +244,11 @@ export default function SolutionsPage() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                Tailored for <span className="gradient-text">Enterprise Success</span>
+                Built for <span className="gradient-text">Real Impact</span>
               </h2>
               <p className="text-muted text-lg leading-relaxed">
-                From ERP implementations to digital transformation, our solutions
-                address the unique challenges of modern enterprises.
+                Every solution we build is designed to solve real business problems —
+                from intelligent automation to scalable product platforms.
               </p>
             </motion.div>
 
@@ -266,7 +266,7 @@ export default function SolutionsPage() {
           </div>
         </section>
 
-        {/* Why Choose Us Section */}
+        {/* Why Stanzasoft Section */}
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <motion.div
@@ -293,9 +293,9 @@ export default function SolutionsPage() {
                     <span className="gradient-text">Digital Excellence</span>
                   </h2>
                   <p className="text-muted text-lg leading-relaxed mb-8">
-                    With deep expertise across enterprise platforms and a commitment to
-                    delivering measurable results, we help businesses navigate their
-                    digital journey with confidence.
+                    We combine deep technical expertise with a product-centric mindset
+                    to deliver solutions that create lasting business value. Our approach
+                    is built on transparency, partnership, and measurable outcomes.
                   </p>
                   <Link href="/contact">
                     <Button size="lg">
@@ -305,29 +305,29 @@ export default function SolutionsPage() {
                   </Link>
                 </div>
 
-                {/* Right Content - Stats */}
-                <div className="grid grid-cols-2 gap-6">
+                {/* Right Content - Value Props */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                   {[
-                    { number: '500+', label: 'Enterprise Clients' },
-                    { number: '98%', label: 'Client Satisfaction' },
-                    { number: '15+', label: 'Years Experience' },
-                    { number: '24/7', label: 'Support Available' },
-                  ].map((stat) => (
+                    { title: 'Scalable AI-Driven Systems', description: 'Intelligent platforms built for growth and automation.' },
+                    { title: 'Integrated Tech & Talent', description: 'Technology solutions paired with strategic HR consulting.' },
+                    { title: 'Long-Term Partnerships', description: 'We invest in relationships, not just deliverables.' },
+                    { title: 'Outcome-Focused Delivery', description: 'Every engagement is measured by real business results.' },
+                  ].map((item, index) => (
                     <motion.div
-                      key={stat.label}
+                      key={item.title}
                       className={cn(
-                        'text-center p-6 rounded-2xl',
+                        'p-6 rounded-2xl',
                         'bg-background border border-border/50'
                       )}
                       initial={{ opacity: 0, scale: 0.9 }}
                       whileInView={{ opacity: 1, scale: 1 }}
                       viewport={{ once: true }}
-                      transition={{ duration: 0.4 }}
+                      transition={{ duration: 0.4, delay: index * 0.1 }}
                     >
-                      <div className="text-3xl md:text-4xl font-bold gradient-text mb-2">
-                        {stat.number}
+                      <div className="text-lg font-semibold text-foreground mb-2">
+                        {item.title}
                       </div>
-                      <div className="text-muted text-sm">{stat.label}</div>
+                      <div className="text-muted text-sm">{item.description}</div>
                     </motion.div>
                   ))}
                 </div>
