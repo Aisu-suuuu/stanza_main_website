@@ -2,62 +2,90 @@
 
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Image from 'next/image'
 import {
   Clock,
   ArrowRight,
   Tag,
-  Bell,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
 
-// Blog posts data (placeholder)
+// Blog posts data
 const blogPosts = [
   {
     id: 1,
-    title: 'The Future of Enterprise AI: Trends to Watch in 2025',
+    slug: 'ai-integration-transforming-business-operations',
+    title: 'AI Integration: How It\'s Transforming Business Operations in 2026',
     excerpt:
-      'Explore the emerging AI technologies that are reshaping how enterprises operate, from generative AI to autonomous agents.',
-    category: 'AI & Machine Learning',
-    date: 'Coming Soon',
+      'From automating customer support to predicting market trends, AI integration is no longer optional — it\'s the competitive edge every business needs. Learn how companies are embedding AI into their core workflows.',
+    category: 'AI Integration',
+    date: 'Feb 5, 2026',
     readTime: '8 min read',
     featured: true,
-    image: '/blog/ai-enterprise.jpg',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=500&fit=crop',
   },
   {
     id: 2,
-    title: 'Maximizing ROI with Salesforce Implementation',
+    slug: 'smart-workflows-automating-with-ai',
+    title: 'Smart Workflows: Building Intelligent Automation That Scales',
     excerpt:
-      'Learn best practices for implementing Salesforce CRM to drive customer engagement and sales performance.',
-    category: 'Salesforce',
-    date: 'Coming Soon',
+      'Manual processes drain resources and slow growth. Discover how smart workflows powered by AI can automate repetitive tasks, reduce errors, and free your team to focus on high-value work.',
+    category: 'Smart Workflows',
+    date: 'Jan 28, 2026',
     readTime: '6 min read',
     featured: false,
-    image: '/blog/salesforce-roi.jpg',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop',
   },
   {
     id: 3,
-    title: 'Cloud Security Best Practices for 2025',
+    slug: 'agentic-ai-future-of-enterprise-automation',
+    title: 'Agentic AI: The Future of Enterprise Automation',
     excerpt:
-      'Essential security strategies to protect your cloud infrastructure and maintain compliance in an evolving threat landscape.',
-    category: 'Cloud Security',
-    date: 'Coming Soon',
+      'Agentic AI goes beyond chatbots — these autonomous systems can reason, plan, and execute multi-step tasks. Explore how agentic AI is reshaping enterprise operations from sales to engineering.',
+    category: 'AI & Machine Learning',
+    date: 'Jan 15, 2026',
     readTime: '10 min read',
     featured: false,
-    image: '/blog/cloud-security.jpg',
+    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&h=500&fit=crop',
   },
   {
     id: 4,
-    title: 'Digital Transformation: A Roadmap for Success',
+    slug: 'salesforce-ai-integration-einstein-copilot',
+    title: 'Salesforce + AI: Unlocking the Power of Einstein Copilot',
     excerpt:
-      'A comprehensive guide to navigating your organization through digital transformation with minimal disruption.',
-    category: 'Digital Strategy',
-    date: 'Coming Soon',
-    readTime: '12 min read',
+      'Salesforce Einstein is bringing generative AI directly into CRM workflows. Learn how to leverage AI-powered insights, automated data entry, and predictive analytics to close deals faster.',
+    category: 'Salesforce',
+    date: 'Jan 3, 2026',
+    readTime: '7 min read',
     featured: false,
-    image: '/blog/digital-transformation.jpg',
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=500&fit=crop',
+  },
+  {
+    id: 5,
+    slug: 'building-ai-first-products',
+    title: 'Building AI-First Products: A Framework for Startups',
+    excerpt:
+      'The best AI products don\'t bolt on intelligence as an afterthought — they\'re designed around it. Here\'s a practical framework for building AI-first products from concept to launch.',
+    category: 'Product Strategy',
+    date: 'Dec 18, 2025',
+    readTime: '9 min read',
+    featured: false,
+    image: 'https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800&h=500&fit=crop',
+  },
+  {
+    id: 6,
+    slug: 'workflow-automation-roi-calculator',
+    title: 'The ROI of Workflow Automation: What the Numbers Say',
+    excerpt:
+      'Companies adopting workflow automation see 30-50% reduction in operational costs. We break down the real numbers behind automation ROI and how to calculate yours.',
+    category: 'Smart Workflows',
+    date: 'Dec 5, 2025',
+    readTime: '5 min read',
+    featured: false,
+    image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=500&fit=crop',
   },
 ]
 
@@ -94,87 +122,87 @@ function BlogCard({
 }) {
   return (
     <motion.div variants={itemVariants} className={featured ? 'md:col-span-2' : ''}>
-      <div
-        className={cn(
-          'group relative h-full',
-          'bg-surface-card rounded-3xl border border-border/50',
-          'hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10',
-          'transition-all duration-300 ease-out',
-          'hover:-translate-y-1',
-          'overflow-hidden'
-        )}
-      >
-        {/* Image Placeholder */}
+      <Link href={`/blog/${post.slug}`}>
         <div
           className={cn(
-            'relative w-full overflow-hidden',
-            featured ? 'h-64 md:h-80' : 'h-48'
+            'group relative h-full',
+            'bg-surface-card rounded-3xl border border-border/50',
+            'hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10',
+            'transition-all duration-300 ease-out',
+            'hover:-translate-y-1',
+            'overflow-hidden'
           )}
         >
+          {/* Image */}
           <div
             className={cn(
-              'absolute inset-0',
-              'bg-gradient-to-br from-primary/30 to-secondary/30',
-              'flex items-center justify-center'
+              'relative w-full overflow-hidden',
+              featured ? 'h-64 md:h-80' : 'h-48'
             )}
           >
-            <span className="text-muted text-sm font-medium">Image Coming Soon</span>
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              sizes={featured ? '(max-width: 768px) 100vw, 66vw' : '(max-width: 768px) 100vw, 33vw'}
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            {/* Category Tag */}
+            <div className="absolute top-4 left-4">
+              <span
+                className={cn(
+                  'inline-flex items-center gap-1.5 px-3 py-1.5',
+                  'text-xs font-medium text-white',
+                  'bg-black/40 backdrop-blur-sm rounded-full',
+                  'border border-white/20'
+                )}
+              >
+                <Tag className="w-3 h-3" />
+                {post.category}
+              </span>
+            </div>
           </div>
-          {/* Category Tag */}
-          <div className="absolute top-4 left-4">
-            <span
+
+          {/* Content */}
+          <div className="p-6 lg:p-8">
+            {/* Meta info */}
+            <div className="flex items-center gap-4 text-sm text-muted mb-4">
+              <span className="flex items-center gap-1.5">
+                <Clock className="w-4 h-4" />
+                {post.readTime}
+              </span>
+              <span>{post.date}</span>
+            </div>
+
+            {/* Title */}
+            <h3
               className={cn(
-                'inline-flex items-center gap-1.5 px-3 py-1.5',
-                'text-xs font-medium text-primary',
-                'bg-surface-card/80 backdrop-blur-sm rounded-full',
-                'border border-primary/20'
+                'font-semibold text-foreground mb-3',
+                'group-hover:text-primary transition-colors duration-300',
+                featured ? 'text-2xl md:text-3xl' : 'text-xl'
               )}
             >
-              <Tag className="w-3 h-3" />
-              {post.category}
+              {post.title}
+            </h3>
+
+            {/* Excerpt */}
+            <p className="text-muted leading-relaxed mb-6">{post.excerpt}</p>
+
+            {/* Read More Link */}
+            <span
+              className={cn(
+                'inline-flex items-center gap-2',
+                'text-primary font-medium',
+                'group-hover:gap-3 transition-all duration-300'
+              )}
+            >
+              Read Article
+              <ArrowRight className="w-4 h-4" />
             </span>
           </div>
         </div>
-
-        {/* Content */}
-        <div className="p-6 lg:p-8">
-          {/* Meta info */}
-          <div className="flex items-center gap-4 text-sm text-muted mb-4">
-            <span className="flex items-center gap-1.5">
-              <Clock className="w-4 h-4" />
-              {post.readTime}
-            </span>
-            <span>{post.date}</span>
-          </div>
-
-          {/* Title */}
-          <h3
-            className={cn(
-              'font-semibold text-foreground mb-3',
-              'group-hover:text-primary transition-colors duration-300',
-              featured ? 'text-2xl md:text-3xl' : 'text-xl'
-            )}
-          >
-            {post.title}
-          </h3>
-
-          {/* Excerpt */}
-          <p className="text-muted leading-relaxed mb-6">{post.excerpt}</p>
-
-          {/* Read More Link */}
-          <span
-            className={cn(
-              'inline-flex items-center gap-2',
-              'text-primary font-medium',
-              'group-hover:gap-3 transition-all duration-300',
-              'cursor-not-allowed opacity-70'
-            )}
-          >
-            Coming Soon
-            <ArrowRight className="w-4 h-4" />
-          </span>
-        </div>
-      </div>
+      </Link>
     </motion.div>
   )
 }
@@ -251,45 +279,6 @@ export default function BlogPage() {
           </div>
         </section>
 
-        {/* Coming Soon Notice */}
-        <section className="py-8">
-          <div className="container mx-auto px-4 md:px-6">
-            <motion.div
-              className={cn(
-                'bg-gradient-to-r from-primary/10 to-secondary/10',
-                'border border-primary/20 rounded-2xl p-6',
-                'flex flex-col md:flex-row items-center justify-between gap-4'
-              )}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <div className="flex items-center gap-4">
-                <div
-                  className={cn(
-                    'w-12 h-12 rounded-xl',
-                    'bg-primary/20 flex items-center justify-center'
-                  )}
-                >
-                  <Bell className="w-6 h-6 text-primary" />
-                </div>
-                <div>
-                  <h3 className="text-foreground font-semibold">Blog Coming Soon</h3>
-                  <p className="text-muted text-sm">
-                    We're preparing insightful content for you. Stay tuned!
-                  </p>
-                </div>
-              </div>
-              <Link href="/contact">
-                <Button variant="outline" size="md">
-                  Get Notified
-                  <ArrowRight className="ml-2 w-4 h-4" />
-                </Button>
-              </Link>
-            </motion.div>
-          </div>
-        </section>
-
         {/* Blog Grid Section */}
         <section className="py-16 md:py-24 bg-background">
           <div className="container mx-auto px-4 md:px-6">
@@ -302,10 +291,10 @@ export default function BlogPage() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
-                Preview of <span className="gradient-text">Upcoming Articles</span>
+                Latest <span className="gradient-text">Articles</span>
               </h2>
               <p className="text-muted text-lg leading-relaxed">
-                Here's a sneak peek at the topics we'll be covering in our upcoming blog posts.
+                Insights on AI integration, smart workflows, and building technology that scales.
               </p>
             </motion.div>
 
