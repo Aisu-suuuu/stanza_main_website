@@ -235,101 +235,15 @@ export default function AboutPage() {
               </p>
             </motion.div>
 
-            {/* Team Intro Card */}
+            {/* Team Portrait Gallery */}
             <motion.div
-              className="bg-surface-card rounded-3xl p-8 lg:p-12 mb-12"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                {/* Illustration - Team Collaboration Doodle */}
-                <div className="relative flex items-center justify-center">
-                  <svg viewBox="0 0 500 400" className="w-full max-w-md" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    {/* Background circle */}
-                    <circle cx="250" cy="200" r="160" fill="url(#teamGrad)" opacity="0.08" />
-                    {/* Desk */}
-                    <rect x="100" y="260" width="300" height="8" rx="4" fill="currentColor" className="text-muted" opacity="0.2" />
-                    <rect x="140" y="268" width="8" height="60" rx="2" fill="currentColor" className="text-muted" opacity="0.15" />
-                    <rect x="352" y="268" width="8" height="60" rx="2" fill="currentColor" className="text-muted" opacity="0.15" />
-                    {/* Person 1 - Left */}
-                    <circle cx="170" cy="190" r="22" fill="#814AC8" opacity="0.2" />
-                    <circle cx="170" cy="190" r="22" stroke="#814AC8" strokeWidth="2.5" strokeDasharray="4 3" />
-                    <circle cx="170" cy="182" r="8" fill="#814AC8" opacity="0.6" />
-                    <path d="M155 205 C155 195, 185 195, 185 205" stroke="#814AC8" strokeWidth="2.5" strokeLinecap="round" />
-                    {/* Laptop 1 */}
-                    <rect x="148" y="238" width="44" height="22" rx="3" stroke="#814AC8" strokeWidth="2" fill="#814AC8" opacity="0.08" />
-                    <rect x="140" y="258" width="60" height="4" rx="2" fill="#814AC8" opacity="0.15" />
-                    {/* Person 2 - Center */}
-                    <circle cx="250" cy="170" r="26" fill="#DF7AFE" opacity="0.2" />
-                    <circle cx="250" cy="170" r="26" stroke="#DF7AFE" strokeWidth="2.5" strokeDasharray="4 3" />
-                    <circle cx="250" cy="161" r="9" fill="#DF7AFE" opacity="0.6" />
-                    <path d="M233 188 C233 177, 267 177, 267 188" stroke="#DF7AFE" strokeWidth="2.5" strokeLinecap="round" />
-                    {/* Laptop 2 */}
-                    <rect x="226" y="230" width="48" height="24" rx="3" stroke="#DF7AFE" strokeWidth="2" fill="#DF7AFE" opacity="0.08" />
-                    <rect x="218" y="252" width="64" height="4" rx="2" fill="#DF7AFE" opacity="0.15" />
-                    {/* Person 3 - Right */}
-                    <circle cx="330" cy="190" r="22" fill="#06B6D4" opacity="0.2" />
-                    <circle cx="330" cy="190" r="22" stroke="#06B6D4" strokeWidth="2.5" strokeDasharray="4 3" />
-                    <circle cx="330" cy="182" r="8" fill="#06B6D4" opacity="0.6" />
-                    <path d="M315 205 C315 195, 345 195, 345 205" stroke="#06B6D4" strokeWidth="2.5" strokeLinecap="round" />
-                    {/* Laptop 3 */}
-                    <rect x="308" y="238" width="44" height="22" rx="3" stroke="#06B6D4" strokeWidth="2" fill="#06B6D4" opacity="0.08" />
-                    <rect x="300" y="258" width="60" height="4" rx="2" fill="#06B6D4" opacity="0.15" />
-                    {/* Connection lines (collaboration) */}
-                    <path d="M195 185 L225 175" stroke="#814AC8" strokeWidth="1.5" strokeDasharray="4 4" opacity="0.4" />
-                    <path d="M275 175 L305 185" stroke="#DF7AFE" strokeWidth="1.5" strokeDasharray="4 4" opacity="0.4" />
-                    {/* Idea bubbles */}
-                    <circle cx="200" cy="148" r="12" stroke="#814AC8" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.5" />
-                    <text x="196" y="152" fontSize="12" fill="#814AC8" opacity="0.7">&#x2728;</text>
-                    <circle cx="290" cy="130" r="14" stroke="#DF7AFE" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.5" />
-                    <text x="284" y="135" fontSize="14" fill="#DF7AFE" opacity="0.7">&#x1F4A1;</text>
-                    <circle cx="355" cy="150" r="11" stroke="#06B6D4" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.5" />
-                    <text x="350" y="154" fontSize="11" fill="#06B6D4" opacity="0.7">&#x2699;</text>
-                    {/* Floating elements */}
-                    <rect x="110" y="130" width="24" height="18" rx="3" stroke="#814AC8" strokeWidth="1.5" opacity="0.3" transform="rotate(-12 122 139)" />
-                    <rect x="370" y="125" width="28" height="20" rx="3" stroke="#06B6D4" strokeWidth="1.5" opacity="0.3" transform="rotate(8 384 135)" />
-                    <defs>
-                      <radialGradient id="teamGrad" cx="0.5" cy="0.5" r="0.5">
-                        <stop offset="0%" stopColor="#814AC8" />
-                        <stop offset="100%" stopColor="#DF7AFE" />
-                      </radialGradient>
-                    </defs>
-                  </svg>
-                </div>
-
-                {/* Content */}
-                <div className="space-y-5">
-                  <p className="text-foreground text-lg leading-relaxed">
-                    At Stanzasoft, our strength lies in our people. We are a cross-functional
-                    team of engineers, designers, AI specialists, and talent strategists — united
-                    by a shared commitment to building enterprise-grade solutions that deliver
-                    real business impact.
-                  </p>
-                  <p className="text-muted text-lg leading-relaxed">
-                    We foster a culture of continuous learning, collaboration, and accountability.
-                    Every team member is empowered to contribute ideas, take ownership, and make
-                    a meaningful difference in the solutions we deliver.
-                  </p>
-                  <p className="text-muted text-lg leading-relaxed">
-                    Whether working remotely or from our offices in San Francisco and Hyderabad,
-                    our team stays connected through shared values: integrity, innovation, and an
-                    unwavering commitment to client success.
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-
-            {/* Team Pillars Grid with Doodle Icons */}
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12"
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
             >
-              {/* Engineering */}
+              {/* Engineering - Male, side-parted hair, dress shirt */}
               <motion.div variants={itemVariants}>
                 <div
                   className={cn(
@@ -339,14 +253,85 @@ export default function AboutPage() {
                     'hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10'
                   )}
                 >
-                  <div className="relative w-24 h-24 mx-auto mb-5">
-                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                      <circle cx="50" cy="50" r="40" fill="#814AC8" opacity="0.08" />
-                      <circle cx="50" cy="50" r="40" stroke="#814AC8" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.3" />
-                      <path d="M35 42 L45 55 L35 68" stroke="#814AC8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M50 68 H65" stroke="#814AC8" strokeWidth="3" strokeLinecap="round" />
-                      <circle cx="70" cy="30" r="4" fill="#DF7AFE" opacity="0.4" />
-                      <circle cx="28" cy="35" r="3" fill="#814AC8" opacity="0.3" />
+                  <div className="mx-auto mb-5 w-40 h-52">
+                    <svg viewBox="0 0 200 260" className="w-full h-full text-foreground" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Frame */}
+                      <rect x="10" y="10" width="180" height="240" rx="2" stroke="currentColor" strokeWidth="2.5" opacity="0.8" />
+                      <rect x="6" y="6" width="188" height="248" rx="3" stroke="currentColor" strokeWidth="1" opacity="0.15" />
+                      {/* Corner hatching - TL */}
+                      <g opacity="0.18" stroke="currentColor" strokeWidth="0.9">
+                        <line x1="14" y1="14" x2="38" y2="38" /><line x1="14" y1="24" x2="28" y2="38" />
+                        <line x1="24" y1="14" x2="38" y2="28" /><line x1="34" y1="14" x2="38" y2="18" />
+                        <line x1="14" y1="34" x2="18" y2="38" />
+                      </g>
+                      {/* Corner hatching - TR */}
+                      <g opacity="0.18" stroke="currentColor" strokeWidth="0.9">
+                        <line x1="162" y1="14" x2="186" y2="38" /><line x1="172" y1="14" x2="186" y2="28" />
+                        <line x1="162" y1="24" x2="176" y2="38" /><line x1="182" y1="14" x2="186" y2="18" />
+                        <line x1="162" y1="34" x2="166" y2="38" />
+                      </g>
+                      {/* Corner hatching - BL */}
+                      <g opacity="0.18" stroke="currentColor" strokeWidth="0.9">
+                        <line x1="14" y1="216" x2="38" y2="240" /><line x1="14" y1="226" x2="28" y2="240" />
+                        <line x1="24" y1="216" x2="38" y2="230" /><line x1="14" y1="236" x2="18" y2="240" />
+                      </g>
+                      {/* Corner hatching - BR */}
+                      <g opacity="0.18" stroke="currentColor" strokeWidth="0.9">
+                        <line x1="162" y1="216" x2="186" y2="240" /><line x1="172" y1="216" x2="186" y2="230" />
+                        <line x1="162" y1="226" x2="176" y2="240" /><line x1="182" y1="216" x2="186" y2="220" />
+                      </g>
+                      {/* Head */}
+                      <path d="M73 108 C71 75, 82 58, 100 55 C118 58, 129 75, 127 108 C127 120, 121 132, 112 139 C106 143, 94 143, 88 139 C79 132, 73 120, 73 108" stroke="currentColor" strokeWidth="2" />
+                      {/* Hair - side parted, slicked */}
+                      <path d="M73 88 C73 65, 84 54, 100 52 C116 54, 127 65, 127 88" stroke="currentColor" strokeWidth="2.2" />
+                      <path d="M74 85 C76 68, 84 57, 95 54" stroke="currentColor" strokeWidth="1.2" opacity="0.5" />
+                      <path d="M80 82 C82 68, 88 58, 97 55" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+                      <path d="M86 80 C88 70, 92 62, 99 56" stroke="currentColor" strokeWidth="0.8" opacity="0.3" />
+                      <path d="M126 85 C124 68, 118 57, 107 54" stroke="currentColor" strokeWidth="1.2" opacity="0.5" />
+                      <path d="M122 82 C120 68, 114 58, 105 55" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+                      {/* Part line */}
+                      <path d="M88 54 C90 52, 92 75, 90 82" stroke="currentColor" strokeWidth="0.8" opacity="0.4" />
+                      {/* Ears */}
+                      <path d="M73 96 C67 96, 66 106, 73 108" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M127 96 C133 96, 134 106, 127 108" stroke="currentColor" strokeWidth="1.5" />
+                      {/* Eyebrows */}
+                      <path d="M82 92 C86 88, 94 88, 97 91" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                      <path d="M103 91 C106 88, 114 88, 118 92" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+                      {/* Eyes */}
+                      <ellipse cx="89" cy="99" rx="5" ry="3.2" stroke="currentColor" strokeWidth="1.5" />
+                      <circle cx="90" cy="99" r="2" fill="currentColor" />
+                      <ellipse cx="111" cy="99" rx="5" ry="3.2" stroke="currentColor" strokeWidth="1.5" />
+                      <circle cx="110" cy="99" r="2" fill="currentColor" />
+                      {/* Nose */}
+                      <path d="M100 102 C98 110, 96 116, 98 118 C100 119, 102 118, 100 102" stroke="currentColor" strokeWidth="1" opacity="0.55" />
+                      {/* Mouth */}
+                      <path d="M92 126 C96 130, 104 130, 108 126" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      {/* Neck */}
+                      <line x1="92" y1="142" x2="88" y2="165" stroke="currentColor" strokeWidth="1.5" />
+                      <line x1="108" y1="142" x2="112" y2="165" stroke="currentColor" strokeWidth="1.5" />
+                      {/* Shirt collar */}
+                      <path d="M88 165 L100 182" stroke="currentColor" strokeWidth="1.8" />
+                      <path d="M112 165 L100 182" stroke="currentColor" strokeWidth="1.8" />
+                      {/* Jacket lapels */}
+                      <path d="M88 165 L80 178 L65 250" stroke="currentColor" strokeWidth="2" />
+                      <path d="M112 165 L120 178 L135 250" stroke="currentColor" strokeWidth="2" />
+                      {/* Shoulders */}
+                      <path d="M88 165 C58 172, 28 185, 14 250" stroke="currentColor" strokeWidth="2.2" />
+                      <path d="M112 165 C142 172, 172 185, 186 250" stroke="currentColor" strokeWidth="2.2" />
+                      {/* Jacket crosshatch - left */}
+                      <g opacity="0.12" stroke="currentColor" strokeWidth="0.8">
+                        <line x1="28" y1="200" x2="52" y2="224" /><line x1="33" y1="195" x2="57" y2="219" />
+                        <line x1="38" y1="190" x2="62" y2="214" /><line x1="43" y1="185" x2="67" y2="209" />
+                        <line x1="52" y1="200" x2="28" y2="224" /><line x1="57" y1="195" x2="33" y2="219" />
+                        <line x1="62" y1="190" x2="38" y2="214" />
+                      </g>
+                      {/* Jacket crosshatch - right */}
+                      <g opacity="0.12" stroke="currentColor" strokeWidth="0.8">
+                        <line x1="138" y1="200" x2="162" y2="224" /><line x1="143" y1="195" x2="167" y2="219" />
+                        <line x1="148" y1="190" x2="172" y2="214" /><line x1="153" y1="185" x2="177" y2="209" />
+                        <line x1="162" y1="200" x2="138" y2="224" /><line x1="167" y1="195" x2="143" y2="219" />
+                        <line x1="172" y1="190" x2="148" y2="214" />
+                      </g>
                     </svg>
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-foreground">Engineering</h3>
@@ -357,7 +342,7 @@ export default function AboutPage() {
                 </div>
               </motion.div>
 
-              {/* Design */}
+              {/* Design - Female, wavy hair, turtleneck */}
               <motion.div variants={itemVariants}>
                 <div
                   className={cn(
@@ -367,15 +352,70 @@ export default function AboutPage() {
                     'hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10'
                   )}
                 >
-                  <div className="relative w-24 h-24 mx-auto mb-5">
-                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                      <circle cx="50" cy="50" r="40" fill="#DF7AFE" opacity="0.08" />
-                      <circle cx="50" cy="50" r="40" stroke="#DF7AFE" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.3" />
-                      <rect x="30" y="30" width="40" height="40" rx="6" stroke="#DF7AFE" strokeWidth="2.5" />
-                      <circle cx="42" cy="48" r="8" stroke="#DF7AFE" strokeWidth="2" strokeDasharray="3 2" />
-                      <path d="M55 58 L62 65" stroke="#DF7AFE" strokeWidth="2.5" strokeLinecap="round" />
-                      <circle cx="72" cy="28" r="3" fill="#814AC8" opacity="0.3" />
-                      <circle cx="25" cy="65" r="4" fill="#DF7AFE" opacity="0.3" />
+                  <div className="mx-auto mb-5 w-40 h-52">
+                    <svg viewBox="0 0 200 260" className="w-full h-full text-foreground" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Frame */}
+                      <rect x="10" y="10" width="180" height="240" rx="2" stroke="currentColor" strokeWidth="2.5" opacity="0.8" />
+                      <rect x="6" y="6" width="188" height="248" rx="3" stroke="currentColor" strokeWidth="1" opacity="0.15" />
+                      {/* Corner hatching */}
+                      <g opacity="0.18" stroke="currentColor" strokeWidth="0.9">
+                        <line x1="14" y1="14" x2="38" y2="38" /><line x1="14" y1="24" x2="28" y2="38" />
+                        <line x1="24" y1="14" x2="38" y2="28" /><line x1="34" y1="14" x2="38" y2="18" />
+                        <line x1="162" y1="14" x2="186" y2="38" /><line x1="172" y1="14" x2="186" y2="28" />
+                        <line x1="162" y1="24" x2="176" y2="38" /><line x1="182" y1="14" x2="186" y2="18" />
+                        <line x1="14" y1="216" x2="38" y2="240" /><line x1="14" y1="226" x2="28" y2="240" />
+                        <line x1="24" y1="216" x2="38" y2="230" />
+                        <line x1="162" y1="216" x2="186" y2="240" /><line x1="172" y1="216" x2="186" y2="230" />
+                        <line x1="162" y1="226" x2="176" y2="240" />
+                      </g>
+                      {/* Hair - flowing wavy, shoulder length */}
+                      <path d="M65 75 C60 55, 80 40, 100 38 C120 40, 140 55, 135 75" stroke="currentColor" strokeWidth="2.2" />
+                      <path d="M65 75 C58 95, 52 120, 48 150" stroke="currentColor" strokeWidth="2" />
+                      <path d="M135 75 C142 95, 148 120, 152 150" stroke="currentColor" strokeWidth="2" />
+                      {/* Hair wave detail lines */}
+                      <path d="M62 80 C58 100, 55 115, 52 135" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+                      <path d="M68 78 C64 98, 60 118, 55 140" stroke="currentColor" strokeWidth="1" opacity="0.35" />
+                      <path d="M138 78 C142 98, 146 118, 149 140" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+                      <path d="M132 80 C136 100, 140 115, 145 135" stroke="currentColor" strokeWidth="1" opacity="0.35" />
+                      {/* Hair top detail */}
+                      <path d="M67 68 C72 48, 88 40, 100 39" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+                      <path d="M75 65 C80 50, 90 42, 100 40" stroke="currentColor" strokeWidth="0.8" opacity="0.3" />
+                      <path d="M133 68 C128 48, 112 40, 100 39" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+                      {/* Head */}
+                      <path d="M74 108 C72 80, 82 65, 100 62 C118 65, 128 80, 126 108 C126 120, 120 132, 112 138 C106 142, 94 142, 88 138 C80 132, 74 120, 74 108" stroke="currentColor" strokeWidth="2" />
+                      {/* Eyebrows */}
+                      <path d="M83 94 C87 91, 93 91, 96 93" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      <path d="M104 93 C107 91, 113 91, 117 94" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      {/* Eyes - slightly larger, feminine */}
+                      <ellipse cx="89" cy="100" rx="5.5" ry="3.5" stroke="currentColor" strokeWidth="1.5" />
+                      <circle cx="90" cy="100" r="2.2" fill="currentColor" />
+                      <path d="M83 98 C85 96, 93 96, 95 98" stroke="currentColor" strokeWidth="0.8" opacity="0.5" />
+                      <ellipse cx="111" cy="100" rx="5.5" ry="3.5" stroke="currentColor" strokeWidth="1.5" />
+                      <circle cx="110" cy="100" r="2.2" fill="currentColor" />
+                      <path d="M105 98 C107 96, 115 96, 117 98" stroke="currentColor" strokeWidth="0.8" opacity="0.5" />
+                      {/* Nose */}
+                      <path d="M100 104 C98 112, 97 116, 99 117" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+                      {/* Lips */}
+                      <path d="M93 124 C96 128, 100 129, 107 124" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      <path d="M94 124 C98 122, 102 122, 106 124" stroke="currentColor" strokeWidth="0.8" opacity="0.4" />
+                      {/* Neck */}
+                      <line x1="93" y1="140" x2="90" y2="162" stroke="currentColor" strokeWidth="1.5" />
+                      <line x1="107" y1="140" x2="110" y2="162" stroke="currentColor" strokeWidth="1.5" />
+                      {/* Turtleneck */}
+                      <path d="M88 158 C88 168, 112 168, 112 158" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M88 162 C88 172, 112 172, 112 162" stroke="currentColor" strokeWidth="1.5" />
+                      {/* Shoulders */}
+                      <path d="M88 170 C58 178, 28 190, 14 250" stroke="currentColor" strokeWidth="2.2" />
+                      <path d="M112 170 C142 178, 172 190, 186 250" stroke="currentColor" strokeWidth="2.2" />
+                      {/* Top crosshatch detail */}
+                      <g opacity="0.1" stroke="currentColor" strokeWidth="0.7">
+                        <line x1="60" y1="195" x2="80" y2="215" /><line x1="55" y1="200" x2="75" y2="220" />
+                        <line x1="50" y1="205" x2="70" y2="225" /><line x1="65" y1="195" x2="85" y2="215" />
+                        <line x1="80" y1="215" x2="60" y2="195" />
+                        <line x1="120" y1="195" x2="140" y2="215" /><line x1="125" y1="200" x2="145" y2="220" />
+                        <line x1="130" y1="205" x2="150" y2="225" /><line x1="135" y1="195" x2="155" y2="215" />
+                        <line x1="140" y1="215" x2="120" y2="195" />
+                      </g>
                     </svg>
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-foreground">Design</h3>
@@ -386,7 +426,7 @@ export default function AboutPage() {
                 </div>
               </motion.div>
 
-              {/* AI & Data */}
+              {/* AI & Data - Male, glasses, casual collar */}
               <motion.div variants={itemVariants}>
                 <div
                   className={cn(
@@ -396,18 +436,71 @@ export default function AboutPage() {
                     'hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10'
                   )}
                 >
-                  <div className="relative w-24 h-24 mx-auto mb-5">
-                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                      <circle cx="50" cy="50" r="40" fill="#814AC8" opacity="0.08" />
-                      <circle cx="50" cy="50" r="40" stroke="#814AC8" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.3" />
-                      {/* Brain shape */}
-                      <path d="M42 60 C30 60, 28 45, 38 40 C35 32, 45 26, 50 32 C55 26, 65 32, 62 40 C72 45, 70 60, 58 60" stroke="#814AC8" strokeWidth="2.5" strokeLinecap="round" fill="#814AC8" opacity="0.06" />
-                      <path d="M50 38 V58" stroke="#814AC8" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.5" />
-                      <circle cx="42" cy="48" r="2.5" fill="#DF7AFE" opacity="0.6" />
-                      <circle cx="58" cy="48" r="2.5" fill="#DF7AFE" opacity="0.6" />
-                      <circle cx="50" cy="42" r="2.5" fill="#814AC8" opacity="0.6" />
-                      <circle cx="30" cy="30" r="3" fill="#DF7AFE" opacity="0.3" />
-                      <circle cx="74" cy="65" r="3.5" fill="#814AC8" opacity="0.25" />
+                  <div className="mx-auto mb-5 w-40 h-52">
+                    <svg viewBox="0 0 200 260" className="w-full h-full text-foreground" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Frame */}
+                      <rect x="10" y="10" width="180" height="240" rx="2" stroke="currentColor" strokeWidth="2.5" opacity="0.8" />
+                      <rect x="6" y="6" width="188" height="248" rx="3" stroke="currentColor" strokeWidth="1" opacity="0.15" />
+                      {/* Corner hatching */}
+                      <g opacity="0.18" stroke="currentColor" strokeWidth="0.9">
+                        <line x1="14" y1="14" x2="38" y2="38" /><line x1="14" y1="24" x2="28" y2="38" />
+                        <line x1="24" y1="14" x2="38" y2="28" /><line x1="34" y1="14" x2="38" y2="18" />
+                        <line x1="162" y1="14" x2="186" y2="38" /><line x1="172" y1="14" x2="186" y2="28" />
+                        <line x1="162" y1="24" x2="176" y2="38" /><line x1="182" y1="14" x2="186" y2="18" />
+                        <line x1="14" y1="216" x2="38" y2="240" /><line x1="14" y1="226" x2="28" y2="240" />
+                        <line x1="24" y1="216" x2="38" y2="230" />
+                        <line x1="162" y1="216" x2="186" y2="240" /><line x1="172" y1="216" x2="186" y2="230" />
+                        <line x1="162" y1="226" x2="176" y2="240" />
+                      </g>
+                      {/* Head */}
+                      <path d="M73 108 C71 75, 82 58, 100 55 C118 58, 129 75, 127 108 C127 120, 121 132, 112 139 C106 143, 94 143, 88 139 C79 132, 73 120, 73 108" stroke="currentColor" strokeWidth="2" />
+                      {/* Hair - short, textured */}
+                      <path d="M73 82 C73 60, 86 48, 100 46 C114 48, 127 60, 127 82" stroke="currentColor" strokeWidth="2.2" />
+                      <path d="M76 78 C78 62, 88 52, 100 50" stroke="currentColor" strokeWidth="1.2" opacity="0.5" />
+                      <path d="M82 74 C84 62, 92 54, 100 51" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+                      <path d="M124 78 C122 62, 112 52, 100 50" stroke="currentColor" strokeWidth="1.2" opacity="0.5" />
+                      <path d="M118 74 C116 62, 108 54, 100 51" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+                      {/* Hair texture strokes */}
+                      <path d="M88 50 L92 46" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+                      <path d="M100 48 L100 44" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+                      <path d="M112 50 L108 46" stroke="currentColor" strokeWidth="1" opacity="0.3" />
+                      {/* Ears */}
+                      <path d="M73 94 C67 94, 66 104, 73 106" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M127 94 C133 94, 134 104, 127 106" stroke="currentColor" strokeWidth="1.5" />
+                      {/* Glasses - round */}
+                      <circle cx="88" cy="98" r="11" stroke="currentColor" strokeWidth="1.8" />
+                      <circle cx="112" cy="98" r="11" stroke="currentColor" strokeWidth="1.8" />
+                      <path d="M99 97 L101 97" stroke="currentColor" strokeWidth="1.8" />
+                      <path d="M73 96 L77 97" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M127 96 L123 97" stroke="currentColor" strokeWidth="1.5" />
+                      {/* Eyes behind glasses */}
+                      <ellipse cx="88" cy="99" rx="4" ry="2.5" stroke="currentColor" strokeWidth="1.2" />
+                      <circle cx="89" cy="99" r="1.8" fill="currentColor" />
+                      <ellipse cx="112" cy="99" rx="4" ry="2.5" stroke="currentColor" strokeWidth="1.2" />
+                      <circle cx="111" cy="99" r="1.8" fill="currentColor" />
+                      {/* Eyebrows above glasses */}
+                      <path d="M80 85 C84 82, 92 82, 96 84" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      <path d="M104 84 C108 82, 116 82, 120 85" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      {/* Nose */}
+                      <path d="M100 104 C98 112, 97 117, 99 118" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+                      {/* Slight smile */}
+                      <path d="M93 126 C97 129, 103 129, 107 126" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      {/* Neck */}
+                      <line x1="92" y1="142" x2="88" y2="164" stroke="currentColor" strokeWidth="1.5" />
+                      <line x1="108" y1="142" x2="112" y2="164" stroke="currentColor" strokeWidth="1.5" />
+                      {/* Collar - casual button-down */}
+                      <path d="M88 164 L82 172 L78 180" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M112 164 L118 172 L122 180" stroke="currentColor" strokeWidth="1.5" />
+                      <path d="M82 172 L92 178" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
+                      <path d="M118 172 L108 178" stroke="currentColor" strokeWidth="1.2" opacity="0.6" />
+                      {/* Shoulders */}
+                      <path d="M88 164 C58 172, 28 185, 14 250" stroke="currentColor" strokeWidth="2.2" />
+                      <path d="M112 164 C142 172, 172 185, 186 250" stroke="currentColor" strokeWidth="2.2" />
+                      {/* Shirt button line */}
+                      <line x1="100" y1="178" x2="100" y2="250" stroke="currentColor" strokeWidth="0.8" opacity="0.3" />
+                      <circle cx="100" cy="195" r="1.5" fill="currentColor" opacity="0.3" />
+                      <circle cx="100" cy="215" r="1.5" fill="currentColor" opacity="0.3" />
+                      <circle cx="100" cy="235" r="1.5" fill="currentColor" opacity="0.3" />
                     </svg>
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-foreground">AI & Data</h3>
@@ -418,7 +511,7 @@ export default function AboutPage() {
                 </div>
               </motion.div>
 
-              {/* Talent & HR */}
+              {/* Talent & HR - Female, bob haircut, blazer */}
               <motion.div variants={itemVariants}>
                 <div
                   className={cn(
@@ -428,19 +521,82 @@ export default function AboutPage() {
                     'hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10'
                   )}
                 >
-                  <div className="relative w-24 h-24 mx-auto mb-5">
-                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-                      <circle cx="50" cy="50" r="40" fill="#06B6D4" opacity="0.08" />
-                      <circle cx="50" cy="50" r="40" stroke="#06B6D4" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.3" />
-                      {/* Person with checkmark */}
-                      <circle cx="45" cy="40" r="10" stroke="#06B6D4" strokeWidth="2.5" />
-                      <circle cx="45" cy="37" r="4" fill="#06B6D4" opacity="0.5" />
-                      <path d="M30 62 C30 52, 60 52, 60 62" stroke="#06B6D4" strokeWidth="2.5" strokeLinecap="round" />
-                      {/* Checkmark badge */}
-                      <circle cx="64" cy="38" r="10" fill="#06B6D4" opacity="0.15" stroke="#06B6D4" strokeWidth="1.5" />
-                      <path d="M59 38 L63 42 L70 34" stroke="#06B6D4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                      <circle cx="28" cy="30" r="3" fill="#06B6D4" opacity="0.3" />
-                      <circle cx="72" cy="62" r="3.5" fill="#06B6D4" opacity="0.25" />
+                  <div className="mx-auto mb-5 w-40 h-52">
+                    <svg viewBox="0 0 200 260" className="w-full h-full text-foreground" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      {/* Frame */}
+                      <rect x="10" y="10" width="180" height="240" rx="2" stroke="currentColor" strokeWidth="2.5" opacity="0.8" />
+                      <rect x="6" y="6" width="188" height="248" rx="3" stroke="currentColor" strokeWidth="1" opacity="0.15" />
+                      {/* Corner hatching */}
+                      <g opacity="0.18" stroke="currentColor" strokeWidth="0.9">
+                        <line x1="14" y1="14" x2="38" y2="38" /><line x1="14" y1="24" x2="28" y2="38" />
+                        <line x1="24" y1="14" x2="38" y2="28" /><line x1="34" y1="14" x2="38" y2="18" />
+                        <line x1="162" y1="14" x2="186" y2="38" /><line x1="172" y1="14" x2="186" y2="28" />
+                        <line x1="162" y1="24" x2="176" y2="38" /><line x1="182" y1="14" x2="186" y2="18" />
+                        <line x1="14" y1="216" x2="38" y2="240" /><line x1="14" y1="226" x2="28" y2="240" />
+                        <line x1="24" y1="216" x2="38" y2="230" />
+                        <line x1="162" y1="216" x2="186" y2="240" /><line x1="172" y1="216" x2="186" y2="230" />
+                        <line x1="162" y1="226" x2="176" y2="240" />
+                      </g>
+                      {/* Hair - professional bob */}
+                      <path d="M62 78 C58 55, 78 38, 100 36 C122 38, 142 55, 138 78" stroke="currentColor" strokeWidth="2.2" />
+                      <path d="M62 78 C58 100, 56 125, 60 140" stroke="currentColor" strokeWidth="2" />
+                      <path d="M138 78 C142 100, 144 125, 140 140" stroke="currentColor" strokeWidth="2" />
+                      {/* Bob ends - curved inward */}
+                      <path d="M60 140 C62 146, 68 148, 72 145" stroke="currentColor" strokeWidth="1.8" />
+                      <path d="M140 140 C138 146, 132 148, 128 145" stroke="currentColor" strokeWidth="1.8" />
+                      {/* Hair detail */}
+                      <path d="M64 82 C62 65, 78 45, 95 40" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+                      <path d="M70 78 C68 65, 82 48, 98 42" stroke="currentColor" strokeWidth="0.8" opacity="0.3" />
+                      <path d="M136 82 C138 65, 122 45, 105 40" stroke="currentColor" strokeWidth="1" opacity="0.4" />
+                      <path d="M130 78 C132 65, 118 48, 102 42" stroke="currentColor" strokeWidth="0.8" opacity="0.3" />
+                      {/* Head */}
+                      <path d="M74 108 C72 80, 82 65, 100 62 C118 65, 128 80, 126 108 C126 120, 120 132, 112 138 C106 142, 94 142, 88 138 C80 132, 74 120, 74 108" stroke="currentColor" strokeWidth="2" />
+                      {/* Eyebrows - arched */}
+                      <path d="M82 92 C85 88, 93 88, 97 91" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      <path d="M103 91 C107 88, 115 88, 118 92" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      {/* Eyes */}
+                      <ellipse cx="89" cy="99" rx="5.5" ry="3.2" stroke="currentColor" strokeWidth="1.5" />
+                      <circle cx="90" cy="99" r="2" fill="currentColor" />
+                      <line x1="83.5" y1="97" x2="94.5" y2="97" stroke="currentColor" strokeWidth="0.6" opacity="0.4" />
+                      <ellipse cx="111" cy="99" rx="5.5" ry="3.2" stroke="currentColor" strokeWidth="1.5" />
+                      <circle cx="110" cy="99" r="2" fill="currentColor" />
+                      {/* Eyelashes hint */}
+                      <path d="M84 97 C86 95, 92 95, 94 97" stroke="currentColor" strokeWidth="0.7" opacity="0.4" />
+                      <path d="M106 97 C108 95, 114 95, 116 97" stroke="currentColor" strokeWidth="0.7" opacity="0.4" />
+                      {/* Nose */}
+                      <path d="M100 104 C98 110, 97 115, 99 116" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+                      {/* Lips */}
+                      <path d="M93 124 C96 128, 100 129, 107 124" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      <path d="M94 124 C98 122, 102 122, 106 124" stroke="currentColor" strokeWidth="0.8" opacity="0.4" />
+                      {/* Earrings */}
+                      <circle cx="72" cy="110" r="2.5" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+                      <circle cx="128" cy="110" r="2.5" stroke="currentColor" strokeWidth="1" opacity="0.5" />
+                      {/* Neck */}
+                      <line x1="93" y1="140" x2="90" y2="162" stroke="currentColor" strokeWidth="1.5" />
+                      <line x1="107" y1="140" x2="110" y2="162" stroke="currentColor" strokeWidth="1.5" />
+                      {/* Blazer V-neck */}
+                      <path d="M90 162 L100 182" stroke="currentColor" strokeWidth="1.8" />
+                      <path d="M110 162 L100 182" stroke="currentColor" strokeWidth="1.8" />
+                      {/* Blazer lapels */}
+                      <path d="M90 162 L82 175 L68 250" stroke="currentColor" strokeWidth="2" />
+                      <path d="M110 162 L118 175 L132 250" stroke="currentColor" strokeWidth="2" />
+                      {/* Shoulders */}
+                      <path d="M90 162 C60 170, 30 185, 14 250" stroke="currentColor" strokeWidth="2.2" />
+                      <path d="M110 162 C140 170, 170 185, 186 250" stroke="currentColor" strokeWidth="2.2" />
+                      {/* Blazer crosshatch - left */}
+                      <g opacity="0.12" stroke="currentColor" strokeWidth="0.8">
+                        <line x1="30" y1="198" x2="52" y2="220" /><line x1="35" y1="193" x2="57" y2="215" />
+                        <line x1="40" y1="188" x2="62" y2="210" /><line x1="45" y1="183" x2="67" y2="205" />
+                        <line x1="52" y1="198" x2="30" y2="220" /><line x1="57" y1="193" x2="35" y2="215" />
+                        <line x1="62" y1="188" x2="40" y2="210" />
+                      </g>
+                      {/* Blazer crosshatch - right */}
+                      <g opacity="0.12" stroke="currentColor" strokeWidth="0.8">
+                        <line x1="138" y1="198" x2="162" y2="220" /><line x1="143" y1="193" x2="167" y2="215" />
+                        <line x1="148" y1="188" x2="172" y2="210" /><line x1="153" y1="183" x2="177" y2="205" />
+                        <line x1="162" y1="198" x2="138" y2="220" /><line x1="167" y1="193" x2="143" y2="215" />
+                        <line x1="172" y1="188" x2="148" y2="210" />
+                      </g>
                     </svg>
                   </div>
                   <h3 className="text-lg font-semibold mb-2 text-foreground">Talent & HR</h3>
@@ -450,6 +606,29 @@ export default function AboutPage() {
                   </p>
                 </div>
               </motion.div>
+            </motion.div>
+
+            {/* Team Description */}
+            <motion.div
+              className="bg-surface-card rounded-3xl p-8 lg:p-12 mt-12"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              <div className="max-w-3xl mx-auto space-y-5 text-center">
+                <p className="text-foreground text-lg leading-relaxed">
+                  At Stanzasoft, our strength lies in our people. We are a cross-functional
+                  team of engineers, designers, AI specialists, and talent strategists — united
+                  by a shared commitment to building enterprise-grade solutions that deliver
+                  real business impact.
+                </p>
+                <p className="text-muted text-lg leading-relaxed">
+                  We foster a culture of continuous learning, collaboration, and accountability.
+                  Whether working remotely or from our offices, our team stays connected through
+                  shared values: integrity, innovation, and an unwavering commitment to client success.
+                </p>
+              </div>
             </motion.div>
           </div>
         </section>
