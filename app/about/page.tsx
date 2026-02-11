@@ -162,26 +162,6 @@ export default function AboutPage() {
                     consulting, Stanzasoft partners with businesses to design, develop, and deploy
                     high-impact solutions that drive measurable outcomes.
                   </p>
-                  <div className="flex flex-wrap gap-4 pt-4">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center">
-                        <span className="text-primary font-bold">100+</span>
-                      </div>
-                      <span className="text-sm text-muted">Projects Delivered</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-secondary/20 flex items-center justify-center">
-                        <span className="text-secondary font-bold">50+</span>
-                      </div>
-                      <span className="text-sm text-muted">Happy Clients</span>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-accent/20 flex items-center justify-center">
-                        <span className="text-accent font-bold">8+</span>
-                      </div>
-                      <span className="text-sm text-muted">Years of Experience</span>
-                    </div>
-                  </div>
                 </motion.div>
               </div>
             </motion.div>
