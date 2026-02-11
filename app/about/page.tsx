@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Cpu, Layers, Handshake, Target } from 'lucide-react'
+import { Cpu, Layers, Handshake, Target, Code2, Palette, Brain, UserCheck } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
@@ -218,34 +218,238 @@ export default function AboutPage() {
         {/* Team Section */}
         <section className="py-20 md:py-28">
           <div className="container-custom">
+            {/* Section Header */}
             <motion.div
-              className="bg-surface-card rounded-3xl p-8 lg:p-12"
+              className="text-center mb-16"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <div className="max-w-4xl mx-auto text-center">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6">
-                  Our Team
-                </h2>
-                <p className="text-muted text-lg leading-relaxed mb-6">
-                  At Stanzasoft, our strength lies in our people. We are a team of engineers,
-                  designers, strategists, and problem-solvers united by a shared commitment to
-                  building enterprise-grade solutions. Our team brings together deep expertise
-                  across product development, AI/ML, cloud architecture, and digital transformation.
-                </p>
-                <p className="text-muted text-lg leading-relaxed mb-6">
-                  We foster a culture of continuous learning, collaboration, and accountability.
-                  Every team member is empowered to contribute ideas, take ownership, and make
-                  a meaningful impact on the solutions we deliver for our clients.
-                </p>
-                <p className="text-muted text-lg leading-relaxed">
-                  Whether working remotely or from our offices in San Francisco and Hyderabad,
-                  our team stays connected through shared values: integrity, innovation, and an
-                  unwavering commitment to client success.
-                </p>
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Our <span className="gradient-text">Team</span>
+              </h2>
+              <p className="text-muted text-lg max-w-2xl mx-auto">
+                A multidisciplinary team of engineers, designers, AI specialists, and
+                talent strategists building solutions that matter.
+              </p>
+            </motion.div>
+
+            {/* Team Intro Card */}
+            <motion.div
+              className="bg-surface-card rounded-3xl p-8 lg:p-12 mb-12"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+                {/* Illustration - Team Collaboration Doodle */}
+                <div className="relative flex items-center justify-center">
+                  <svg viewBox="0 0 500 400" className="w-full max-w-md" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Background circle */}
+                    <circle cx="250" cy="200" r="160" fill="url(#teamGrad)" opacity="0.08" />
+                    {/* Desk */}
+                    <rect x="100" y="260" width="300" height="8" rx="4" fill="currentColor" className="text-muted" opacity="0.2" />
+                    <rect x="140" y="268" width="8" height="60" rx="2" fill="currentColor" className="text-muted" opacity="0.15" />
+                    <rect x="352" y="268" width="8" height="60" rx="2" fill="currentColor" className="text-muted" opacity="0.15" />
+                    {/* Person 1 - Left */}
+                    <circle cx="170" cy="190" r="22" fill="#814AC8" opacity="0.2" />
+                    <circle cx="170" cy="190" r="22" stroke="#814AC8" strokeWidth="2.5" strokeDasharray="4 3" />
+                    <circle cx="170" cy="182" r="8" fill="#814AC8" opacity="0.6" />
+                    <path d="M155 205 C155 195, 185 195, 185 205" stroke="#814AC8" strokeWidth="2.5" strokeLinecap="round" />
+                    {/* Laptop 1 */}
+                    <rect x="148" y="238" width="44" height="22" rx="3" stroke="#814AC8" strokeWidth="2" fill="#814AC8" opacity="0.08" />
+                    <rect x="140" y="258" width="60" height="4" rx="2" fill="#814AC8" opacity="0.15" />
+                    {/* Person 2 - Center */}
+                    <circle cx="250" cy="170" r="26" fill="#DF7AFE" opacity="0.2" />
+                    <circle cx="250" cy="170" r="26" stroke="#DF7AFE" strokeWidth="2.5" strokeDasharray="4 3" />
+                    <circle cx="250" cy="161" r="9" fill="#DF7AFE" opacity="0.6" />
+                    <path d="M233 188 C233 177, 267 177, 267 188" stroke="#DF7AFE" strokeWidth="2.5" strokeLinecap="round" />
+                    {/* Laptop 2 */}
+                    <rect x="226" y="230" width="48" height="24" rx="3" stroke="#DF7AFE" strokeWidth="2" fill="#DF7AFE" opacity="0.08" />
+                    <rect x="218" y="252" width="64" height="4" rx="2" fill="#DF7AFE" opacity="0.15" />
+                    {/* Person 3 - Right */}
+                    <circle cx="330" cy="190" r="22" fill="#06B6D4" opacity="0.2" />
+                    <circle cx="330" cy="190" r="22" stroke="#06B6D4" strokeWidth="2.5" strokeDasharray="4 3" />
+                    <circle cx="330" cy="182" r="8" fill="#06B6D4" opacity="0.6" />
+                    <path d="M315 205 C315 195, 345 195, 345 205" stroke="#06B6D4" strokeWidth="2.5" strokeLinecap="round" />
+                    {/* Laptop 3 */}
+                    <rect x="308" y="238" width="44" height="22" rx="3" stroke="#06B6D4" strokeWidth="2" fill="#06B6D4" opacity="0.08" />
+                    <rect x="300" y="258" width="60" height="4" rx="2" fill="#06B6D4" opacity="0.15" />
+                    {/* Connection lines (collaboration) */}
+                    <path d="M195 185 L225 175" stroke="#814AC8" strokeWidth="1.5" strokeDasharray="4 4" opacity="0.4" />
+                    <path d="M275 175 L305 185" stroke="#DF7AFE" strokeWidth="1.5" strokeDasharray="4 4" opacity="0.4" />
+                    {/* Idea bubbles */}
+                    <circle cx="200" cy="148" r="12" stroke="#814AC8" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.5" />
+                    <text x="196" y="152" fontSize="12" fill="#814AC8" opacity="0.7">&#x2728;</text>
+                    <circle cx="290" cy="130" r="14" stroke="#DF7AFE" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.5" />
+                    <text x="284" y="135" fontSize="14" fill="#DF7AFE" opacity="0.7">&#x1F4A1;</text>
+                    <circle cx="355" cy="150" r="11" stroke="#06B6D4" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.5" />
+                    <text x="350" y="154" fontSize="11" fill="#06B6D4" opacity="0.7">&#x2699;</text>
+                    {/* Floating elements */}
+                    <rect x="110" y="130" width="24" height="18" rx="3" stroke="#814AC8" strokeWidth="1.5" opacity="0.3" transform="rotate(-12 122 139)" />
+                    <rect x="370" y="125" width="28" height="20" rx="3" stroke="#06B6D4" strokeWidth="1.5" opacity="0.3" transform="rotate(8 384 135)" />
+                    <defs>
+                      <radialGradient id="teamGrad" cx="0.5" cy="0.5" r="0.5">
+                        <stop offset="0%" stopColor="#814AC8" />
+                        <stop offset="100%" stopColor="#DF7AFE" />
+                      </radialGradient>
+                    </defs>
+                  </svg>
+                </div>
+
+                {/* Content */}
+                <div className="space-y-5">
+                  <p className="text-foreground text-lg leading-relaxed">
+                    At Stanzasoft, our strength lies in our people. We are a cross-functional
+                    team of engineers, designers, AI specialists, and talent strategists — united
+                    by a shared commitment to building enterprise-grade solutions that deliver
+                    real business impact.
+                  </p>
+                  <p className="text-muted text-lg leading-relaxed">
+                    We foster a culture of continuous learning, collaboration, and accountability.
+                    Every team member is empowered to contribute ideas, take ownership, and make
+                    a meaningful difference in the solutions we deliver.
+                  </p>
+                  <p className="text-muted text-lg leading-relaxed">
+                    Whether working remotely or from our offices in San Francisco and Hyderabad,
+                    our team stays connected through shared values: integrity, innovation, and an
+                    unwavering commitment to client success.
+                  </p>
+                </div>
               </div>
+            </motion.div>
+
+            {/* Team Pillars Grid with Doodle Icons */}
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              {/* Engineering */}
+              <motion.div variants={itemVariants}>
+                <div
+                  className={cn(
+                    'h-full p-6 text-center bg-surface-card rounded-3xl',
+                    'border border-border/50',
+                    'hover:border-primary/50 transition-all duration-300',
+                    'hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10'
+                  )}
+                >
+                  <div className="relative w-24 h-24 mx-auto mb-5">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                      <circle cx="50" cy="50" r="40" fill="#814AC8" opacity="0.08" />
+                      <circle cx="50" cy="50" r="40" stroke="#814AC8" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.3" />
+                      <path d="M35 42 L45 55 L35 68" stroke="#814AC8" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+                      <path d="M50 68 H65" stroke="#814AC8" strokeWidth="3" strokeLinecap="round" />
+                      <circle cx="70" cy="30" r="4" fill="#DF7AFE" opacity="0.4" />
+                      <circle cx="28" cy="35" r="3" fill="#814AC8" opacity="0.3" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2 text-foreground">Engineering</h3>
+                  <p className="text-muted text-sm leading-relaxed">
+                    Full-stack engineers and architects building scalable, production-ready
+                    systems from frontend to cloud infrastructure.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Design */}
+              <motion.div variants={itemVariants}>
+                <div
+                  className={cn(
+                    'h-full p-6 text-center bg-surface-card rounded-3xl',
+                    'border border-border/50',
+                    'hover:border-primary/50 transition-all duration-300',
+                    'hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10'
+                  )}
+                >
+                  <div className="relative w-24 h-24 mx-auto mb-5">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                      <circle cx="50" cy="50" r="40" fill="#DF7AFE" opacity="0.08" />
+                      <circle cx="50" cy="50" r="40" stroke="#DF7AFE" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.3" />
+                      <rect x="30" y="30" width="40" height="40" rx="6" stroke="#DF7AFE" strokeWidth="2.5" />
+                      <circle cx="42" cy="48" r="8" stroke="#DF7AFE" strokeWidth="2" strokeDasharray="3 2" />
+                      <path d="M55 58 L62 65" stroke="#DF7AFE" strokeWidth="2.5" strokeLinecap="round" />
+                      <circle cx="72" cy="28" r="3" fill="#814AC8" opacity="0.3" />
+                      <circle cx="25" cy="65" r="4" fill="#DF7AFE" opacity="0.3" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2 text-foreground">Design</h3>
+                  <p className="text-muted text-sm leading-relaxed">
+                    UI/UX designers and product thinkers crafting intuitive interfaces
+                    and seamless user experiences.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* AI & Data */}
+              <motion.div variants={itemVariants}>
+                <div
+                  className={cn(
+                    'h-full p-6 text-center bg-surface-card rounded-3xl',
+                    'border border-border/50',
+                    'hover:border-primary/50 transition-all duration-300',
+                    'hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10'
+                  )}
+                >
+                  <div className="relative w-24 h-24 mx-auto mb-5">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                      <circle cx="50" cy="50" r="40" fill="#814AC8" opacity="0.08" />
+                      <circle cx="50" cy="50" r="40" stroke="#814AC8" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.3" />
+                      {/* Brain shape */}
+                      <path d="M42 60 C30 60, 28 45, 38 40 C35 32, 45 26, 50 32 C55 26, 65 32, 62 40 C72 45, 70 60, 58 60" stroke="#814AC8" strokeWidth="2.5" strokeLinecap="round" fill="#814AC8" opacity="0.06" />
+                      <path d="M50 38 V58" stroke="#814AC8" strokeWidth="1.5" strokeDasharray="3 3" opacity="0.5" />
+                      <circle cx="42" cy="48" r="2.5" fill="#DF7AFE" opacity="0.6" />
+                      <circle cx="58" cy="48" r="2.5" fill="#DF7AFE" opacity="0.6" />
+                      <circle cx="50" cy="42" r="2.5" fill="#814AC8" opacity="0.6" />
+                      <circle cx="30" cy="30" r="3" fill="#DF7AFE" opacity="0.3" />
+                      <circle cx="74" cy="65" r="3.5" fill="#814AC8" opacity="0.25" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2 text-foreground">AI & Data</h3>
+                  <p className="text-muted text-sm leading-relaxed">
+                    AI/ML engineers and data scientists developing intelligent automation
+                    and agentic AI platforms.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Talent & HR */}
+              <motion.div variants={itemVariants}>
+                <div
+                  className={cn(
+                    'h-full p-6 text-center bg-surface-card rounded-3xl',
+                    'border border-border/50',
+                    'hover:border-primary/50 transition-all duration-300',
+                    'hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10'
+                  )}
+                >
+                  <div className="relative w-24 h-24 mx-auto mb-5">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
+                      <circle cx="50" cy="50" r="40" fill="#06B6D4" opacity="0.08" />
+                      <circle cx="50" cy="50" r="40" stroke="#06B6D4" strokeWidth="1.5" strokeDasharray="6 4" opacity="0.3" />
+                      {/* Person with checkmark */}
+                      <circle cx="45" cy="40" r="10" stroke="#06B6D4" strokeWidth="2.5" />
+                      <circle cx="45" cy="37" r="4" fill="#06B6D4" opacity="0.5" />
+                      <path d="M30 62 C30 52, 60 52, 60 62" stroke="#06B6D4" strokeWidth="2.5" strokeLinecap="round" />
+                      {/* Checkmark badge */}
+                      <circle cx="64" cy="38" r="10" fill="#06B6D4" opacity="0.15" stroke="#06B6D4" strokeWidth="1.5" />
+                      <path d="M59 38 L63 42 L70 34" stroke="#06B6D4" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                      <circle cx="28" cy="30" r="3" fill="#06B6D4" opacity="0.3" />
+                      <circle cx="72" cy="62" r="3.5" fill="#06B6D4" opacity="0.25" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-semibold mb-2 text-foreground">Talent & HR</h3>
+                  <p className="text-muted text-sm leading-relaxed">
+                    Recruitment strategists and HR consultants connecting organizations
+                    with high-quality talent.
+                  </p>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </section>
