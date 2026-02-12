@@ -169,7 +169,23 @@ const PurpleOrb = () => {
   )
 }
 
-export default function Hero() {
+interface HeroProps {
+  headline?: string
+  subheadline?: string
+  ctaPrimaryText?: string
+  ctaPrimaryLink?: string
+  ctaSecondaryText?: string
+  ctaSecondaryLink?: string
+}
+
+export default function Hero({
+  headline,
+  subheadline,
+  ctaPrimaryText,
+  ctaPrimaryLink,
+  ctaSecondaryText,
+  ctaSecondaryLink,
+}: HeroProps) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true })
   const mainControls = useAnimation()
@@ -200,18 +216,24 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <span className="block sm:inline">
-            <span className="text-cream">We </span>
-            <span className="text-[#DF7AFE]">
-              think
-            </span>
-            <span className="text-cream">, you </span>
-            <span className="text-[#DF7AFE]">
-              grow
-            </span>
-          </span>
-          <br className="hidden sm:block" />
-          <span className="text-cream">— that&apos;s the deal</span>
+          {headline ? (
+            <span className="text-cream">{headline}</span>
+          ) : (
+            <>
+              <span className="block sm:inline">
+                <span className="text-cream">We </span>
+                <span className="text-[#DF7AFE]">
+                  think
+                </span>
+                <span className="text-cream">, you </span>
+                <span className="text-[#DF7AFE]">
+                  grow
+                </span>
+              </span>
+              <br className="hidden sm:block" />
+              <span className="text-cream">— that&apos;s the deal</span>
+            </>
+          )}
         </motion.h1>
 
         {/* Subheadline */}
@@ -221,8 +243,7 @@ export default function Hero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
         >
-          Engineering intelligent solutions for modern enterprises — from
-          product development to AI automation.
+          {subheadline || 'Engineering intelligent solutions for modern enterprises — from product development to AI automation.'}
         </motion.p>
 
         {/* CTA Buttons */}
@@ -233,7 +254,7 @@ export default function Hero() {
           transition={{ duration: 0.6, delay: 0.7 }}
         >
           {/* Get in touch button - Purple */}
-          <Link href="/contact">
+          <Link href={ctaPrimaryLink || '/contact'}>
             <button
               className={cn(
                 'inline-flex items-center gap-2 px-5 py-2.5',
@@ -243,13 +264,13 @@ export default function Hero() {
                 'hover:bg-[#9659d9] transition-colors duration-200'
               )}
             >
-              Get in touch
+              {ctaPrimaryText || 'Get in touch'}
               <ArrowUpRight className="w-4 h-4" />
             </button>
           </Link>
 
           {/* View services button - Dark/transparent */}
-          <Link href="/services">
+          <Link href={ctaSecondaryLink || '/services'}>
             <button
               className={cn(
                 'inline-flex items-center gap-2 px-5 py-2.5',
@@ -259,7 +280,7 @@ export default function Hero() {
                 'hover:bg-foreground/15 dark:hover:bg-surface-card transition-colors duration-200'
               )}
             >
-              View services
+              {ctaSecondaryText || 'View services'}
             </button>
           </Link>
         </motion.div>

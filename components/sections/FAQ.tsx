@@ -11,7 +11,7 @@ interface FAQItem {
   answer: string
 }
 
-const faqItems: FAQItem[] = [
+const defaultFaqItems: FAQItem[] = [
   {
     question: 'How can AI automation help my business?',
     answer:
@@ -88,7 +88,14 @@ function FAQAccordionItem({
   )
 }
 
-export function FAQ() {
+interface FAQProps {
+  heading?: string
+  subheading?: string
+  items?: FAQItem[]
+}
+
+export function FAQ({ heading, subheading, items }: FAQProps) {
+  const faqItems = items && items.length > 0 ? items : defaultFaqItems
   const ref = useRef<HTMLDivElement>(null)
 
   // Scroll-driven blur effect
@@ -120,10 +127,14 @@ export function FAQ() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            We've Got the Answers You're{' '}
-            <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
-              Looking For
-            </span>
+            {heading || (
+              <>
+                We&apos;ve Got the Answers You&apos;re{' '}
+                <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
+                  Looking For
+                </span>
+              </>
+            )}
           </motion.h2>
           <motion.p
             className="text-lg md:text-xl text-muted"
@@ -132,7 +143,7 @@ export function FAQ() {
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            Quick answers to your AI automation questions.
+            {subheading || 'Quick answers to your AI automation questions.'}
           </motion.p>
         </motion.div>
 

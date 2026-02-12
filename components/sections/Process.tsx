@@ -12,7 +12,7 @@ interface ProcessStep {
   description: string
 }
 
-const steps: ProcessStep[] = [
+const defaultSteps: ProcessStep[] = [
   {
     number: 1,
     title: 'Get in touch',
@@ -58,7 +58,14 @@ const STEP_ANGLES = [-90, -30, 30, 90]
 
 /* ─── Main Component ─── */
 
-export function Process() {
+interface ProcessProps {
+  badge?: string
+  heading?: string
+  steps?: ProcessStep[]
+}
+
+export function Process({ badge, heading, steps }: ProcessProps) {
+  const stepItems = steps && steps.length > 0 ? steps : defaultSteps
   const sectionRef = useRef<HTMLDivElement>(null)
 
   const { scrollYProgress } = useScroll({
@@ -93,7 +100,7 @@ export function Process() {
                 className="text-xs font-semibold tracking-[0.25em] uppercase"
                 style={{ color: ACCENT }}
               >
-                Our Process
+                {badge || 'Our Process'}
               </span>
             </div>
             <div className="flex-1 h-px bg-foreground/10" />
@@ -101,25 +108,29 @@ export function Process() {
 
           {/* Heading */}
           <h2 className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground leading-tight max-w-3xl">
-            Making{' '}
-            <span
-              className="inline-block px-2 py-0.5 rounded-md"
-              style={{ background: `linear-gradient(135deg, ${ACCENT_DARK}, ${ACCENT})`, color: '#ffffff' }}
-            >
-              business magic
-            </span>{' '}
-            in four moves
+            {heading || (
+              <>
+                Making{' '}
+                <span
+                  className="inline-block px-2 py-0.5 rounded-md"
+                  style={{ background: `linear-gradient(135deg, ${ACCENT_DARK}, ${ACCENT})`, color: '#ffffff' }}
+                >
+                  business magic
+                </span>{' '}
+                in four moves
+              </>
+            )}
           </h2>
         </div>
 
         {/* ── Arc area (desktop) ── */}
         <div className="hidden sm:block flex-1 relative overflow-hidden">
-          <DesktopArc arcRotation={arcRotation} />
+          <DesktopArc arcRotation={arcRotation} steps={stepItems} />
         </div>
 
         {/* ── Mobile timeline ── */}
         <div className="flex sm:hidden flex-1 w-full overflow-hidden">
-          <MobileTimeline scrollYProgress={scrollYProgress} />
+          <MobileTimeline scrollYProgress={scrollYProgress} steps={stepItems} />
         </div>
       </div>
     </section>
@@ -132,8 +143,10 @@ export function Process() {
 
 function DesktopArc({
   arcRotation,
+  steps,
 }: {
   arcRotation: MotionValue<number>
+  steps: ProcessStep[]
 }) {
   const arcSize = 2400
   const radius = arcSize / 2
@@ -251,8 +264,10 @@ function DesktopArc({
 
 function MobileTimeline({
   scrollYProgress,
+  steps,
 }: {
   scrollYProgress: MotionValue<number>
+  steps: ProcessStep[]
 }) {
   return (
     <div className="relative flex flex-col w-full px-6 py-8">

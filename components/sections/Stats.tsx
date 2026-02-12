@@ -73,14 +73,19 @@ function AnimatedCounter({ value, suffix, label, delay, isInView }: StatItemProp
   )
 }
 
-const stats = [
+const defaultStats = [
   { value: 5, suffix: '+', label: 'Years of Experience' },
   { value: 5, suffix: '+', label: 'Clients Served' },
   { value: 100, suffix: '%', label: 'Success Rate' },
   { value: 5, suffix: '+', label: 'Industries Served' },
 ]
 
-export function Stats() {
+interface StatsProps {
+  stats?: { value: number; suffix: string; label: string }[]
+}
+
+export function Stats({ stats }: StatsProps) {
+  const statItems = stats && stats.length > 0 ? stats : defaultStats
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
@@ -99,7 +104,7 @@ export function Stats() {
     >
       <motion.div className="mx-auto max-w-7xl px-6 lg:px-8" style={{ filter: filterBlur }}>
         <div className="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4 lg:gap-12">
-          {stats.map((stat, index) => (
+          {statItems.map((stat, index) => (
             <AnimatedCounter
               key={stat.label}
               value={stat.value}

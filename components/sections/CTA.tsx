@@ -6,7 +6,14 @@ import Link from 'next/link'
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/Button'
 
-export function CTA() {
+interface CTAProps {
+  heading?: string
+  subtext?: string
+  buttonText?: string
+  buttonLink?: string
+}
+
+export function CTA({ heading, subtext, buttonText, buttonLink }: CTAProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   // Scroll-driven blur effect
@@ -62,19 +69,23 @@ export function CTA() {
               <div className="flex flex-col items-center text-center">
                 {/* Headline */}
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
-                  Let AI do the Work so you can{' '}
-                  <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
-                    Scale Faster
-                  </span>
+                  {heading || (
+                    <>
+                      Let AI do the Work so you can{' '}
+                      <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
+                        Scale Faster
+                      </span>
+                    </>
+                  )}
                 </h2>
 
                 {/* Subtitle */}
                 <p className="text-muted text-lg md:text-xl mb-10 max-w-xl">
-                  Book a Call Today and Start Automating
+                  {subtext || 'Book a Call Today and Start Automating'}
                 </p>
 
                 {/* CTA Button */}
-                <Link href="/contact">
+                <Link href={buttonLink || '/contact'}>
                   <Button
                     size="lg"
                     className={cn(
@@ -86,7 +97,7 @@ export function CTA() {
                       'transition-all duration-300'
                     )}
                   >
-                    Book a free call
+                    {buttonText || 'Book a free call'}
                   </Button>
                 </Link>
               </div>

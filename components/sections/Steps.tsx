@@ -15,7 +15,7 @@ interface Step {
   imageUrl: string
 }
 
-const steps: Step[] = [
+const defaultSteps: Step[] = [
   {
     number: '01',
     badge: 'AI Assistant',
@@ -183,8 +183,16 @@ function StepCard({ step, index, isActive }: { step: Step; index: number; isActi
   )
 }
 
-export function Steps() {
-  const cardCount = steps.length
+interface StepsProps {
+  badge?: string
+  heading?: string
+  subheading?: string
+  steps?: Step[]
+}
+
+export function Steps({ badge, heading, subheading, steps }: StepsProps) {
+  const stepItems = steps && steps.length > 0 ? steps : defaultSteps
+  const cardCount = stepItems.length
   const ref = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
@@ -243,17 +251,20 @@ export function Steps() {
               'border border-primary/20'
             )}
           >
-            Our Services
+            {badge || 'Our Services'}
           </span>
           <h2 className="text-4xl font-bold text-foreground sm:text-5xl lg:text-6xl leading-tight mb-6">
-            AI Solutions That Take Your Business to the{' '}
-            <span className="bg-gradient-text bg-clip-text text-transparent">
-              Next Level
-            </span>
+            {heading || (
+              <>
+                AI Solutions That Take Your Business to the{' '}
+                <span className="bg-gradient-text bg-clip-text text-transparent">
+                  Next Level
+                </span>
+              </>
+            )}
           </h2>
           <p className="text-lg md:text-xl text-muted max-w-2xl leading-relaxed">
-            We design, develop, and implement automated tools that help you work
-            smarter, not harder.
+            {subheading || 'We design, develop, and implement automated tools that help you work smarter, not harder.'}
           </p>
         </motion.div>
 
@@ -263,7 +274,7 @@ export function Steps() {
           className="relative"
           style={{ height: `${cardCount * 65}vh` }}
         >
-          {steps.map((step, index) => (
+          {stepItems.map((step, index) => (
             <StepCard
               key={step.number}
               step={step}

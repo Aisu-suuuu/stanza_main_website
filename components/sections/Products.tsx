@@ -15,7 +15,7 @@ interface Product {
   imageOnLeft: boolean
 }
 
-const products: Product[] = [
+const defaultProducts: Product[] = [
   {
     title: 'PrepMonkey',
     description: [
@@ -110,7 +110,14 @@ function ProductRow({ product, index, isInView }: ProductRowProps) {
   )
 }
 
-export function Products() {
+interface ProductsProps {
+  heading?: string
+  subheading?: string
+  products?: Product[]
+}
+
+export function Products({ heading, subheading, products }: ProductsProps) {
+  const productItems = products && products.length > 0 ? products : defaultProducts
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
@@ -133,13 +140,16 @@ export function Products() {
           className="text-center mb-16 lg:mb-20"
         >
           <h2 className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
-            Our Products
+            {heading || 'Our Products'}
           </h2>
+          {subheading && (
+            <p className="mt-4 text-lg md:text-xl text-muted max-w-2xl mx-auto">{subheading}</p>
+          )}
         </motion.div>
 
         {/* Products - Alternating Layout */}
         <div className="space-y-20 lg:space-y-28">
-          {products.map((product, index) => (
+          {productItems.map((product, index) => (
             <ProductRow
               key={product.title}
               product={product}

@@ -1,0 +1,405 @@
+[
+  {
+    "key": "group_home_page",
+    "title": "Home Page Fields",
+    "fields": [
+      {"key": "field_hero_headline", "label": "Hero Headline", "name": "hero_headline", "type": "text"},
+      {"key": "field_hero_subheadline", "label": "Hero Subheadline", "name": "hero_subheadline", "type": "textarea"},
+      {"key": "field_hero_cta_primary_text", "label": "Hero CTA Primary Text", "name": "hero_cta_primary_text", "type": "text"},
+      {"key": "field_hero_cta_primary_link", "label": "Hero CTA Primary Link", "name": "hero_cta_primary_link", "type": "url"},
+      {"key": "field_hero_cta_secondary_text", "label": "Hero CTA Secondary Text", "name": "hero_cta_secondary_text", "type": "text"},
+      {"key": "field_hero_cta_secondary_link", "label": "Hero CTA Secondary Link", "name": "hero_cta_secondary_link", "type": "url"},
+      {"key": "field_about_heading", "label": "About Heading", "name": "about_heading", "type": "text"},
+      {"key": "field_about_paragraph_1", "label": "About Paragraph 1", "name": "about_paragraph_1", "type": "textarea"},
+      {"key": "field_about_paragraph_2", "label": "About Paragraph 2", "name": "about_paragraph_2", "type": "textarea"},
+      {"key": "field_about_image", "label": "About Image", "name": "about_image", "type": "image", "return_format": "url"},
+      {"key": "field_about_clients_tagline", "label": "About Clients Tagline", "name": "about_clients_tagline", "type": "text"},
+      {"key": "field_products_section_heading", "label": "Products Section Heading", "name": "products_section_heading", "type": "text"},
+      {"key": "field_products_section_subheading", "label": "Products Section Subheading", "name": "products_section_subheading", "type": "textarea"},
+      {"key": "field_steps_section_badge", "label": "Steps Section Badge", "name": "steps_section_badge", "type": "text"},
+      {"key": "field_steps_section_heading", "label": "Steps Section Heading", "name": "steps_section_heading", "type": "text"},
+      {"key": "field_steps_section_subheading", "label": "Steps Section Subheading", "name": "steps_section_subheading", "type": "textarea"},
+      {"key": "field_process_section_badge", "label": "Process Section Badge", "name": "process_section_badge", "type": "text"},
+      {"key": "field_process_section_heading", "label": "Process Section Heading", "name": "process_section_heading", "type": "text"},
+      {"key": "field_home_faq_heading", "label": "FAQ Heading", "name": "faq_heading", "type": "text"},
+      {"key": "field_home_faq_subheading", "label": "FAQ Subheading", "name": "faq_subheading", "type": "textarea"},
+      {"key": "field_home_cta_heading", "label": "CTA Heading", "name": "cta_heading", "type": "text"},
+      {"key": "field_home_cta_subtext", "label": "CTA Subtext", "name": "cta_subtext", "type": "text"},
+      {"key": "field_home_cta_button_text", "label": "CTA Button Text", "name": "cta_button_text", "type": "text"},
+      {"key": "field_home_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "url"}
+    ],
+    "location": [[{"param": "page", "operator": "==", "value": "home"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_about_page",
+    "title": "About Page Fields",
+    "fields": [
+      {"key": "field_about_hero_badge", "label": "Hero Badge", "name": "hero_badge", "type": "text"},
+      {"key": "field_about_hero_heading", "label": "Hero Heading", "name": "hero_heading", "type": "text"},
+      {"key": "field_about_hero_subheading", "label": "Hero Subheading", "name": "hero_subheading", "type": "textarea"},
+      {"key": "field_about_mission_heading", "label": "Mission Heading", "name": "mission_heading", "type": "text"},
+      {"key": "field_about_mission_p1", "label": "Mission Paragraph 1", "name": "mission_paragraph_1", "type": "textarea"},
+      {"key": "field_about_mission_p2", "label": "Mission Paragraph 2", "name": "mission_paragraph_2", "type": "textarea"},
+      {"key": "field_about_mission_image", "label": "Mission Image", "name": "mission_image", "type": "image", "return_format": "url"},
+      {"key": "field_about_values_heading", "label": "Values Heading", "name": "values_heading", "type": "text"},
+      {"key": "field_about_values_subheading", "label": "Values Subheading", "name": "values_subheading", "type": "textarea"},
+      {"key": "field_about_team_heading", "label": "Team Heading", "name": "team_heading", "type": "text"},
+      {"key": "field_about_team_subheading", "label": "Team Subheading", "name": "team_subheading", "type": "textarea"},
+      {"key": "field_about_team_desc_1", "label": "Team Description 1", "name": "team_description_1", "type": "textarea"},
+      {"key": "field_about_team_desc_2", "label": "Team Description 2", "name": "team_description_2", "type": "textarea"},
+      {"key": "field_about_cta_heading", "label": "CTA Heading", "name": "cta_heading", "type": "text"},
+      {"key": "field_about_cta_subtext", "label": "CTA Subtext", "name": "cta_subtext", "type": "text"},
+      {"key": "field_about_cta_button_text", "label": "CTA Button Text", "name": "cta_button_text", "type": "text"},
+      {"key": "field_about_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "url"}
+    ],
+    "location": [[{"param": "page", "operator": "==", "value": "about"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_services_page",
+    "title": "Services Page Fields",
+    "fields": [
+      {"key": "field_services_hero_badge", "label": "Hero Badge", "name": "hero_badge", "type": "text"},
+      {"key": "field_services_hero_heading", "label": "Hero Heading", "name": "hero_heading", "type": "text"},
+      {"key": "field_services_hero_subheading", "label": "Hero Subheading", "name": "hero_subheading", "type": "textarea"},
+      {"key": "field_services_process_badge", "label": "Process Badge", "name": "process_badge", "type": "text"},
+      {"key": "field_services_process_heading", "label": "Process Heading", "name": "process_heading", "type": "text"},
+      {"key": "field_services_process_subheading", "label": "Process Subheading", "name": "process_subheading", "type": "textarea"},
+      {"key": "field_services_cta_heading", "label": "CTA Heading", "name": "cta_heading", "type": "text"},
+      {"key": "field_services_cta_subtext", "label": "CTA Subtext", "name": "cta_subtext", "type": "text"},
+      {"key": "field_services_cta_button_text", "label": "CTA Button Text", "name": "cta_button_text", "type": "text"},
+      {"key": "field_services_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "url"}
+    ],
+    "location": [[{"param": "page", "operator": "==", "value": "services"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_solutions_page",
+    "title": "Solutions Page Fields",
+    "fields": [
+      {"key": "field_solutions_hero_badge", "label": "Hero Badge", "name": "hero_badge", "type": "text"},
+      {"key": "field_solutions_hero_heading", "label": "Hero Heading", "name": "hero_heading", "type": "text"},
+      {"key": "field_solutions_hero_subheading", "label": "Hero Subheading", "name": "hero_subheading", "type": "textarea"},
+      {"key": "field_solutions_grid_heading", "label": "Grid Heading", "name": "grid_heading", "type": "text"},
+      {"key": "field_solutions_grid_subheading", "label": "Grid Subheading", "name": "grid_subheading", "type": "textarea"},
+      {"key": "field_solutions_why_badge", "label": "Why Badge", "name": "why_badge", "type": "text"},
+      {"key": "field_solutions_why_heading", "label": "Why Heading", "name": "why_heading", "type": "text"},
+      {"key": "field_solutions_why_paragraph", "label": "Why Paragraph", "name": "why_paragraph", "type": "textarea"},
+      {"key": "field_solutions_cta_heading", "label": "CTA Heading", "name": "cta_heading", "type": "text"},
+      {"key": "field_solutions_cta_subtext", "label": "CTA Subtext", "name": "cta_subtext", "type": "text"},
+      {"key": "field_solutions_cta_button_text", "label": "CTA Button Text", "name": "cta_button_text", "type": "text"},
+      {"key": "field_solutions_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "url"}
+    ],
+    "location": [[{"param": "page", "operator": "==", "value": "solutions"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_products_page",
+    "title": "Products Page Fields",
+    "fields": [
+      {"key": "field_products_hero_badge", "label": "Hero Badge", "name": "hero_badge", "type": "text"},
+      {"key": "field_products_hero_heading", "label": "Hero Heading", "name": "hero_heading", "type": "text"},
+      {"key": "field_products_hero_subheading", "label": "Hero Subheading", "name": "hero_subheading", "type": "textarea"},
+      {"key": "field_products_featured_heading", "label": "Featured Heading", "name": "featured_heading", "type": "text"},
+      {"key": "field_products_featured_subheading", "label": "Featured Subheading", "name": "featured_subheading", "type": "textarea"},
+      {"key": "field_products_testimonials_heading", "label": "Testimonials Heading", "name": "testimonials_heading", "type": "text"},
+      {"key": "field_products_testimonials_subheading", "label": "Testimonials Subheading", "name": "testimonials_subheading", "type": "textarea"},
+      {"key": "field_products_cta_heading", "label": "CTA Heading", "name": "cta_heading", "type": "text"},
+      {"key": "field_products_cta_subtext", "label": "CTA Subtext", "name": "cta_subtext", "type": "text"},
+      {"key": "field_products_cta_button_text", "label": "CTA Button Text", "name": "cta_button_text", "type": "text"},
+      {"key": "field_products_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "url"}
+    ],
+    "location": [[{"param": "page", "operator": "==", "value": "products"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_industries_page",
+    "title": "Industries Page Fields",
+    "fields": [
+      {"key": "field_industries_hero_badge", "label": "Hero Badge", "name": "hero_badge", "type": "text"},
+      {"key": "field_industries_hero_heading", "label": "Hero Heading", "name": "hero_heading", "type": "text"},
+      {"key": "field_industries_hero_subheading", "label": "Hero Subheading", "name": "hero_subheading", "type": "textarea"},
+      {"key": "field_industries_approach_heading", "label": "Approach Heading", "name": "approach_heading", "type": "text"},
+      {"key": "field_industries_approach_subheading", "label": "Approach Subheading", "name": "approach_subheading", "type": "textarea"},
+      {"key": "field_industries_trust_heading", "label": "Trust Heading", "name": "trust_heading", "type": "text"},
+      {"key": "field_industries_trust_paragraph", "label": "Trust Paragraph", "name": "trust_paragraph", "type": "textarea"},
+      {"key": "field_industries_cta_heading", "label": "CTA Heading", "name": "cta_heading", "type": "text"},
+      {"key": "field_industries_cta_subtext", "label": "CTA Subtext", "name": "cta_subtext", "type": "text"},
+      {"key": "field_industries_cta_button_text", "label": "CTA Button Text", "name": "cta_button_text", "type": "text"},
+      {"key": "field_industries_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "url"}
+    ],
+    "location": [[{"param": "page", "operator": "==", "value": "industries"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_blog_page",
+    "title": "Blog Page Fields",
+    "fields": [
+      {"key": "field_blog_hero_badge", "label": "Hero Badge", "name": "hero_badge", "type": "text"},
+      {"key": "field_blog_hero_heading", "label": "Hero Heading", "name": "hero_heading", "type": "text"},
+      {"key": "field_blog_hero_subheading", "label": "Hero Subheading", "name": "hero_subheading", "type": "textarea"},
+      {"key": "field_blog_newsletter_badge", "label": "Newsletter Badge", "name": "newsletter_badge", "type": "text"},
+      {"key": "field_blog_newsletter_heading", "label": "Newsletter Heading", "name": "newsletter_heading", "type": "text"},
+      {"key": "field_blog_newsletter_subheading", "label": "Newsletter Subheading", "name": "newsletter_subheading", "type": "textarea"},
+      {"key": "field_blog_newsletter_disclaimer", "label": "Newsletter Disclaimer", "name": "newsletter_disclaimer", "type": "text"}
+    ],
+    "location": [[{"param": "page", "operator": "==", "value": "blog"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_contact_page",
+    "title": "Contact Page Fields",
+    "fields": [
+      {"key": "field_contact_hero_badge", "label": "Hero Badge", "name": "hero_badge", "type": "text"},
+      {"key": "field_contact_hero_heading", "label": "Hero Heading", "name": "hero_heading", "type": "text"},
+      {"key": "field_contact_hero_subheading", "label": "Hero Subheading", "name": "hero_subheading", "type": "textarea"},
+      {"key": "field_contact_form_heading", "label": "Form Heading", "name": "form_heading", "type": "text"},
+      {"key": "field_contact_form_subheading", "label": "Form Subheading", "name": "form_subheading", "type": "textarea"},
+      {"key": "field_contact_form_success", "label": "Form Success Message", "name": "form_success_message", "type": "textarea"},
+      {"key": "field_contact_email", "label": "Email", "name": "email", "type": "email"},
+      {"key": "field_contact_phone", "label": "Phone", "name": "phone", "type": "text"},
+      {"key": "field_contact_faq_cta_heading", "label": "FAQ CTA Heading", "name": "faq_cta_heading", "type": "text"},
+      {"key": "field_contact_faq_cta_paragraph", "label": "FAQ CTA Paragraph", "name": "faq_cta_paragraph", "type": "textarea"}
+    ],
+    "location": [[{"param": "page", "operator": "==", "value": "contact"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_careers_page",
+    "title": "Careers Page Fields",
+    "fields": [
+      {"key": "field_careers_hero_badge", "label": "Hero Badge", "name": "hero_badge", "type": "text"},
+      {"key": "field_careers_hero_heading", "label": "Hero Heading", "name": "hero_heading", "type": "text"},
+      {"key": "field_careers_hero_subheading", "label": "Hero Subheading", "name": "hero_subheading", "type": "textarea"},
+      {"key": "field_careers_benefits_heading", "label": "Benefits Heading", "name": "benefits_heading", "type": "text"},
+      {"key": "field_careers_benefits_subheading", "label": "Benefits Subheading", "name": "benefits_subheading", "type": "textarea"},
+      {"key": "field_careers_positions_heading", "label": "Positions Heading", "name": "positions_heading", "type": "text"},
+      {"key": "field_careers_positions_subheading", "label": "Positions Subheading", "name": "positions_subheading", "type": "textarea"},
+      {"key": "field_careers_culture_heading", "label": "Culture Heading", "name": "culture_heading", "type": "text"},
+      {"key": "field_careers_culture_subheading", "label": "Culture Subheading", "name": "culture_subheading", "type": "textarea"},
+      {"key": "field_careers_culture_description", "label": "Culture Description", "name": "culture_description", "type": "textarea"},
+      {"key": "field_careers_cta_heading", "label": "CTA Heading", "name": "cta_heading", "type": "text"},
+      {"key": "field_careers_cta_subtext", "label": "CTA Subtext", "name": "cta_subtext", "type": "text"},
+      {"key": "field_careers_cta_button_text", "label": "CTA Button Text", "name": "cta_button_text", "type": "text"},
+      {"key": "field_careers_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "url"}
+    ],
+    "location": [[{"param": "page", "operator": "==", "value": "careers"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_service_fields",
+    "title": "Service Fields",
+    "fields": [
+      {"key": "field_service_description", "label": "Description", "name": "description", "type": "textarea"},
+      {"key": "field_service_icon_name", "label": "Icon Name", "name": "icon_name", "type": "text", "instructions": "Lucide icon name, e.g. brain, code, database"},
+      {"key": "field_service_href", "label": "Link URL", "name": "href", "type": "url"},
+      {"key": "field_service_bullet_points", "label": "Bullet Points", "name": "bullet_points", "type": "textarea", "instructions": "Enter one bullet point per line"},
+      {"key": "field_service_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "service"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_solution_fields",
+    "title": "Solution Fields",
+    "fields": [
+      {"key": "field_solution_description", "label": "Description", "name": "description", "type": "textarea"},
+      {"key": "field_solution_icon_name", "label": "Icon Name", "name": "icon_name", "type": "text", "instructions": "Lucide icon name"},
+      {"key": "field_solution_features", "label": "Features", "name": "features", "type": "textarea", "instructions": "One feature per line"},
+      {"key": "field_solution_href", "label": "Link URL", "name": "href", "type": "url"},
+      {"key": "field_solution_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "solution"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_product_fields",
+    "title": "Product Fields",
+    "fields": [
+      {"key": "field_product_description", "label": "Description", "name": "description", "type": "textarea"},
+      {"key": "field_product_description_2", "label": "Description 2", "name": "description_2", "type": "textarea"},
+      {"key": "field_product_features", "label": "Features", "name": "features", "type": "textarea", "instructions": "One feature per line"},
+      {"key": "field_product_image", "label": "Product Image", "name": "product_image", "type": "image", "return_format": "url"},
+      {"key": "field_product_gradient", "label": "Gradient", "name": "gradient", "type": "text", "instructions": "e.g. from-purple-500 to-pink-500"},
+      {"key": "field_product_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "product"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_industry_fields",
+    "title": "Industry Fields",
+    "fields": [
+      {"key": "field_industry_description", "label": "Description", "name": "description", "type": "textarea"},
+      {"key": "field_industry_features", "label": "Features", "name": "features", "type": "textarea", "instructions": "One feature per line"},
+      {"key": "field_industry_icon_name", "label": "Icon Name", "name": "icon_name", "type": "text"},
+      {"key": "field_industry_color_from", "label": "Color From", "name": "color_from", "type": "text", "instructions": "Tailwind color class e.g. blue-500"},
+      {"key": "field_industry_color_to", "label": "Color To", "name": "color_to", "type": "text"},
+      {"key": "field_industry_icon_color", "label": "Icon Color", "name": "icon_color", "type": "text"},
+      {"key": "field_industry_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "industry"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_faq_item_fields",
+    "title": "FAQ Item Fields",
+    "fields": [
+      {"key": "field_faq_answer", "label": "Answer", "name": "answer", "type": "textarea"},
+      {"key": "field_faq_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "faq_item"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_stat_fields",
+    "title": "Stat Fields",
+    "fields": [
+      {"key": "field_stat_value", "label": "Value", "name": "value", "type": "number"},
+      {"key": "field_stat_suffix", "label": "Suffix", "name": "suffix", "type": "text", "instructions": "e.g. +, %, etc."},
+      {"key": "field_stat_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "stat"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_step_fields",
+    "title": "Step Fields",
+    "fields": [
+      {"key": "field_step_number", "label": "Number", "name": "number", "type": "text", "instructions": "e.g. 01, 02"},
+      {"key": "field_step_badge", "label": "Badge", "name": "badge", "type": "text"},
+      {"key": "field_step_description", "label": "Description", "name": "description", "type": "textarea"},
+      {"key": "field_step_tags", "label": "Tags", "name": "tags", "type": "textarea", "instructions": "One tag per line"},
+      {"key": "field_step_image", "label": "Step Image", "name": "step_image", "type": "image", "return_format": "url"},
+      {"key": "field_step_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "step"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_process_step_fields",
+    "title": "Process Step Fields",
+    "fields": [
+      {"key": "field_process_number", "label": "Number", "name": "number", "type": "number"},
+      {"key": "field_process_description", "label": "Description", "name": "description", "type": "textarea"},
+      {"key": "field_process_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "process_step"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_testimonial_fields",
+    "title": "Testimonial Fields",
+    "fields": [
+      {"key": "field_testimonial_quote", "label": "Quote", "name": "quote", "type": "textarea"},
+      {"key": "field_testimonial_role", "label": "Role", "name": "role", "type": "text"},
+      {"key": "field_testimonial_avatar", "label": "Avatar", "name": "avatar", "type": "image", "return_format": "url"},
+      {"key": "field_testimonial_rating", "label": "Rating", "name": "rating", "type": "number"},
+      {"key": "field_testimonial_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "testimonial"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_team_department_fields",
+    "title": "Team Department Fields",
+    "fields": [
+      {"key": "field_team_dept_description", "label": "Description", "name": "description", "type": "textarea"},
+      {"key": "field_team_dept_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "team_department"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_value_prop_fields",
+    "title": "Value Prop Fields",
+    "fields": [
+      {"key": "field_value_prop_description", "label": "Description", "name": "description", "type": "textarea"},
+      {"key": "field_value_prop_icon_name", "label": "Icon Name", "name": "icon_name", "type": "text"},
+      {"key": "field_value_prop_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "value_prop"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_career_position_fields",
+    "title": "Career Position Fields",
+    "fields": [
+      {"key": "field_career_pos_type", "label": "Type", "name": "type", "type": "text", "instructions": "e.g. Full-time, Part-time"},
+      {"key": "field_career_pos_location", "label": "Location", "name": "location", "type": "text"},
+      {"key": "field_career_pos_department", "label": "Department", "name": "department", "type": "text"},
+      {"key": "field_career_pos_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "career_position"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_career_benefit_fields",
+    "title": "Career Benefit Fields",
+    "fields": [
+      {"key": "field_career_benefit_description", "label": "Description", "name": "description", "type": "textarea"},
+      {"key": "field_career_benefit_icon_name", "label": "Icon Name", "name": "icon_name", "type": "text"},
+      {"key": "field_career_benefit_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "career_benefit"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_client_logo_fields",
+    "title": "Client Logo Fields",
+    "fields": [
+      {"key": "field_client_logo_image", "label": "Logo", "name": "logo", "type": "image", "return_format": "url"},
+      {"key": "field_client_logo_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "client_logo"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_office_location_fields",
+    "title": "Office Location Fields",
+    "fields": [
+      {"key": "field_office_country", "label": "Country", "name": "country", "type": "text"},
+      {"key": "field_office_address", "label": "Address", "name": "address", "type": "textarea"},
+      {"key": "field_office_timezone", "label": "Timezone", "name": "timezone", "type": "text"},
+      {"key": "field_office_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "office_location"}]],
+    "active": true,
+    "show_in_rest": 1
+  },
+  {
+    "key": "group_blog_post_fields",
+    "title": "Blog Post Fields",
+    "fields": [
+      {"key": "field_blog_read_time", "label": "Read Time", "name": "read_time", "type": "text", "instructions": "e.g. 5 min read"},
+      {"key": "field_blog_featured", "label": "Featured", "name": "featured", "type": "true_false"}
+    ],
+    "location": [[{"param": "post_type", "operator": "==", "value": "post"}]],
+    "active": true,
+    "show_in_rest": 1
+  }
+]
