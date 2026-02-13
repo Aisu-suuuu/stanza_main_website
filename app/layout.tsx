@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { DM_Sans, Playfair_Display } from 'next/font/google'
 import './globals.css'
 import { Providers } from './providers'
+import Footer from '@/components/layout/Footer'
 
 const dmSans = DM_Sans({
   subsets: ['latin'],
@@ -39,6 +40,7 @@ export default function RootLayout({
       <body className="font-sans bg-background text-foreground antialiased">
         <Providers>
           {children}
+          <Footer />
         </Providers>
       </body>
     </html>

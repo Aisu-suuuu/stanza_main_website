@@ -5,7 +5,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, Clock, Calendar, Tag, ArrowRight } from 'lucide-react'
 import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 
@@ -192,7 +191,6 @@ export default function BlogPostClient({ post, relatedPosts = [] }: BlogPostClie
           )}
         </div>
       </main>
-      <Footer />
     </>
   )
 }

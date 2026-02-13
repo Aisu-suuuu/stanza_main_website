@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { motion, useInView } from 'framer-motion'
 import { Check, ArrowRight, Star, Quote } from 'lucide-react'
 import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 
@@ -557,7 +556,6 @@ export default function ProductsPageClient({ pageData }: ProductsPageClientProps
         <TestimonialsSection pageData={pageData} />
         <CTASection pageData={pageData} />
       </main>
-      <Footer />
     </>
   )
 }

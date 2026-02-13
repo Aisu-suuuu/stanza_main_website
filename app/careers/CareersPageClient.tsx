@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
-import { Header, Footer } from '@/components/layout'
+import { Header } from '@/components/layout'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 import {
@@ -485,7 +485,6 @@ export default function CareersPageClient({ pageData, positions, benefits }: Car
           </div>
         </section>
       </main>
-      <Footer />
     </>
   )
 }

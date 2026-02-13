@@ -12,7 +12,6 @@ import {
   Cpu,
 } from 'lucide-react'
 import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
 import { Card } from '@/components/ui/Card'
 import { cn } from '@/lib/utils'
@@ -507,7 +506,6 @@ export default function IndustriesPageClient({ pageData }: IndustriesPageClientP
           </div>
         </section>
       </main>
-      <Footer />
     </>
   )
 }

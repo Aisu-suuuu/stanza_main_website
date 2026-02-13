@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Cpu, Layers, Handshake, Target, Code2, Palette, Brain, UserCheck } from 'lucide-react'
 import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 
@@ -742,7 +741,6 @@ export default function AboutPageClient({ pageData, values: valuesFromWP, depart
           </div>
         </section>
       </main>
-      <Footer />
     </>
   )
 }

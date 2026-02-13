@@ -14,7 +14,6 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
 
 // Solutions data
@@ -436,7 +435,6 @@ export default function SolutionsPageClient({ pageData }: SolutionsPageClientPro
           </div>
         </section>
       </main>
-      <Footer />
     </>
   )
 }

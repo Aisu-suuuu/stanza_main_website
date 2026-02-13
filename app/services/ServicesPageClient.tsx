@@ -15,7 +15,6 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
 
 interface ServicesPageClientProps {
@@ -519,7 +518,6 @@ export default function ServicesPageClient({ pageData }: ServicesPageClientProps
           </div>
         </section>
       </main>
-      <Footer />
     </>
   )
 }

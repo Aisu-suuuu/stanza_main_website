@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from 'react'
 import { motion } from 'framer-motion'
-import { Header, Footer } from '@/components/layout'
+import { Header } from '@/components/layout'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 import {
@@ -545,7 +545,6 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
           </div>
         </section>
       </main>
-      <Footer />
     </>
   )
 }

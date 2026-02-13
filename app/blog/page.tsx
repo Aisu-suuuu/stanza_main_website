@@ -10,7 +10,10 @@ export default async function BlogPage() {
     getBlogPosts(),
   ])
 
-  const postData = wpPosts.map((p) => ({
+  // Filter out default WordPress posts (e.g. "Hello world!")
+  const realPosts = wpPosts.filter((p) => p.slug !== 'hello-world')
+
+  const postData = realPosts.map((p) => ({
     id: p.id,
     slug: p.slug,
     title: stripHtml(p.title.rendered),

@@ -1,8 +1,7 @@
-'use client'
-
 import Link from 'next/link'
 import { Linkedin, Twitter, Mail, Phone, MapPin } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { getPageBySlug } from '@/lib/api/pages'
 
 const quickLinks = [
   { href: '/about', label: 'About' },
@@ -23,7 +22,12 @@ const socialLinks = [
   { href: 'https://twitter.com/stanzasoft', icon: Twitter, label: 'Twitter' },
 ]
 
-export default function Footer() {
+export default async function Footer() {
+  const contactData = await getPageBySlug<{ phone?: string; email?: string }>('contact')
+  const phone = contactData?.phone || '+91 9000888055'
+  const email = contactData?.email || 'hello@stanzasoft.com'
+  const phoneHref = 'tel:' + phone.replace(/[\s()-]/g, '')
+
   return (
     <footer className="bg-background border-t border-border/50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -107,20 +111,20 @@ export default function Footer() {
             <ul className="space-y-3">
               <li>
                 <a
-                  href="mailto:hello@stanzasoft.com"
+                  href={`mailto:${email}`}
                   className="flex items-center gap-2 text-muted text-sm hover:text-foreground transition-colors duration-200"
                 >
                   <Mail className="h-4 w-4 flex-shrink-0 text-primary" />
-                  <span>hello@stanzasoft.com</span>
+                  <span>{email}</span>
                 </a>
               </li>
               <li>
                 <a
-                  href="tel:+919000888055"
+                  href={phoneHref}
                   className="flex items-center gap-2 text-muted text-sm hover:text-foreground transition-colors duration-200"
                 >
                   <Phone className="h-4 w-4 flex-shrink-0 text-primary" />
-                  <span>+91 9000888055</span>
+                  <span>{phone}</span>
                 </a>
               </li>
             </ul>

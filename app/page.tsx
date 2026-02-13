@@ -1,5 +1,5 @@
 import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
+
 import Hero from '@/components/sections/Hero'
 import { AboutUs } from '@/components/sections/AboutUs'
 import { Stats } from '@/components/sections/Stats'
@@ -124,7 +124,6 @@ export default async function Home() {
           buttonLink={acf?.cta_button_link}
         />
       </main>
-      <Footer />
     </>
   )
 }

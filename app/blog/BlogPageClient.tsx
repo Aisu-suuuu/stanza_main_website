@@ -10,7 +10,6 @@ import {
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import Header from '@/components/layout/Header'
-import Footer from '@/components/layout/Footer'
 import { Button } from '@/components/ui/Button'
 
 interface BlogPost {
@@ -467,7 +466,6 @@ export default function BlogPageClient({ pageData, posts }: BlogPageClientProps)
           </div>
         </section>
       </main>
-      <Footer />
     </>
   )
 }
