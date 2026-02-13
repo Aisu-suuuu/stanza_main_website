@@ -11,6 +11,7 @@ import {
 import { cn } from '@/lib/utils'
 import Header from '@/components/layout/Header'
 import { Button } from '@/components/ui/Button'
+import { fallbackBlogPosts } from '@/lib/fallback-blog'
 
 interface BlogPost {
   id: number
@@ -36,82 +37,6 @@ interface BlogPageClientProps {
   }
   posts?: BlogPost[]
 }
-
-// Blog posts data (fallback)
-const blogPosts: BlogPost[] = [
-  {
-    id: 1,
-    slug: 'ai-integration-transforming-business-operations',
-    title: 'AI Integration: How It\'s Transforming Business Operations in 2026',
-    excerpt:
-      'From automating customer support to predicting market trends, AI integration is no longer optional — it\'s the competitive edge every business needs. Learn how companies are embedding AI into their core workflows.',
-    category: 'AI Integration',
-    date: 'Feb 5, 2026',
-    readTime: '8 min read',
-    featured: true,
-    image: 'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1400&h=800&fit=crop&q=80',
-  },
-  {
-    id: 2,
-    slug: 'smart-workflows-automating-with-ai',
-    title: 'Smart Workflows: Building Intelligent Automation That Scales',
-    excerpt:
-      'Manual processes drain resources and slow growth. Discover how smart workflows powered by AI can automate repetitive tasks, reduce errors, and free your team to focus on high-value work.',
-    category: 'Smart Workflows',
-    date: 'Jan 28, 2026',
-    readTime: '6 min read',
-    featured: false,
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&h=800&fit=crop&q=80',
-  },
-  {
-    id: 3,
-    slug: 'agentic-ai-future-of-enterprise-automation',
-    title: 'Agentic AI: The Future of Enterprise Automation',
-    excerpt:
-      'Agentic AI goes beyond chatbots — these autonomous systems can reason, plan, and execute multi-step tasks. Explore how agentic AI is reshaping enterprise operations from sales to engineering.',
-    category: 'AI & Machine Learning',
-    date: 'Jan 15, 2026',
-    readTime: '10 min read',
-    featured: false,
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1400&h=800&fit=crop&q=80',
-  },
-  {
-    id: 4,
-    slug: 'salesforce-ai-integration-einstein-copilot',
-    title: 'Salesforce + AI: Unlocking the Power of Einstein Copilot',
-    excerpt:
-      'Salesforce Einstein is bringing generative AI directly into CRM workflows. Learn how to leverage AI-powered insights, automated data entry, and predictive analytics to close deals faster.',
-    category: 'Salesforce',
-    date: 'Jan 3, 2026',
-    readTime: '7 min read',
-    featured: false,
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&h=800&fit=crop&q=80',
-  },
-  {
-    id: 5,
-    slug: 'building-ai-first-products',
-    title: 'Building AI-First Products: A Framework for Startups',
-    excerpt:
-      'The best AI products don\'t bolt on intelligence as an afterthought — they\'re designed around it. Here\'s a practical framework for building AI-first products from concept to launch.',
-    category: 'Product Strategy',
-    date: 'Dec 18, 2025',
-    readTime: '9 min read',
-    featured: false,
-    image: 'https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=1400&h=800&fit=crop&q=80',
-  },
-  {
-    id: 6,
-    slug: 'workflow-automation-roi-calculator',
-    title: 'The ROI of Workflow Automation: What the Numbers Say',
-    excerpt:
-      'Companies adopting workflow automation see 30-50% reduction in operational costs. We break down the real numbers behind automation ROI and how to calculate yours.',
-    category: 'Smart Workflows',
-    date: 'Dec 5, 2025',
-    readTime: '5 min read',
-    featured: false,
-    image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1400&h=800&fit=crop&q=80',
-  },
-]
 
 // Animation variants
 const containerVariants = {
@@ -232,7 +157,7 @@ function BlogCard({
 }
 
 export default function BlogPageClient({ pageData, posts }: BlogPageClientProps) {
-  const displayPosts = posts && posts.length > 0 ? posts : blogPosts
+  const displayPosts = posts && posts.length > 0 ? posts : fallbackBlogPosts
 
   return (
     <>
