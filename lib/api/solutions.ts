@@ -9,3 +9,11 @@ export async function getSolutions(): Promise<WPSolution[]> {
   if (!solutions) return []
   return solutions.sort((a, b) => (a.acf.display_order || 0) - (b.acf.display_order || 0))
 }
+
+export async function getSolutionBySlug(slug: string): Promise<WPSolution | null> {
+  const solutions = await wpFetch<WPSolution[]>(
+    `/solution?slug=${slug}&_fields=id,title,slug,acf`,
+    { revalidate: 3600, tags: [`solution-${slug}`] }
+  )
+  return solutions?.[0] || null
+}

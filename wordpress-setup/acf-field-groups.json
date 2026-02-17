@@ -6,9 +6,9 @@
       {"key": "field_hero_headline", "label": "Hero Headline", "name": "hero_headline", "type": "text"},
       {"key": "field_hero_subheadline", "label": "Hero Subheadline", "name": "hero_subheadline", "type": "textarea"},
       {"key": "field_hero_cta_primary_text", "label": "Hero CTA Primary Text", "name": "hero_cta_primary_text", "type": "text"},
-      {"key": "field_hero_cta_primary_link", "label": "Hero CTA Primary Link", "name": "hero_cta_primary_link", "type": "url"},
+      {"key": "field_hero_cta_primary_link", "label": "Hero CTA Primary Link", "name": "hero_cta_primary_link", "type": "text"},
       {"key": "field_hero_cta_secondary_text", "label": "Hero CTA Secondary Text", "name": "hero_cta_secondary_text", "type": "text"},
-      {"key": "field_hero_cta_secondary_link", "label": "Hero CTA Secondary Link", "name": "hero_cta_secondary_link", "type": "url"},
+      {"key": "field_hero_cta_secondary_link", "label": "Hero CTA Secondary Link", "name": "hero_cta_secondary_link", "type": "text"},
       {"key": "field_about_heading", "label": "About Heading", "name": "about_heading", "type": "text"},
       {"key": "field_about_paragraph_1", "label": "About Paragraph 1", "name": "about_paragraph_1", "type": "textarea"},
       {"key": "field_about_paragraph_2", "label": "About Paragraph 2", "name": "about_paragraph_2", "type": "textarea"},
@@ -26,7 +26,7 @@
       {"key": "field_home_cta_heading", "label": "CTA Heading", "name": "cta_heading", "type": "text"},
       {"key": "field_home_cta_subtext", "label": "CTA Subtext", "name": "cta_subtext", "type": "text"},
       {"key": "field_home_cta_button_text", "label": "CTA Button Text", "name": "cta_button_text", "type": "text"},
-      {"key": "field_home_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "url"}
+      {"key": "field_home_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "text"}
     ],
     "location": [[{"param": "page", "operator": "==", "value": "home"}]],
     "active": true,
@@ -52,7 +52,7 @@
       {"key": "field_about_cta_heading", "label": "CTA Heading", "name": "cta_heading", "type": "text"},
       {"key": "field_about_cta_subtext", "label": "CTA Subtext", "name": "cta_subtext", "type": "text"},
       {"key": "field_about_cta_button_text", "label": "CTA Button Text", "name": "cta_button_text", "type": "text"},
-      {"key": "field_about_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "url"}
+      {"key": "field_about_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "text"}
     ],
     "location": [[{"param": "page", "operator": "==", "value": "about"}]],
     "active": true,
@@ -71,7 +71,7 @@
       {"key": "field_services_cta_heading", "label": "CTA Heading", "name": "cta_heading", "type": "text"},
       {"key": "field_services_cta_subtext", "label": "CTA Subtext", "name": "cta_subtext", "type": "text"},
       {"key": "field_services_cta_button_text", "label": "CTA Button Text", "name": "cta_button_text", "type": "text"},
-      {"key": "field_services_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "url"}
+      {"key": "field_services_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "text"}
     ],
     "location": [[{"param": "page", "operator": "==", "value": "services"}]],
     "active": true,
@@ -92,7 +92,7 @@
       {"key": "field_solutions_cta_heading", "label": "CTA Heading", "name": "cta_heading", "type": "text"},
       {"key": "field_solutions_cta_subtext", "label": "CTA Subtext", "name": "cta_subtext", "type": "text"},
       {"key": "field_solutions_cta_button_text", "label": "CTA Button Text", "name": "cta_button_text", "type": "text"},
-      {"key": "field_solutions_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "url"}
+      {"key": "field_solutions_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "text"}
     ],
     "location": [[{"param": "page", "operator": "==", "value": "solutions"}]],
     "active": true,
@@ -112,7 +112,7 @@
       {"key": "field_products_cta_heading", "label": "CTA Heading", "name": "cta_heading", "type": "text"},
       {"key": "field_products_cta_subtext", "label": "CTA Subtext", "name": "cta_subtext", "type": "text"},
       {"key": "field_products_cta_button_text", "label": "CTA Button Text", "name": "cta_button_text", "type": "text"},
-      {"key": "field_products_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "url"}
+      {"key": "field_products_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "text"}
     ],
     "location": [[{"param": "page", "operator": "==", "value": "products"}]],
     "active": true,
@@ -132,7 +132,7 @@
       {"key": "field_industries_cta_heading", "label": "CTA Heading", "name": "cta_heading", "type": "text"},
       {"key": "field_industries_cta_subtext", "label": "CTA Subtext", "name": "cta_subtext", "type": "text"},
       {"key": "field_industries_cta_button_text", "label": "CTA Button Text", "name": "cta_button_text", "type": "text"},
-      {"key": "field_industries_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "url"}
+      {"key": "field_industries_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "text"}
     ],
     "location": [[{"param": "page", "operator": "==", "value": "industries"}]],
     "active": true,
@@ -190,7 +190,7 @@
       {"key": "field_careers_cta_heading", "label": "CTA Heading", "name": "cta_heading", "type": "text"},
       {"key": "field_careers_cta_subtext", "label": "CTA Subtext", "name": "cta_subtext", "type": "text"},
       {"key": "field_careers_cta_button_text", "label": "CTA Button Text", "name": "cta_button_text", "type": "text"},
-      {"key": "field_careers_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "url"}
+      {"key": "field_careers_cta_button_link", "label": "CTA Button Link", "name": "cta_button_link", "type": "text"}
     ],
     "location": [[{"param": "page", "operator": "==", "value": "careers"}]],
     "active": true,
@@ -202,7 +202,7 @@
     "fields": [
       {"key": "field_service_description", "label": "Description", "name": "description", "type": "textarea"},
       {"key": "field_service_icon_name", "label": "Icon Name", "name": "icon_name", "type": "text", "instructions": "Lucide icon name, e.g. brain, code, database"},
-      {"key": "field_service_href", "label": "Link URL", "name": "href", "type": "url"},
+      {"key": "field_service_href", "label": "Link URL", "name": "href", "type": "text"},
       {"key": "field_service_bullet_points", "label": "Bullet Points", "name": "bullet_points", "type": "textarea", "instructions": "Enter one bullet point per line"},
       {"key": "field_service_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
     ],
@@ -217,7 +217,7 @@
       {"key": "field_solution_description", "label": "Description", "name": "description", "type": "textarea"},
       {"key": "field_solution_icon_name", "label": "Icon Name", "name": "icon_name", "type": "text", "instructions": "Lucide icon name"},
       {"key": "field_solution_features", "label": "Features", "name": "features", "type": "textarea", "instructions": "One feature per line"},
-      {"key": "field_solution_href", "label": "Link URL", "name": "href", "type": "url"},
+      {"key": "field_solution_href", "label": "Link URL", "name": "href", "type": "text"},
       {"key": "field_solution_display_order", "label": "Display Order", "name": "display_order", "type": "number"}
     ],
     "location": [[{"param": "post_type", "operator": "==", "value": "solution"}]],
