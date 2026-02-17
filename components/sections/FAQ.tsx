@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import * as Accordion from '@radix-ui/react-accordion'
-import { ChevronDown } from 'lucide-react'
+import { Plus } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 interface FAQItem {
@@ -37,54 +37,66 @@ const defaultFaqItems: FAQItem[] = [
     answer:
       'We offer comprehensive support including 24/7 technical assistance, regular system updates, performance monitoring, and dedicated account management. Our team is always available to help you maximize the value of your AI automation investment.',
   },
+  {
+    question: 'How long does it take to implement a solution?',
+    answer:
+      'Implementation timelines vary depending on project complexity. Simple automations can be deployed within 2–4 weeks, while enterprise-wide solutions typically take 2–3 months. We provide a detailed timeline during the discovery phase so you know exactly what to expect.',
+  },
 ]
 
 function FAQAccordionItem({
   item,
   value,
+  index,
 }: {
   item: FAQItem
   value: string
+  index: number
 }) {
   return (
-    <Accordion.Item
-      value={value}
-      className="group mb-3"
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.4, delay: index * 0.06 }}
     >
-      <Accordion.Header>
-        <Accordion.Trigger
+      <Accordion.Item value={value} className="group">
+        <Accordion.Header>
+          <Accordion.Trigger
+            className={cn(
+              'flex w-full items-center justify-between gap-4',
+              'px-6 py-5 rounded-2xl',
+              'bg-foreground/[0.06]',
+              'text-left text-base md:text-lg font-medium text-foreground',
+              'transition-all duration-300',
+              'hover:bg-foreground/[0.1]',
+              'group-data-[state=open]:rounded-b-none',
+              'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50'
+            )}
+          >
+            <span>{item.question}</span>
+            <Plus
+              className={cn(
+                'h-5 w-5 shrink-0 text-foreground/40 transition-transform duration-300',
+                'group-data-[state=open]:rotate-45'
+              )}
+              strokeWidth={1.5}
+            />
+          </Accordion.Trigger>
+        </Accordion.Header>
+        <Accordion.Content
           className={cn(
-            'flex w-full items-center justify-between',
-            'px-6 py-5 rounded-xl',
-            'bg-surface-card border border-foreground/10',
-            'text-left text-base md:text-lg font-medium text-foreground',
-            'transition-all duration-200',
-            'hover:border-foreground/20',
-            'group-data-[state=open]:rounded-b-none group-data-[state=open]:border-b-0',
-            'focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50'
+            'overflow-hidden',
+            'data-[state=open]:animate-accordion-down',
+            'data-[state=closed]:animate-accordion-up'
           )}
         >
-          {item.question}
-          <ChevronDown
-            className={cn(
-              'h-5 w-5 shrink-0 text-foreground/50 transition-transform duration-300',
-              'group-data-[state=open]:rotate-180'
-            )}
-          />
-        </Accordion.Trigger>
-      </Accordion.Header>
-      <Accordion.Content
-        className={cn(
-          'overflow-hidden',
-          'data-[state=open]:animate-accordion-down',
-          'data-[state=closed]:animate-accordion-up'
-        )}
-      >
-        <div className="px-6 py-5 bg-surface-card border border-t-0 border-foreground/10 rounded-b-xl text-muted leading-relaxed">
-          {item.answer}
-        </div>
-      </Accordion.Content>
-    </Accordion.Item>
+          <div className="px-6 py-5 bg-foreground/[0.06] rounded-b-2xl text-muted leading-relaxed text-[15px]">
+            {item.answer}
+          </div>
+        </Accordion.Content>
+      </Accordion.Item>
+    </motion.div>
   )
 }
 
@@ -98,7 +110,6 @@ export function FAQ({ heading, subheading, items }: FAQProps) {
   const faqItems = items && items.length > 0 ? items : defaultFaqItems
   const ref = useRef<HTMLDivElement>(null)
 
-  // Scroll-driven blur effect
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'start center'],
@@ -109,66 +120,58 @@ export function FAQ({ heading, subheading, items }: FAQProps) {
   return (
     <section ref={ref} className="bg-background py-24 md:py-32">
       <motion.div className="container mx-auto px-4 md:px-6" style={{ filter: filterBlur }}>
-        {/* Header */}
-        <motion.div
-          className="text-center max-w-3xl mx-auto mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.h2
-            className={cn(
-              'text-4xl md:text-5xl lg:text-6xl font-bold',
-              'text-foreground leading-tight mb-6'
-            )}
-            initial={{ opacity: 0, y: 20 }}
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 lg:gap-16 items-start">
+          {/* Left — Header */}
+          <motion.div
+            className="lg:sticky lg:top-32"
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
           >
-            {heading || (
-              <>
-                We&apos;ve Got the Answers You&apos;re{' '}
-                <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
-                  Looking For
-                </span>
-              </>
-            )}
-          </motion.h2>
-          <motion.p
-            className="text-lg md:text-xl text-muted"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-          >
-            {subheading || 'Quick answers to your AI automation questions.'}
-          </motion.p>
-        </motion.div>
+            <div className="flex items-center gap-2 mb-6">
+              <div className="w-6 h-6 rounded-full border border-foreground/20 flex items-center justify-center">
+                <div className="w-2 h-2 rounded-full bg-foreground/40" />
+              </div>
+              <span className="text-sm font-medium text-foreground/60 tracking-wide">
+                Frequently Asked Questions
+              </span>
+            </div>
+            <h2
+              className={cn(
+                'text-3xl md:text-4xl lg:text-[2.75rem] font-bold',
+                'text-foreground leading-[1.15] mb-5'
+              )}
+            >
+              {heading || (
+                <>
+                  We&apos;ve Got the Answers{' '}
+                  <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
+                    You&apos;re Looking For
+                  </span>
+                </>
+              )}
+            </h2>
+            <p className="text-base md:text-lg text-muted leading-relaxed max-w-md">
+              {subheading ||
+                "We've gathered all the important info right here. Explore our FAQs and find the answers you need."}
+            </p>
+          </motion.div>
 
-        {/* Accordion */}
-        <motion.div
-          className="max-w-3xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <Accordion.Root
-            type="single"
-            collapsible
-            className="w-full"
-          >
-            {faqItems.map((item, index) => (
-              <FAQAccordionItem
-                key={index}
-                item={item}
-                value={`item-${index}`}
-              />
-            ))}
-          </Accordion.Root>
-        </motion.div>
+          {/* Right — Accordion */}
+          <div className="space-y-3">
+            <Accordion.Root type="single" collapsible className="w-full space-y-3">
+              {faqItems.map((item, index) => (
+                <FAQAccordionItem
+                  key={index}
+                  item={item}
+                  value={`item-${index}`}
+                  index={index}
+                />
+              ))}
+            </Accordion.Root>
+          </div>
+        </div>
       </motion.div>
     </section>
   )

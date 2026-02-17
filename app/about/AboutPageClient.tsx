@@ -1,9 +1,10 @@
 'use client'
 
+import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
-import { Cpu, Layers, Handshake, Target, Code2, Palette, Brain, UserCheck } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Cpu, Layers, Handshake, Target, Code2, Palette, Brain, UserCheck, ArrowRight } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
@@ -38,21 +39,25 @@ const values = [
     icon: Cpu,
     title: 'Scalable AI-Driven Systems',
     description: 'We build intelligent, production-ready AI systems designed to scale with your business and deliver measurable impact.',
+    image: 'https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&h=600&fit=crop&q=80',
   },
   {
     icon: Layers,
     title: 'Integrated Technology & Talent',
     description: 'From product development to recruitment, we provide end-to-end solutions that combine technology and talent under one roof.',
+    image: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&h=600&fit=crop&q=80',
   },
   {
     icon: Handshake,
     title: 'Long-Term Strategic Partnerships',
     description: 'We invest in lasting relationships with our clients, working as an extension of their team to achieve shared goals.',
+    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=600&fit=crop&q=80',
   },
   {
     icon: Target,
     title: 'Outcome-Focused Delivery',
     description: 'Every solution we build is tied to clear business outcomes — efficiency gains, cost savings, and accelerated growth.',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop&q=80',
   },
 ]
 
@@ -77,6 +82,107 @@ const itemVariants = {
       ease: [0.25, 0.4, 0.25, 1],
     },
   },
+}
+
+function WhyStanzasoft({ pageData }: { pageData?: AboutPageClientProps['pageData'] }) {
+  const [activeIndex, setActiveIndex] = useState(0)
+  const active = values[activeIndex]
+
+  const goPrev = () => setActiveIndex((prev) => (prev === 0 ? values.length - 1 : prev - 1))
+  const goNext = () => setActiveIndex((prev) => (prev === values.length - 1 ? 0 : prev + 1))
+
+  return (
+    <section className="py-24 md:py-32 bg-background">
+      <div className="container-custom">
+        {/* Section heading */}
+        <motion.div
+          className="text-center mb-14"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+            Our <span className="gradient-text">Services</span>
+          </h2>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-[1.15fr_1fr] gap-8 lg:gap-12 items-center">
+          {/* Left — Image */}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeIndex}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+              className="relative aspect-[4/3] rounded-2xl overflow-hidden"
+            >
+              <Image
+                src={active.image}
+                alt={active.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 55vw"
+              />
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Right — Content */}
+          <div className="flex flex-col justify-between min-h-[360px]">
+            <div>
+              {/* Step number */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <p className="text-lg font-semibold text-foreground mb-4">
+                    {String(activeIndex + 1).padStart(3, '0')}{' '}
+                    <span className="text-primary">/</span>
+                  </p>
+
+                  {/* Title */}
+                  <h3 className="text-3xl md:text-4xl lg:text-[2.75rem] font-bold text-foreground leading-[1.1] mb-4">
+                    {active.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-base md:text-lg text-muted leading-relaxed max-w-lg">
+                    {active.description}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Bottom — Arrows */}
+            <div className="mt-8">
+              <div className="h-px bg-foreground/10 mb-5" />
+              <div className="flex gap-3">
+                <button
+                  onClick={goPrev}
+                  className="w-12 h-12 rounded-full border border-foreground/20 flex items-center justify-center text-foreground hover:bg-foreground/5 transition-colors duration-200"
+                  aria-label="Previous"
+                >
+                  <ArrowRight className="w-5 h-5 rotate-180" />
+                </button>
+                <button
+                  onClick={goNext}
+                  className="w-12 h-12 rounded-full border border-foreground/20 flex items-center justify-center text-foreground hover:bg-foreground/5 transition-colors duration-200"
+                  aria-label="Next"
+                >
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
 }
 
 export default function AboutPageClient({ pageData, values: valuesFromWP, departments }: AboutPageClientProps) {
@@ -139,110 +245,60 @@ export default function AboutPageClient({ pageData, values: valuesFromWP, depart
           </div>
         </section>
 
-        {/* Mission Section - Gray Card Container */}
+        {/* Mission Section — Minimal statement layout */}
         <section className="py-20 md:py-28">
           <div className="container-custom">
-            <motion.div
-              className="bg-surface-card rounded-3xl p-8 lg:p-12"
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-                <motion.div
-                  className="relative"
-                  initial={{ opacity: 0, x: -40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: 0.2 }}
-                >
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden">
-                    <Image
-                      src={pageData?.mission_image || 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop'}
-                      alt="Stanzasoft team collaborating"
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-surface-card/60 via-transparent to-transparent" />
-                  </div>
-                </motion.div>
+            {/* Top separator line */}
+            <div className="h-px bg-foreground/10 mb-16" />
 
-                <motion.div
-                  className="space-y-6"
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.7, delay: 0.3 }}
+            <div className="grid grid-cols-1 lg:grid-cols-[160px_1fr] gap-10 lg:gap-16">
+              {/* Left — Label */}
+              <motion.div
+                className="flex gap-3"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="w-[3px] rounded-full bg-primary self-stretch" />
+                <div>
+                  <p className="text-primary text-sm font-semibold font-mono">001</p>
+                  <p className="text-foreground/60 text-sm">About us</p>
+                </div>
+              </motion.div>
+
+              {/* Right — Content */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                {/* Large statement */}
+                <p className="text-2xl md:text-3xl lg:text-[2.2rem] font-semibold text-foreground leading-[1.4] mb-8 max-w-4xl">
+                  {pageData?.mission_paragraph_1 || 'Stanzasoft is a product-centric technology company delivering enterprise-grade digital solutions and AI-powered platforms — helping businesses operate more efficiently, intelligently, and competitively.'}
+                </p>
+
+                {/* Smaller detail paragraph */}
+                <p className="text-base md:text-lg text-muted leading-relaxed mb-8 max-w-3xl">
+                  {pageData?.mission_paragraph_2 || 'With expertise spanning product development, AI automation, and strategic HR consulting, Stanzasoft partners with businesses to design, develop, and deploy high-impact solutions that drive measurable outcomes.'}
+                </p>
+
+                {/* Link */}
+                <Link
+                  href="/services"
+                  className="inline-flex items-center gap-2 text-foreground font-medium hover:text-primary transition-colors duration-300 group/link"
                 >
-                  <h2 className="text-3xl md:text-4xl font-bold text-foreground">
-                    {pageData?.mission_heading || 'About Us'}
-                  </h2>
-                  <p className="text-muted text-lg leading-relaxed">
-                    {pageData?.mission_paragraph_1 || 'Stanzasoft is a product-centric technology company delivering enterprise-grade digital solutions and AI-powered platforms. We specialize in building scalable, production-ready systems that enable organizations to operate more efficiently, intelligently, and competitively.'}
-                  </p>
-                  <p className="text-muted text-lg leading-relaxed">
-                    {pageData?.mission_paragraph_2 || 'With expertise spanning product development, AI automation, and strategic HR consulting, Stanzasoft partners with businesses to design, develop, and deploy high-impact solutions that drive measurable outcomes.'}
-                  </p>
-                </motion.div>
-              </div>
-            </motion.div>
+                  Our services
+                  <ArrowRight className="w-4 h-4 -rotate-45 transition-transform duration-300 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                </Link>
+              </motion.div>
+            </div>
           </div>
         </section>
 
-        {/* Values Section - Gray Card Styling */}
-        <section className="py-20 md:py-28 bg-background">
-          <div className="container-custom">
-            <motion.div
-              className="text-center mb-16"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
-                {pageData?.values_heading ? (
-                  pageData.values_heading
-                ) : (
-                  <>
-                    Why <span className="gradient-text">Stanzasoft</span>
-                  </>
-                )}
-              </h2>
-              <p className="text-muted text-lg max-w-2xl mx-auto">
-                {pageData?.values_subheading || 'What sets us apart as a technology and talent partner.'}
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-            >
-              {values.map((value) => (
-                <motion.div key={value.title} variants={itemVariants}>
-                  <div
-                    className={cn(
-                      'h-full p-6 text-center bg-surface-card rounded-3xl',
-                      'border border-border/50',
-                      'hover:border-primary/50 transition-all duration-300',
-                      'hover:-translate-y-1 hover:shadow-lg hover:shadow-primary/10'
-                    )}
-                  >
-                    <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center">
-                      <value.icon className="w-7 h-7 text-primary" />
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3 text-foreground">{value.title}</h3>
-                    <p className="text-muted text-sm leading-relaxed">{value.description}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </div>
-        </section>
+        {/* Our Services Section — Carousel layout */}
+        <WhyStanzasoft pageData={pageData} />
 
         {/* Team Section */}
         <section className="py-20 md:py-28">
