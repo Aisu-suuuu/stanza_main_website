@@ -24,7 +24,7 @@ const defaultSteps: Step[] = [
       'From managing calendars to drafting emails and summarizing meetings, our AI assistants handle your routine work so you can focus on what matters.',
     tags: ['Summarize', 'Scheduling', 'Easy mode'],
     imageUrl:
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&auto=format&fit=crop&q=80',
   },
   {
     number: '02',
@@ -34,7 +34,7 @@ const defaultSteps: Step[] = [
       'Transform raw data into actionable insights. Our intelligent analytics tools identify patterns, predict trends, and recommend optimizations in real-time.',
     tags: ['Analytics', 'Insights', 'Real-time'],
     imageUrl:
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&auto=format&fit=crop&q=80',
   },
   {
     number: '03',
@@ -44,7 +44,7 @@ const defaultSteps: Step[] = [
       'Grow your operations without growing complexity. Our automation solutions adapt to your business needs and scale effortlessly as you expand.',
     tags: ['Scalability', 'Growth', 'Flexibility'],
     imageUrl:
-      'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&auto=format&fit=crop&q=80',
   },
   {
     number: '04',
@@ -54,18 +54,18 @@ const defaultSteps: Step[] = [
       'Connect all your tools and platforms into one unified workflow. Our AI bridges the gaps between systems, creating a seamless operational ecosystem.',
     tags: ['Integration', 'Workflow', 'Unified'],
     imageUrl:
-      'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&auto=format&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=80',
   },
 ]
 
 // Individual Card Component - receives active state from parent
-function StepCard({ step, index, isActive }: { step: Step; index: number; isActive: boolean }) {
+function StepCard({ step, index, isActive, stickyEnabled }: { step: Step; index: number; isActive: boolean; stickyEnabled: boolean }) {
   const stickyTop = 100 + index * 40
 
   return (
     <div
-      className="sticky pb-5"
-      style={{ top: stickyTop, zIndex: index + 1 }}
+      className={cn('pb-5', stickyEnabled && 'sticky')}
+      style={stickyEnabled ? { top: stickyTop, zIndex: index + 1 } : { zIndex: index + 1 }}
     >
       <div
         className={cn(
@@ -78,7 +78,7 @@ function StepCard({ step, index, isActive }: { step: Step; index: number; isActi
           isActive
             ? {
                 background:
-                  'linear-gradient(var(--surface-card), var(--surface-card)) padding-box, linear-gradient(135deg, rgba(255,255,255,0.95), rgba(155,111,212,0.8)) border-box',
+                  'linear-gradient(var(--surface-card), var(--surface-card)) padding-box, linear-gradient(135deg, rgba(255,255,255,0.95), rgba(124,58,237,0.8)) border-box',
               }
             : undefined
         }
@@ -88,7 +88,7 @@ function StepCard({ step, index, isActive }: { step: Step; index: number; isActi
           <span
             className={cn(
               'text-7xl lg:text-8xl font-bold leading-none hidden lg:block transition-colors duration-500',
-              isActive ? 'text-[#9B6FD4]/20' : 'text-foreground/10'
+              isActive ? 'text-foreground/20' : 'text-foreground/10'
             )}
           >
             {step.number}.
@@ -101,7 +101,7 @@ function StepCard({ step, index, isActive }: { step: Step; index: number; isActi
               className={cn(
                 'inline-block px-3 py-1 backdrop-blur-sm rounded-full text-sm font-medium transition-colors duration-500',
                 isActive
-                  ? 'bg-[#9B6FD4]/10 text-[#9B6FD4]'
+                  ? 'bg-[#7C3AED]/10 text-foreground'
                   : 'bg-foreground/10 text-foreground/90'
               )}
             >
@@ -113,7 +113,7 @@ function StepCard({ step, index, isActive }: { step: Step; index: number; isActi
               <span
                 className={cn(
                   'text-4xl sm:text-5xl font-bold transition-colors duration-500',
-                  isActive ? 'text-[#9B6FD4]/30' : 'text-foreground/30'
+                  isActive ? 'text-foreground/30' : 'text-foreground/30'
                 )}
               >
                 {step.number}.
@@ -142,7 +142,7 @@ function StepCard({ step, index, isActive }: { step: Step; index: number; isActi
                   className={cn(
                     'px-3 py-1.5 rounded-full text-sm transition-colors duration-500',
                     isActive
-                      ? 'border border-[#9B6FD4]/30 text-[#9B6FD4]'
+                      ? 'border border-[#7C3AED]/30 text-foreground'
                       : 'border border-foreground/30 text-foreground/90'
                   )}
                 >
@@ -157,7 +157,7 @@ function StepCard({ step, index, isActive }: { step: Step; index: number; isActi
               className={cn(
                 'inline-flex items-center gap-2 transition-colors duration-300 mt-2',
                 isActive
-                  ? 'text-[#9B6FD4] hover:text-[#7B52B4]'
+                  ? 'text-foreground hover:text-foreground/80'
                   : 'text-muted hover:text-foreground'
               )}
             >
@@ -196,13 +196,23 @@ export function Steps({ badge, heading, subheading, steps }: StepsProps) {
   const ref = useRef<HTMLDivElement>(null)
   const cardsRef = useRef<HTMLDivElement>(null)
   const [activeIndex, setActiveIndex] = useState(0)
+  const [isDesktop, setIsDesktop] = useState(false)
+
+  // Detect desktop for sticky card stacking (disable on mobile)
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1024px)')
+    setIsDesktop(mq.matches)
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
 
   // Scroll-driven blur effect
   const { scrollYProgress } = useScroll({
     target: ref,
     offset: ['start end', 'start center'],
   })
-  const blurValue = useTransform(scrollYProgress, [0, 1], [8, 0])
+  const blurValue = useTransform(scrollYProgress, [0, 1], [6, 0])
   const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
 
   // Track which card is frontmost by checking which card's top is in the upper portion of viewport
@@ -246,7 +256,7 @@ export function Steps({ badge, heading, subheading, steps }: StepsProps) {
           <span
             className={cn(
               'inline-block px-4 py-1.5 mb-6',
-              'text-sm font-medium text-primary',
+              'text-sm font-medium text-foreground',
               'bg-primary/10 rounded-full',
               'border border-primary/20'
             )}
@@ -257,7 +267,7 @@ export function Steps({ badge, heading, subheading, steps }: StepsProps) {
             {heading || (
               <>
                 AI Solutions That Take Your Business to the{' '}
-                <span className="bg-gradient-text bg-clip-text text-transparent">
+                <span className="text-foreground">
                   Next Level
                 </span>
               </>
@@ -272,14 +282,15 @@ export function Steps({ badge, heading, subheading, steps }: StepsProps) {
         <div
           ref={cardsRef}
           className="relative"
-          style={{ height: `${cardCount * 65}vh` }}
+          style={isDesktop ? { height: `${cardCount * 65}vh` } : undefined}
         >
           {stepItems.map((step, index) => (
             <StepCard
               key={step.number}
               step={step}
               index={index}
-              isActive={index === activeIndex}
+              isActive={isDesktop ? index === activeIndex : true}
+              stickyEnabled={isDesktop}
             />
           ))}
         </div>

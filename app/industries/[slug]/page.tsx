@@ -53,8 +53,8 @@ export default async function IndustryDetailPage({
         slug: i.slug,
         title: stripHtml(i.title.rendered),
         description: i.acf.description,
-        colorFrom: i.acf.color_from || '#814AC8',
-        colorTo: i.acf.color_to || '#DF7AFE',
+        colorFrom: i.acf.color_from || '#7C3AED',
+        colorTo: i.acf.color_to || '#7C3AED',
       }))
 
     return (
@@ -66,8 +66,8 @@ export default async function IndustryDetailPage({
           overview: industry.acf.description,
           features: industry.acf.features ? parseNewlineList(industry.acf.features) : [],
           challenges: [],
-          colorFrom: industry.acf.color_from || '#814AC8',
-          colorTo: industry.acf.color_to || '#DF7AFE',
+          colorFrom: industry.acf.color_from || '#7C3AED',
+          colorTo: industry.acf.color_to || '#7C3AED',
           iconName: industry.acf.icon_name || 'Building2',
         }}
         otherIndustries={otherIndustries}

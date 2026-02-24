@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowRight, ArrowLeft, CheckCircle, Sparkles, ChevronRight, AlertTriangle } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -32,6 +33,24 @@ const itemVariants = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.25, 0.4, 0.25, 1] } },
 }
 
+function BlurSection({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'start center'],
+  })
+  const blurValue = useTransform(scrollYProgress, [0, 1], [6, 0])
+  const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+
+  return (
+    <div ref={ref}>
+      <motion.div style={{ filter: filterBlur }}>
+        {children}
+      </motion.div>
+    </div>
+  )
+}
+
 export default function IndustryDetailClient({ industry, otherIndustries = [] }: IndustryDetailClientProps) {
   return (
     <>
@@ -45,9 +64,9 @@ export default function IndustryDetailClient({ industry, otherIndustries = [] }:
           </div>
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <motion.nav className="flex items-center gap-2 text-sm text-muted mb-8" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-              <Link href="/" className="hover:text-primary transition-colors">Home</Link>
+              <Link href="/" className="hover:text-foreground transition-colors">Home</Link>
               <ChevronRight className="w-3.5 h-3.5" />
-              <Link href="/industries" className="hover:text-primary transition-colors">Industries</Link>
+              <Link href="/industries" className="hover:text-foreground transition-colors">Industries</Link>
               <ChevronRight className="w-3.5 h-3.5" />
               <span className="text-foreground">{industry.title}</span>
             </motion.nav>
@@ -75,6 +94,7 @@ export default function IndustryDetailClient({ industry, otherIndustries = [] }:
         </section>
 
         {/* Overview */}
+        <BlurSection>
         <section className="py-16 md:py-24 bg-background">
           <div className="container mx-auto px-4 md:px-6">
             <motion.div className="bg-surface-card rounded-3xl p-8 lg:p-12" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
@@ -88,9 +108,11 @@ export default function IndustryDetailClient({ industry, otherIndustries = [] }:
             </motion.div>
           </div>
         </section>
+        </BlurSection>
 
         {/* Challenges */}
         {industry.challenges.length > 0 && (
+          <BlurSection>
           <section className="py-16 md:py-24">
             <div className="container mx-auto px-4 md:px-6">
               <motion.div className="max-w-2xl mx-auto text-center mb-16" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
@@ -116,10 +138,12 @@ export default function IndustryDetailClient({ industry, otherIndustries = [] }:
               </div>
             </div>
           </section>
+          </BlurSection>
         )}
 
         {/* Features */}
         {industry.features.length > 0 && (
+          <BlurSection>
           <section className="py-16 md:py-24 bg-background">
             <div className="container mx-auto px-4 md:px-6">
               <motion.div className="max-w-2xl mx-auto text-center mb-16" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
@@ -140,10 +164,12 @@ export default function IndustryDetailClient({ industry, otherIndustries = [] }:
               </motion.div>
             </div>
           </section>
+          </BlurSection>
         )}
 
         {/* Other Industries */}
         {otherIndustries.length > 0 && (
+          <BlurSection>
           <section className="py-16 md:py-24">
             <div className="container mx-auto px-4 md:px-6">
               <motion.div className="max-w-2xl mx-auto text-center mb-12" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
@@ -165,18 +191,15 @@ export default function IndustryDetailClient({ industry, otherIndustries = [] }:
               </div>
             </div>
           </section>
+          </BlurSection>
         )}
 
         {/* CTA */}
+        <BlurSection>
         <section className="relative py-24 lg:py-32 overflow-hidden bg-background">
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <motion.div className="max-w-4xl mx-auto" initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-              <div className="relative p-[2px] rounded-3xl overflow-hidden">
-                <motion.div className="absolute inset-0" style={{ background: `conic-gradient(from 0deg, ${industry.colorFrom}, ${industry.colorTo}, transparent, transparent, ${industry.colorFrom})` }} animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: 'linear' }} />
-                <div className="absolute inset-0 blur-xl opacity-50">
-                  <motion.div className="absolute inset-0" style={{ background: `conic-gradient(from 0deg, ${industry.colorFrom}, ${industry.colorTo}, transparent, transparent, ${industry.colorFrom})` }} animate={{ rotate: 360 }} transition={{ duration: 8, repeat: Infinity, ease: 'linear' }} />
-                </div>
-                <div className="relative bg-surface-card rounded-3xl px-8 py-16 md:px-16 md:py-20">
+              <div className="bg-surface-card rounded-3xl border border-border px-8 py-16 md:px-16 md:py-20">
                   <div className="flex flex-col items-center text-center">
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
                       Transform Your{' '}
@@ -192,15 +215,15 @@ export default function IndustryDetailClient({ industry, otherIndustries = [] }:
                         Start a Conversation
                       </Button>
                     </Link>
-                    <Link href="/industries" className="mt-6 inline-flex items-center gap-2 text-muted hover:text-primary transition-colors">
+                    <Link href="/industries" className="mt-6 inline-flex items-center gap-2 text-muted hover:text-foreground transition-colors">
                       <ArrowLeft className="w-4 h-4" /> Back to All Industries
                     </Link>
                   </div>
-                </div>
               </div>
             </motion.div>
           </div>
         </section>
+        </BlurSection>
       </main>
     </>
   )

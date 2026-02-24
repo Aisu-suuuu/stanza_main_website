@@ -39,8 +39,8 @@ const defaultSteps: ProcessStep[] = [
   },
 ]
 
-const ACCENT = '#DF7AFE'
-const ACCENT_DARK = '#814AC8'
+const ACCENT = 'var(--secondary)'
+const ACCENT_DARK = 'var(--primary)'
 
 /*
  * Each step sits at a fixed angle on the arc.
@@ -167,7 +167,7 @@ function DesktopArc({
           left: '50%',
           top: '18%',
           transform: 'translateX(-50%)',
-          background: 'linear-gradient(180deg, rgba(129, 74, 200, 0.4) 0%, rgba(223, 122, 254, 0.2) 50%, transparent 100%)',
+          background: 'linear-gradient(180deg, rgba(124, 58, 237, 0.4) 0%, rgba(124, 58, 237, 0.2) 50%, transparent 100%)',
         }}
       />
       <motion.div
@@ -179,8 +179,8 @@ function DesktopArc({
           top: '18%',
           translateX: '-50%',
           backgroundColor: 'var(--surface-card, #141414)',
-          border: '1.5px solid rgba(129, 74, 200, 0.3)',
-          boxShadow: '0 -20px 80px -20px rgba(223, 122, 254, 0.3), 0 -10px 40px -10px rgba(129, 74, 200, 0.2), inset 0 -20px 60px -20px rgba(223, 122, 254, 0.1)',
+          border: '1.5px solid rgba(124, 58, 237, 0.3)',
+          boxShadow: '0 -20px 80px -20px rgba(124, 58, 237, 0.3), 0 -10px 40px -10px rgba(124, 58, 237, 0.2), inset 0 -20px 60px -20px rgba(124, 58, 237, 0.1)',
           rotate: arcRotation,
         }}
       >

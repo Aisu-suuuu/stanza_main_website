@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { Linkedin, Twitter, Mail, Phone, MapPin } from 'lucide-react'
+import { Linkedin, Mail, MapPin } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { getPageBySlug } from '@/lib/api/pages'
 
@@ -18,15 +18,12 @@ const services = [
 ]
 
 const socialLinks = [
-  { href: 'https://linkedin.com/company/stanzasoft', icon: Linkedin, label: 'LinkedIn' },
-  { href: 'https://twitter.com/stanzasoft', icon: Twitter, label: 'Twitter' },
+  { href: 'https://www.linkedin.com/company/stanza-soft-inc/', icon: Linkedin, label: 'LinkedIn' },
 ]
 
 export default async function Footer() {
   const contactData = await getPageBySlug<{ phone?: string; email?: string }>('contact')
-  const phone = contactData?.phone || '+91 9000888055'
   const email = contactData?.email || 'hello@stanzasoft.com'
-  const phoneHref = 'tel:' + phone.replace(/[\s()-]/g, '')
 
   return (
     <footer className="bg-background border-t border-border/50">
@@ -55,11 +52,11 @@ export default async function Footer() {
             {/* Locations */}
             <div className="space-y-3">
               <div className="flex items-start gap-2 text-sm text-muted">
-                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-primary" />
+                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-foreground" />
                 <span>San Francisco, USA</span>
               </div>
               <div className="flex items-start gap-2 text-sm text-muted">
-                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-primary" />
+                <MapPin className="h-4 w-4 mt-0.5 flex-shrink-0 text-foreground" />
                 <span>Hyderabad, India</span>
               </div>
             </div>
@@ -114,17 +111,8 @@ export default async function Footer() {
                   href={`mailto:${email}`}
                   className="flex items-center gap-2 text-muted text-sm hover:text-foreground transition-colors duration-200"
                 >
-                  <Mail className="h-4 w-4 flex-shrink-0 text-primary" />
+                  <Mail className="h-4 w-4 flex-shrink-0 text-foreground" />
                   <span>{email}</span>
-                </a>
-              </li>
-              <li>
-                <a
-                  href={phoneHref}
-                  className="flex items-center gap-2 text-muted text-sm hover:text-foreground transition-colors duration-200"
-                >
-                  <Phone className="h-4 w-4 flex-shrink-0 text-primary" />
-                  <span>{phone}</span>
                 </a>
               </li>
             </ul>
@@ -138,6 +126,16 @@ export default async function Footer() {
             © {new Date().getFullYear()} Stanzasoft. All rights reserved.
           </p>
 
+          {/* Legal Links */}
+          <div className="flex items-center gap-4">
+            <Link
+              href="/privacy-policy"
+              className="text-muted text-sm hover:text-foreground transition-colors duration-200"
+            >
+              Privacy Policy
+            </Link>
+          </div>
+
           {/* Social Links */}
           <div className="flex items-center gap-4">
             {socialLinks.map((social) => (
@@ -149,7 +147,7 @@ export default async function Footer() {
                 className={cn(
                   'inline-flex items-center justify-center w-9 h-9 rounded-full',
                   'bg-card hover:bg-primary/20',
-                  'text-muted hover:text-primary transition-colors'
+                  'text-muted hover:text-foreground transition-colors'
                 )}
                 aria-label={social.label}
               >

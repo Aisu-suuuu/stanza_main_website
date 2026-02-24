@@ -110,11 +110,11 @@ export function FAQ({ heading, subheading, items }: FAQProps) {
   const faqItems = items && items.length > 0 ? items : defaultFaqItems
   const ref = useRef<HTMLDivElement>(null)
 
-  const { scrollYProgress } = useScroll({
+  const { scrollYProgress: faqScrollProgress } = useScroll({
     target: ref,
     offset: ['start end', 'start center'],
   })
-  const blurValue = useTransform(scrollYProgress, [0, 1], [8, 0])
+  const blurValue = useTransform(faqScrollProgress, [0, 1], [6, 0])
   const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
 
   return (
@@ -146,7 +146,7 @@ export function FAQ({ heading, subheading, items }: FAQProps) {
               {heading || (
                 <>
                   We&apos;ve Got the Answers{' '}
-                  <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
+                  <span className="text-foreground">
                     You&apos;re Looking For
                   </span>
                 </>

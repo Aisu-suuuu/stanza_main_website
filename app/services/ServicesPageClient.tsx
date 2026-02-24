@@ -1,12 +1,13 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef, useState, useEffect } from 'react'
+import { motion, useInView, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import {
   Layers,
-  Bot,
-  MessageSquareText,
-  Users,
+  Monitor,
+  Settings,
+  GraduationCap,
   ArrowRight,
   MessageSquare,
   Lightbulb,
@@ -39,53 +40,82 @@ interface ServicesPageClientProps {
   }[]
 }
 
-// Core Capabilities data
+function BlurSection({ children, className }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'start center'],
+  })
+  const blurValue = useTransform(scrollYProgress, [0, 1], [6, 0])
+  const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+
+  return (
+    <div ref={ref} className={className}>
+      <motion.div style={{ filter: filterBlur }}>
+        {children}
+      </motion.div>
+    </div>
+  )
+}
+
+// Services data with tags
 const services = [
   {
     icon: Layers,
-    title: 'End-to-End Product Development',
+    title: 'Project Outsourcing',
     description:
-      'We transform concepts into robust, scalable digital products through a structured and strategic development lifecycle — from ideation and UX architecture to full-stack engineering and deployment.',
-    href: '/contact',
-    bulletPoints: [
-      'Product Strategy & Roadmapping',
-      'UI/UX Design & System Architecture',
-      'Application Development',
-      'Quality Assurance & Optimization',
-      'Production Deployment & Scaling',
+      'End-to-end project outsourcing with dedicated teams that seamlessly integrate into your workflow — from requirement gathering and planning to development, testing, and delivery.',
+    tags: [
+      { icon: '🧑‍💻', label: 'Dedicated Teams' },
+      { icon: '📋', label: 'Agile Management' },
+      { icon: '✅', label: 'QA & Testing' },
+      { icon: '🔗', label: 'Team Integration' },
+      { icon: '🚀', label: 'On-time Delivery' },
     ],
+    detail:
+      'Our project outsourcing services provide you with fully managed, cross-functional teams that work as an extension of your own. We handle recruitment, onboarding, and project management so you can focus on strategy while we handle execution at scale.',
   },
   {
-    icon: Bot,
-    title: 'Agentic AI Solutions',
+    icon: Monitor,
+    title: 'Managed IT Services',
     description:
-      'We develop intelligent AI platforms designed to automate workflows, optimize business processes, and enhance operational efficiency.',
-    href: '/contact',
-    bulletPoints: [
-      'Reduce manual dependency',
-      'Improve decision-making speed',
-      'Streamline internal operations',
-      'Enhance productivity at scale',
+      'Comprehensive IT management and support solutions that keep your infrastructure running smoothly, securely, and efficiently around the clock.',
+    tags: [
+      { icon: '📡', label: 'Infrastructure Monitoring' },
+      { icon: '☁️', label: 'Cloud Operations' },
+      { icon: '🛡️', label: 'Security & Compliance' },
+      { icon: '🕐', label: '24/7 Support' },
     ],
+    detail:
+      'Our managed IT services are designed to give you peace of mind. We proactively monitor, maintain, and optimize your infrastructure — from cloud environments and networking to security patching and disaster recovery — so your systems stay reliable and secure.',
   },
   {
-    icon: MessageSquareText,
-    title: 'AI-Driven Chatbots',
+    icon: Settings,
+    title: 'Technology Consulting',
     description:
-      'We design advanced conversational AI systems that enhance customer engagement and automate support processes while maintaining high-quality interactions.',
-    href: '/contact',
-    bulletPoints: [],
+      'Strategic technology advisory services that help businesses navigate digital transformation, adopt modern architectures, and make data-driven technology decisions.',
+    tags: [
+      { icon: '🔄', label: 'Digital Transformation' },
+      { icon: '🏗️', label: 'Architecture Planning' },
+      { icon: '🤖', label: 'AI/ML Roadmaps' },
+      { icon: '📊', label: 'Tech Assessment' },
+    ],
+    detail:
+      'Our technology consulting engagements start with a deep understanding of your business goals. We assess your current stack, identify gaps and opportunities, and deliver actionable roadmaps that align your technology investments with measurable business outcomes.',
   },
   {
-    icon: Users,
-    title: 'HR Consulting & Recruitment',
+    icon: GraduationCap,
+    title: 'Training and Upskilling',
     description:
-      'Stanzasoft provides strategic HR and recruitment solutions, enabling organizations to acquire high-quality talent aligned with their operational and growth objectives.',
-    href: '/contact',
-    bulletPoints: [
-      'Talent Acquisition',
-      'Recruitment Strategy',
+      'Customized training programs designed to upskill your workforce in cutting-edge technologies, AI/ML tools, and modern development practices.',
+    tags: [
+      { icon: '🧠', label: 'AI & ML Workshops' },
+      { icon: '☁️', label: 'Cloud & DevOps' },
+      { icon: '🏢', label: 'Corporate Programs' },
+      { icon: '💻', label: 'Hands-on Projects' },
     ],
+    detail:
+      'Our training programs combine expert instruction with real-world, project-based learning. Whether you need to upskill your engineering team on AI/ML, cloud-native development, or DevOps practices, we tailor every curriculum to your team\'s current level and your business objectives.',
   },
 ]
 
@@ -121,95 +151,161 @@ const processSteps = [
   },
 ]
 
-// Animation variants
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-}
+// Scroll-spy services section (Grownex-style)
+function ServicesAccordionSection() {
+  const ref = useRef<HTMLDivElement>(null)
+  const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const [activeNav, setActiveNav] = useState(0)
+  const [expanded, setExpanded] = useState<Set<number>>(new Set())
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'end start'],
+  })
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.25, 0.4, 0.25, 1],
-    },
-  },
-}
+  const headerY = useTransform(scrollYProgress, [0, 0.4], [12, -4])
 
-// Service Card Component
-function ServiceCard({
-  service,
-}: {
-  service: (typeof services)[0]
-}) {
-  const Icon = service.icon
+  // Scroll-spy: update activeNav based on which card is in view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = cardRefs.current.indexOf(entry.target as HTMLDivElement)
+            if (index !== -1) setActiveNav(index)
+          }
+        })
+      },
+      { rootMargin: '-40% 0px -40% 0px', threshold: 0.1 }
+    )
+
+    cardRefs.current.forEach((el) => {
+      if (el) observer.observe(el)
+    })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const scrollToCard = (i: number) => {
+    setActiveNav(i)
+    cardRefs.current[i]?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
+
+  const toggle = (i: number) => {
+    setExpanded((prev) => {
+      const next = new Set(prev)
+      next.has(i) ? next.delete(i) : next.add(i)
+      return next
+    })
+  }
 
   return (
-    <motion.div variants={itemVariants}>
-      <div
-        className={cn(
-          'group relative h-full p-6 lg:p-8',
-          'bg-surface-card rounded-3xl border border-border/50',
-          'hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10',
-          'transition-all duration-300 ease-out',
-          'hover:-translate-y-1'
-        )}
-      >
-        {/* Icon */}
-        <div
-          className={cn(
-            'inline-flex items-center justify-center',
-            'w-14 h-14 rounded-xl mb-6',
-            'bg-gradient-to-br from-primary/20 to-secondary/20',
-            'group-hover:from-primary/30 group-hover:to-secondary/30',
-            'transition-colors duration-300'
-          )}
+    <section ref={ref} className="py-16 md:py-24 bg-background">
+      <div className="max-w-[1280px] mx-auto px-4 md:px-8 lg:px-16">
+        {/* Layout: Sticky Sidebar + Scrolling Cards */}
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          animate={isInView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="flex flex-col md:flex-row gap-8 md:gap-12"
         >
-          <Icon className="w-7 h-7 text-primary" />
-        </div>
+          {/* Sticky Sidebar Nav */}
+          <nav className="hidden md:block md:w-[260px] flex-shrink-0">
+            <div className="sticky top-[120px] space-y-1">
+              {services.map((s, i) => (
+                <button
+                  key={s.title}
+                  onClick={() => scrollToCard(i)}
+                  className={cn(
+                    'text-left text-[14px] md:text-[15px] w-full py-2.5 transition-colors duration-200 flex items-center gap-2',
+                    activeNav === i
+                      ? 'font-bold text-foreground'
+                      : 'text-muted hover:text-foreground'
+                  )}
+                >
+                  {activeNav === i && (
+                    <motion.span
+                      layoutId="service-indicator"
+                      className="text-[#A78BFA] text-[11px]"
+                      transition={{ duration: 0.25 }}
+                    >
+                      &#9654;
+                    </motion.span>
+                  )}
+                  {s.title}
+                </button>
+              ))}
+            </div>
+          </nav>
 
-        {/* Title */}
-        <h3 className="text-xl font-semibold text-foreground mb-3">
-          {service.title}
-        </h3>
+          {/* Service Cards */}
+          <div className="flex-1 space-y-5">
+            {services.map((service, i) => (
+              <div
+                key={service.title}
+                ref={(el) => {
+                  cardRefs.current[i] = el
+                }}
+                className="bg-surface-card rounded-2xl p-6 md:p-8"
+              >
+                <h3 className="text-[18px] md:text-[20px] font-bold text-foreground mb-2.5">
+                  {service.title}
+                </h3>
+                <p className="text-[13px] md:text-[14px] text-muted leading-[1.7] mb-5">
+                  {service.description}
+                </p>
 
-        {/* Description */}
-        <p className="text-muted leading-relaxed mb-4">{service.description}</p>
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-5">
+                  {service.tags.map((tag) => (
+                    <span
+                      key={tag.label}
+                      className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-background rounded-full text-[12px] md:text-[13px] text-foreground border border-border/50"
+                    >
+                      <span className="text-[12px]">{tag.icon}</span>
+                      {tag.label}
+                    </span>
+                  ))}
+                </div>
 
-        {/* Bullet Points */}
-        {service.bulletPoints && service.bulletPoints.length > 0 && (
-          <ul className="space-y-2 mb-6">
-            {service.bulletPoints.map((point, idx) => (
-              <li key={idx} className="flex items-start gap-2 text-sm text-muted">
-                <span className="text-primary mt-1 flex-shrink-0">&#9670;</span>
-                <span>{point}</span>
-              </li>
+                {/* Accordion */}
+                <button
+                  onClick={() => toggle(i)}
+                  className="w-full flex items-center justify-between pt-4 border-t border-border/50 group"
+                >
+                  <span className="text-[15px] font-medium text-foreground group-hover:text-[#A78BFA] transition-colors">
+                    View Details
+                  </span>
+                  <motion.span
+                    animate={{ rotate: expanded.has(i) ? 45 : 0 }}
+                    transition={{ duration: 0.2 }}
+                    className="text-[22px] leading-none text-muted group-hover:text-[#A78BFA] transition-colors"
+                  >
+                    +
+                  </motion.span>
+                </button>
+
+                <AnimatePresence>
+                  {expanded.has(i) && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.25 }}
+                      className="overflow-hidden"
+                    >
+                      <p className="pt-4 text-[13px] text-muted leading-[1.7]">
+                        {service.detail}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
             ))}
-          </ul>
-        )}
-
-        {/* Learn More Link */}
-        <Link
-          href={service.href}
-          className={cn(
-            'inline-flex items-center gap-2',
-            'text-primary font-medium',
-            'hover:gap-3 transition-all duration-300'
-          )}
-        >
-          Get Started
-          <ArrowRight className="w-4 h-4" />
-        </Link>
+          </div>
+        </motion.div>
       </div>
-    </motion.div>
+    </section>
   )
 }
 
@@ -237,7 +333,7 @@ function ProcessStep({
           className={cn(
             'hidden lg:block absolute top-10 left-[calc(100%+1rem)]',
             'w-[calc(100%-2rem)] h-0.5',
-            'bg-gradient-to-r from-primary/50 to-secondary/50'
+            'bg-primary/50'
           )}
         />
       )}
@@ -248,7 +344,7 @@ function ProcessStep({
           <div
             className={cn(
               'w-20 h-20 rounded-2xl',
-              'bg-gradient-to-br from-primary to-secondary',
+              'bg-primary',
               'flex items-center justify-center',
               'shadow-lg shadow-primary/25'
             )}
@@ -262,7 +358,7 @@ function ProcessStep({
               'w-8 h-8 rounded-full',
               'bg-surface-card border-2 border-primary',
               'flex items-center justify-center',
-              'text-sm font-bold text-primary'
+              'text-sm font-bold text-foreground'
             )}
           >
             {step.number}
@@ -301,7 +397,7 @@ export default function ServicesPageClient({ pageData }: ServicesPageClientProps
             <div
               className={cn(
                 'absolute -bottom-40 -left-40 w-[500px] h-[500px]',
-                'bg-secondary/20 rounded-full blur-[120px]'
+                'bg-primary/20 rounded-full blur-[120px]'
               )}
             />
           </div>
@@ -317,7 +413,7 @@ export default function ServicesPageClient({ pageData }: ServicesPageClientProps
               <motion.span
                 className={cn(
                   'inline-block px-4 py-2 mb-6',
-                  'text-sm font-medium text-primary',
+                  'text-sm font-medium text-foreground',
                   'bg-primary/10 rounded-full border border-primary/20'
                 )}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -340,12 +436,12 @@ export default function ServicesPageClient({ pageData }: ServicesPageClientProps
                 <span className="text-foreground">
                   {pageData?.hero_heading
                     ? pageData.hero_heading.replace(/\{gradient\}.*\{\/gradient\}/, '')
-                    : 'What We '}
+                    : 'Our Services '}
                 </span>
                 <span className="gradient-text">
                   {pageData?.hero_heading
-                    ? (pageData.hero_heading.match(/\{gradient\}(.*?)\{\/gradient\}/)?.[1] || 'Build')
-                    : 'Build'}
+                    ? (pageData.hero_heading.match(/\{gradient\}(.*?)\{\/gradient\}/)?.[1] || 'with AI/ML')
+                    : 'with AI/ML'}
                 </span>
               </motion.h1>
 
@@ -363,24 +459,13 @@ export default function ServicesPageClient({ pageData }: ServicesPageClientProps
           </div>
         </section>
 
-        {/* Services Grid Section - Gray Card Containers */}
-        <section className="py-16 md:py-24 bg-background">
-          <div className="container mx-auto px-4 md:px-6">
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8"
-              variants={containerVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: '-100px' }}
-            >
-              {services.map((service) => (
-                <ServiceCard key={service.title} service={service} />
-              ))}
-            </motion.div>
-          </div>
-        </section>
+        {/* Services Section — Grownex-style sidebar + cards */}
+        <BlurSection>
+          <ServicesAccordionSection />
+        </BlurSection>
 
-        {/* Process Section - Gray Card Container */}
+        {/* Process Section */}
+        <BlurSection>
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
             {/* Section Header */}
@@ -394,7 +479,7 @@ export default function ServicesPageClient({ pageData }: ServicesPageClientProps
               <span
                 className={cn(
                   'inline-block px-4 py-2 mb-6',
-                  'text-sm font-medium text-primary',
+                  'text-sm font-medium text-foreground',
                   'bg-primary/10 rounded-full border border-primary/20'
                 )}
               >
@@ -424,7 +509,7 @@ export default function ServicesPageClient({ pageData }: ServicesPageClientProps
               </p>
             </motion.div>
 
-            {/* Process Steps - Wrapped in Gray Card */}
+            {/* Process Steps */}
             <motion.div
               className="bg-surface-card rounded-3xl p-8 lg:p-12"
               initial={{ opacity: 0, y: 30 }}
@@ -440,8 +525,10 @@ export default function ServicesPageClient({ pageData }: ServicesPageClientProps
             </motion.div>
           </div>
         </section>
+        </BlurSection>
 
         {/* CTA Section */}
+        <BlurSection>
         <section className="relative py-24 lg:py-32 overflow-hidden bg-background">
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <motion.div
@@ -451,39 +538,14 @@ export default function ServicesPageClient({ pageData }: ServicesPageClientProps
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6 }}
             >
-              {/* Card with animated gradient border */}
-              <div className="relative p-[2px] rounded-3xl overflow-hidden">
-                {/* Animated gradient border */}
-                <motion.div
-                  className="absolute inset-0"
-                  style={{
-                    background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
-                  }}
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                />
-
-                {/* Glow effect */}
-                <div className="absolute inset-0 blur-xl opacity-50">
-                  <motion.div
-                    className="absolute inset-0"
-                    style={{
-                      background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
-                    }}
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                  />
-                </div>
-
-                {/* Inner card content */}
-                <div className="relative bg-surface-card rounded-3xl px-8 py-16 md:px-16 md:py-20">
+              <div className="bg-surface-card rounded-3xl border border-border px-8 py-16 md:px-16 md:py-20">
                   <div className="flex flex-col items-center text-center">
                     {/* Headline */}
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
                       {pageData?.cta_heading || (
                         <>
                           Let AI do the Work so you can{' '}
-                          <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
+                          <span className="text-foreground">
                             Scale Faster
                           </span>
                         </>
@@ -500,11 +562,10 @@ export default function ServicesPageClient({ pageData }: ServicesPageClientProps
                       <Button
                         size="lg"
                         className={cn(
-                          'bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8]',
-                          'text-white font-semibold',
+                          'bg-primary text-primary-foreground',
+                          'font-semibold',
                           'px-10 py-5 text-lg rounded-xl',
-                          'shadow-2xl shadow-[#814AC8]/30',
-                          'hover:shadow-[#814AC8]/50 hover:scale-105',
+                          'hover:opacity-90 hover:scale-105',
                           'transition-all duration-300'
                         )}
                       >
@@ -513,10 +574,10 @@ export default function ServicesPageClient({ pageData }: ServicesPageClientProps
                     </Link>
                   </div>
                 </div>
-              </div>
             </motion.div>
           </div>
         </section>
+        </BlurSection>
       </main>
     </>
   )

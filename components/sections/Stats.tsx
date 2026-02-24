@@ -62,7 +62,7 @@ function AnimatedCounter({ value, suffix, label, delay, isInView }: StatItemProp
         <span className="text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
           {displayValue}
         </span>
-        <span className="ml-1 text-3xl font-bold text-primary sm:text-4xl lg:text-5xl">
+        <span className="ml-1 text-3xl font-bold text-foreground sm:text-4xl lg:text-5xl">
           {suffix}
         </span>
       </div>
@@ -89,13 +89,14 @@ export function Stats({ stats }: StatsProps) {
   const ref = useRef<HTMLDivElement>(null)
   const isInView = useInView(ref, { once: true, margin: '-100px' })
 
-  // Scroll-driven blur effect
+  // Scroll-driven blur + parallax
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start end', 'start center'],
+    offset: ['start end', 'end start'],
   })
-  const blurValue = useTransform(scrollYProgress, [0, 1], [8, 0])
-  const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+  const blurProgress = useTransform(scrollYProgress, [0, 0.3], [6, 0])
+  const filterBlur = useTransform(blurProgress, (v) => `blur(${v}px)`)
+  const decorY = useTransform(scrollYProgress, [0, 1], [50, -50])
 
   return (
     <section
@@ -117,11 +118,11 @@ export function Stats({ stats }: StatsProps) {
         </div>
       </motion.div>
 
-      {/* Decorative elements */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
+      {/* Decorative elements with parallax */}
+      <motion.div className="absolute inset-0 -z-10 overflow-hidden" style={{ y: decorY }}>
         <div className="absolute -left-1/4 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-gradient-to-br from-primary/10 to-transparent blur-3xl" />
-        <div className="absolute -right-1/4 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-gradient-to-bl from-secondary/10 to-transparent blur-3xl" />
-      </div>
+        <div className="absolute -right-1/4 top-1/2 h-[400px] w-[400px] -translate-y-1/2 rounded-full bg-gradient-to-bl from-primary/10 to-transparent blur-3xl" />
+      </motion.div>
 
       {/* Top and bottom border lines */}
       <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-border to-transparent" />

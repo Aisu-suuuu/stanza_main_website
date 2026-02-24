@@ -10,6 +10,78 @@ export interface FallbackProduct {
 
 export const fallbackProducts: FallbackProduct[] = [
   {
+    title: 'PrepMonkey',
+    slug: 'prepmonkey',
+    description:
+      'An AI-powered EdTech platform designed to optimize competitive exam preparation through structured learning paths, performance tracking, and intelligent study assistance.',
+    overview:
+      'PrepMonkey is an innovative EdTech platform that leverages artificial intelligence to transform how students prepare for competitive exams. By combining structured learning paths with real-time performance analytics, PrepMonkey identifies knowledge gaps and adapts study plans to each student\'s unique learning style. The platform offers comprehensive practice tests, detailed performance breakdowns, and AI-driven recommendations to maximize study efficiency and exam readiness.',
+    features: [
+      'Structured learning paths tailored to specific competitive exams',
+      'AI-powered performance tracking and gap analysis',
+      'Adaptive practice tests with difficulty scaling',
+      'Detailed analytics dashboards for students and educators',
+      'Intelligent study schedule optimization',
+      'Mock exams simulating real test environments',
+      'Topic-wise mastery tracking and progress reports',
+      'Multi-device access with offline study mode',
+    ],
+    highlights: [
+      {
+        title: 'Personalized Learning',
+        description:
+          'AI analyzes each student\'s strengths and weaknesses to create customized study plans that maximize learning efficiency and exam performance.',
+      },
+      {
+        title: 'Real-Time Analytics',
+        description:
+          'Track progress with detailed dashboards showing topic mastery, time management, accuracy trends, and predicted exam scores.',
+      },
+      {
+        title: 'Proven Results',
+        description:
+          'Students using PrepMonkey see an average 35% improvement in test scores through targeted practice and intelligent study recommendations.',
+      },
+    ],
+    gradient: 'from-amber-500 to-orange-600',
+  },
+  {
+    title: 'Agentic AI Platform',
+    slug: 'agentic-ai-platform',
+    description:
+      'A comprehensive AI automation platform built to transform operational workflows, reduce inefficiencies, and accelerate business performance through autonomous AI agents.',
+    overview:
+      'The Agentic AI Platform is Stanzasoft\'s enterprise-grade automation solution that deploys autonomous AI agents to handle complex business workflows. Unlike traditional automation tools, our platform\'s agents can reason, plan, and execute multi-step tasks independently — from processing documents and managing data pipelines to orchestrating cross-system operations. Built for scalability and security, the platform integrates seamlessly with existing enterprise systems and adapts to evolving business needs.',
+    features: [
+      'Autonomous AI agents for multi-step workflow execution',
+      'Natural language task definition and configuration',
+      'Seamless integration with enterprise systems (ERP, CRM, HRMS)',
+      'Real-time monitoring and agent performance dashboards',
+      'Built-in guardrails and human-in-the-loop controls',
+      'Scalable architecture supporting thousands of concurrent agents',
+      'Custom agent training on proprietary business data',
+      'Comprehensive audit trails and compliance reporting',
+    ],
+    highlights: [
+      {
+        title: 'Autonomous Operations',
+        description:
+          'AI agents independently handle complex, multi-step workflows — reducing manual intervention by up to 80% while maintaining accuracy and compliance.',
+      },
+      {
+        title: 'Enterprise-Ready Security',
+        description:
+          'Built with enterprise-grade security, role-based access controls, and comprehensive audit logging to meet the most stringent compliance requirements.',
+      },
+      {
+        title: 'Rapid Deployment',
+        description:
+          'Go from concept to production in weeks, not months. Pre-built agent templates and no-code configuration accelerate time-to-value for common use cases.',
+      },
+    ],
+    gradient: 'from-violet-500 to-purple-600',
+  },
+  {
     title: 'StanzaBot',
     slug: 'stanzabot',
     description:

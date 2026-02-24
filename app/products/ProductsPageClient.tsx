@@ -3,7 +3,7 @@
 import { useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { Check, ArrowRight, Star, Quote } from 'lucide-react'
 import Header from '@/components/layout/Header'
 import { Button } from '@/components/ui/Button'
@@ -40,8 +40,8 @@ const products = [
       'AI-powered recommendations',
     ],
     imageUrl:
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1200&auto=format&fit=crop&q=80',
-    gradient: 'from-accent via-primary to-secondary',
+      'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&auto=format&fit=crop&q=80',
+    gradient: 'from-primary to-primary',
   },
   {
     id: 'agentic-ai-platform',
@@ -56,8 +56,8 @@ const products = [
       'Seamless system integration',
     ],
     imageUrl:
-      'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&auto=format&fit=crop&q=80',
-    gradient: 'from-primary via-secondary to-accent',
+      'https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=1200&auto=format&fit=crop&q=80',
+    gradient: 'from-primary to-primary',
   },
 ]
 
@@ -68,7 +68,7 @@ const testimonials = [
       'The Agentic AI Platform transformed our workflow completely. Tasks that took hours now complete in minutes with remarkable accuracy.',
     author: 'Sarah Chen',
     role: 'CTO, TechFlow Solutions',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80',
     rating: 5,
   },
   {
@@ -76,7 +76,7 @@ const testimonials = [
       'PrepMonkey helped our students improve their test scores by an average of 35%. The structured learning paths and intelligent study assistance are game-changers.',
     author: 'Dr. Michael Rivera',
     role: 'Director, Apex Academy',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
     rating: 5,
   },
   {
@@ -84,10 +84,28 @@ const testimonials = [
       'Stanzasoft\'s AI solutions have given us a competitive edge we never thought possible. Their outcome-focused approach delivers real results.',
     author: 'Emily Watson',
     role: 'VP Operations, DataDrive Inc',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&auto=format&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&auto=format&fit=crop&q=80',
     rating: 5,
   },
 ]
+
+function BlurSection({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'start center'],
+  })
+  const blurValue = useTransform(scrollYProgress, [0, 1], [6, 0])
+  const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+
+  return (
+    <div ref={ref}>
+      <motion.div style={{ filter: filterBlur }}>
+        {children}
+      </motion.div>
+    </div>
+  )
+}
 
 // Hero Section Component
 function HeroSection({ pageData }: ProductsPageClientProps) {
@@ -96,7 +114,7 @@ function HeroSection({ pageData }: ProductsPageClientProps) {
       {/* Background gradients */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-primary/10 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-secondary/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-primary/10 rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -114,7 +132,7 @@ function HeroSection({ pageData }: ProductsPageClientProps) {
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 mb-6"
           >
             <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-            <span className="text-sm font-medium text-primary">
+            <span className="text-sm font-medium text-foreground">
               {pageData?.hero_badge || 'Innovative Solutions'}
             </span>
           </motion.div>
@@ -127,7 +145,7 @@ function HeroSection({ pageData }: ProductsPageClientProps) {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             {pageData?.hero_heading || 'Our'}{' '}
-            <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            <span className="text-foreground">
               Products
             </span>
           </motion.h1>
@@ -265,7 +283,7 @@ function ProductCard({ product, index, isInView }: ProductCardProps) {
               <span
                 className={cn(
                   'flex-shrink-0 w-6 h-6 rounded-full',
-                  'bg-gradient-to-r from-primary to-secondary',
+                  'bg-primary',
                   'flex items-center justify-center'
                 )}
               >
@@ -310,7 +328,7 @@ function FeaturedProductsSection({ pageData }: ProductsPageClientProps) {
       {/* Background pattern */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute left-0 top-1/4 w-[500px] h-[500px] bg-gradient-to-br from-primary/5 to-transparent rounded-full blur-3xl" />
-        <div className="absolute right-0 bottom-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-secondary/5 to-transparent rounded-full blur-3xl" />
+        <div className="absolute right-0 bottom-1/4 w-[500px] h-[500px] bg-gradient-to-tl from-primary/5 to-transparent rounded-full blur-3xl" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -374,7 +392,7 @@ function TestimonialCard({ testimonial, index, isInView }: TestimonialCardProps)
         className={cn(
           'absolute -top-4 left-8',
           'w-8 h-8 rounded-full',
-          'bg-gradient-to-r from-primary to-secondary',
+          'bg-primary',
           'flex items-center justify-center'
         )}
       >
@@ -384,7 +402,7 @@ function TestimonialCard({ testimonial, index, isInView }: TestimonialCardProps)
       {/* Rating */}
       <div className="flex gap-1 mb-4">
         {Array.from({ length: testimonial.rating }).map((_, i) => (
-          <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+          <Star key={i} className="w-5 h-5 fill-primary text-foreground" />
         ))}
       </div>
 
@@ -425,7 +443,7 @@ function TestimonialsSection({ pageData }: ProductsPageClientProps) {
       {/* Decorative elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/2 left-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2" />
-        <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-secondary/5 rounded-full blur-3xl -translate-y-1/2" />
+        <div className="absolute top-1/2 right-0 w-[400px] h-[400px] bg-primary/5 rounded-full blur-3xl -translate-y-1/2" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -480,37 +498,12 @@ function CTASection({ pageData }: ProductsPageClientProps) {
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
           transition={{ duration: 0.6 }}
         >
-          {/* Card with animated gradient border */}
-          <div className="relative p-[2px] rounded-3xl overflow-hidden">
-            {/* Animated gradient border */}
-            <motion.div
-              className="absolute inset-0"
-              style={{
-                background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
-              }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-            />
-
-            {/* Glow effect */}
-            <div className="absolute inset-0 blur-xl opacity-50">
-              <motion.div
-                className="absolute inset-0"
-                style={{
-                  background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
-                }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-              />
-            </div>
-
-            {/* Inner card content */}
-            <div className="relative bg-surface-card rounded-3xl px-8 py-16 md:px-16 md:py-20">
+          <div className="bg-surface-card rounded-3xl border border-border px-8 py-16 md:px-16 md:py-20">
               <div className="flex flex-col items-center text-center">
                 {/* Headline */}
                 <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
                   {pageData?.cta_heading || 'Let AI do the Work so you can'}{' '}
-                  <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
+                  <span className="text-foreground">
                     Scale Faster
                   </span>
                 </h2>
@@ -525,11 +518,10 @@ function CTASection({ pageData }: ProductsPageClientProps) {
                   <Button
                     size="lg"
                     className={cn(
-                      'bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8]',
-                      'text-white font-semibold',
+                      'bg-primary text-primary-foreground',
+                      'font-semibold',
                       'px-10 py-5 text-lg rounded-xl',
-                      'shadow-2xl shadow-[#814AC8]/30',
-                      'hover:shadow-[#814AC8]/50 hover:scale-105',
+                      'hover:opacity-90 hover:scale-105',
                       'transition-all duration-300'
                     )}
                   >
@@ -537,7 +529,6 @@ function CTASection({ pageData }: ProductsPageClientProps) {
                   </Button>
                 </Link>
               </div>
-            </div>
           </div>
         </motion.div>
       </div>
@@ -552,9 +543,8 @@ export default function ProductsPageClient({ pageData }: ProductsPageClientProps
       <Header />
       <main className="bg-background">
         <HeroSection pageData={pageData} />
-        <FeaturedProductsSection pageData={pageData} />
-        <TestimonialsSection pageData={pageData} />
-        <CTASection pageData={pageData} />
+        <BlurSection><FeaturedProductsSection pageData={pageData} /></BlurSection>
+        <BlurSection><CTASection pageData={pageData} /></BlurSection>
       </main>
     </>
   )

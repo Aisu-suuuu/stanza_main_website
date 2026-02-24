@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
@@ -128,7 +129,7 @@ function BlogCard({
             <h3
               className={cn(
                 'font-semibold text-foreground mb-3',
-                'group-hover:text-primary transition-colors duration-300',
+                'group-hover:text-foreground transition-colors duration-300',
                 featured ? 'text-2xl md:text-3xl' : 'text-xl'
               )}
             >
@@ -142,7 +143,7 @@ function BlogCard({
             <span
               className={cn(
                 'inline-flex items-center gap-2',
-                'text-primary font-medium',
+                'text-foreground font-medium',
                 'group-hover:gap-3 transition-all duration-300'
               )}
             >
@@ -153,6 +154,24 @@ function BlogCard({
         </div>
       </Link>
     </motion.div>
+  )
+}
+
+function BlurSection({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'start center'],
+  })
+  const blurValue = useTransform(scrollYProgress, [0, 1], [6, 0])
+  const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+
+  return (
+    <div ref={ref}>
+      <motion.div style={{ filter: filterBlur }}>
+        {children}
+      </motion.div>
+    </div>
   )
 }
 
@@ -176,7 +195,7 @@ export default function BlogPageClient({ pageData, posts }: BlogPageClientProps)
             <div
               className={cn(
                 'absolute -bottom-40 -left-40 w-[500px] h-[500px]',
-                'bg-secondary/20 rounded-full blur-[120px]'
+                'bg-primary/20 rounded-full blur-[120px]'
               )}
             />
           </div>
@@ -192,7 +211,7 @@ export default function BlogPageClient({ pageData, posts }: BlogPageClientProps)
               <motion.span
                 className={cn(
                   'inline-block px-4 py-2 mb-6',
-                  'text-sm font-medium text-primary',
+                  'text-sm font-medium text-foreground',
                   'bg-primary/10 rounded-full border border-primary/20'
                 )}
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -230,6 +249,7 @@ export default function BlogPageClient({ pageData, posts }: BlogPageClientProps)
         </section>
 
         {/* Blog Grid Section */}
+        <BlurSection>
         <section className="py-16 md:py-24 bg-background">
           <div className="container mx-auto px-4 md:px-6">
             {/* Section Header */}
@@ -265,8 +285,10 @@ export default function BlogPageClient({ pageData, posts }: BlogPageClientProps)
             </motion.div>
           </div>
         </section>
+        </BlurSection>
 
         {/* Newsletter Section */}
+        <BlurSection>
         <section className="py-16 md:py-24">
           <div className="container mx-auto px-4 md:px-6">
             <motion.div
@@ -280,7 +302,7 @@ export default function BlogPageClient({ pageData, posts }: BlogPageClientProps)
                 <span
                   className={cn(
                     'inline-block px-4 py-2 mb-6',
-                    'text-sm font-medium text-primary',
+                    'text-sm font-medium text-foreground',
                     'bg-primary/10 rounded-full border border-primary/20'
                   )}
                 >
@@ -317,8 +339,10 @@ export default function BlogPageClient({ pageData, posts }: BlogPageClientProps)
             </motion.div>
           </div>
         </section>
+        </BlurSection>
 
         {/* CTA Section */}
+        <BlurSection>
         <section className="relative py-24 lg:py-32 overflow-hidden bg-background">
           <div className="container mx-auto px-4 md:px-6 relative z-10">
             <motion.div
@@ -328,37 +352,13 @@ export default function BlogPageClient({ pageData, posts }: BlogPageClientProps)
               viewport={{ once: true, margin: '-100px' }}
               transition={{ duration: 0.6 }}
             >
-              {/* Card with animated gradient border */}
-              <div className="relative p-[2px] rounded-3xl overflow-hidden">
-                {/* Animated gradient border */}
-                <motion.div
-                  className="absolute inset-0"
-                  style={{
-                    background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
-                  }}
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                />
-
-                {/* Glow effect */}
-                <div className="absolute inset-0 blur-xl opacity-50">
-                  <motion.div
-                    className="absolute inset-0"
-                    style={{
-                      background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
-                    }}
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                  />
-                </div>
-
-                {/* Inner card content */}
-                <div className="relative bg-surface-card rounded-3xl px-8 py-16 md:px-16 md:py-20">
+              {/* Card with border */}
+              <div className="bg-surface-card rounded-3xl border border-border px-8 py-16 md:px-16 md:py-20">
                   <div className="flex flex-col items-center text-center">
                     {/* Headline */}
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
                       Let AI do the Work so you can{' '}
-                      <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
+                      <span className="text-foreground">
                         Scale Faster
                       </span>
                     </h2>
@@ -373,11 +373,10 @@ export default function BlogPageClient({ pageData, posts }: BlogPageClientProps)
                       <Button
                         size="lg"
                         className={cn(
-                          'bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8]',
-                          'text-white font-semibold',
+                          'bg-primary text-primary-foreground',
+                          'font-semibold',
                           'px-10 py-5 text-lg rounded-xl',
-                          'shadow-2xl shadow-[#814AC8]/30',
-                          'hover:shadow-[#814AC8]/50 hover:scale-105',
+                          'hover:opacity-90 hover:scale-105',
                           'transition-all duration-300'
                         )}
                       >
@@ -385,11 +384,11 @@ export default function BlogPageClient({ pageData, posts }: BlogPageClientProps)
                       </Button>
                     </Link>
                   </div>
-                </div>
               </div>
             </motion.div>
           </div>
         </section>
+        </BlurSection>
       </main>
     </>
   )

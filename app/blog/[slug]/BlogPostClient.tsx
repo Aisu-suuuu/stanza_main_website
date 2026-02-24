@@ -1,6 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowLeft, Clock, Calendar, Tag, ArrowRight } from 'lucide-react'
@@ -28,6 +29,24 @@ interface BlogPostClientProps {
   }[]
 }
 
+function BlurSection({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'start center'],
+  })
+  const blurValue = useTransform(scrollYProgress, [0, 1], [6, 0])
+  const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+
+  return (
+    <div ref={ref}>
+      <motion.div style={{ filter: filterBlur }}>
+        {children}
+      </motion.div>
+    </div>
+  )
+}
+
 export default function BlogPostClient({ post, relatedPosts = [] }: BlogPostClientProps) {
   return (
     <>
@@ -47,6 +66,7 @@ export default function BlogPostClient({ post, relatedPosts = [] }: BlogPostClie
         </div>
 
         {/* Article Content */}
+        <BlurSection>
         <div className="container-custom relative z-10 -mt-32">
           <motion.article
             className="max-w-3xl mx-auto"
@@ -57,7 +77,7 @@ export default function BlogPostClient({ post, relatedPosts = [] }: BlogPostClie
             {/* Back link */}
             <Link
               href="/blog"
-              className="inline-flex items-center gap-2 text-muted hover:text-primary transition-colors mb-8"
+              className="inline-flex items-center gap-2 text-muted hover:text-foreground transition-colors mb-8"
             >
               <ArrowLeft className="w-4 h-4" />
               Back to Blog
@@ -65,7 +85,7 @@ export default function BlogPostClient({ post, relatedPosts = [] }: BlogPostClie
 
             {/* Meta */}
             <div className="flex flex-wrap items-center gap-4 text-sm text-muted mb-6">
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 text-primary bg-primary/10 rounded-full border border-primary/20">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 text-foreground bg-primary/10 rounded-full border border-primary/20">
                 <Tag className="w-3 h-3" />
                 {post.category}
               </span>
@@ -102,13 +122,13 @@ export default function BlogPostClient({ post, relatedPosts = [] }: BlogPostClie
                 'prose-blockquote:text-foreground prose-blockquote:text-xl prose-blockquote:font-medium prose-blockquote:italic',
                 'prose-blockquote:not-italic',
                 // Links
-                'prose-a:text-primary prose-a:no-underline hover:prose-a:underline',
+                'prose-a:text-foreground prose-a:no-underline hover:prose-a:underline',
                 // Strong
                 'prose-strong:text-foreground',
                 // Images
                 'prose-img:rounded-2xl prose-img:my-8',
                 // Code
-                'prose-code:text-primary prose-code:bg-primary/10 prose-code:px-2 prose-code:py-0.5 prose-code:rounded',
+                'prose-code:text-foreground prose-code:bg-primary/10 prose-code:px-2 prose-code:py-0.5 prose-code:rounded',
                 'prose-pre:bg-surface-card prose-pre:border prose-pre:border-border/50 prose-pre:rounded-xl'
               )}
               dangerouslySetInnerHTML={{ __html: post.content }}
@@ -126,11 +146,10 @@ export default function BlogPostClient({ post, relatedPosts = [] }: BlogPostClie
                 <Button
                   size="lg"
                   className={cn(
-                    'bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8]',
-                    'text-white font-semibold',
+                    'bg-primary text-primary-foreground',
+                    'font-semibold',
                     'px-8 py-4 text-lg rounded-xl',
-                    'shadow-lg shadow-[#814AC8]/25',
-                    'hover:shadow-[#814AC8]/50 hover:scale-105',
+                    'hover:opacity-90 hover:scale-105',
                     'transition-all duration-300'
                   )}
                 >
@@ -173,8 +192,8 @@ export default function BlogPostClient({ post, relatedPosts = [] }: BlogPostClie
                         />
                       </div>
                       <div className="flex-1 min-w-0">
-                        <span className="text-xs text-primary font-medium">{related.category}</span>
-                        <h3 className="text-foreground font-semibold mt-1 line-clamp-2 group-hover:text-primary transition-colors">
+                        <span className="text-xs text-foreground font-medium">{related.category}</span>
+                        <h3 className="text-foreground font-semibold mt-1 line-clamp-2 group-hover:text-foreground transition-colors">
                           {related.title}
                         </h3>
                         <span className="text-muted text-sm mt-1 flex items-center gap-1">
@@ -182,7 +201,7 @@ export default function BlogPostClient({ post, relatedPosts = [] }: BlogPostClie
                           {related.readTime}
                         </span>
                       </div>
-                      <ArrowRight className="w-4 h-4 text-muted group-hover:text-primary transition-colors flex-shrink-0 mt-1" />
+                      <ArrowRight className="w-4 h-4 text-muted group-hover:text-foreground transition-colors flex-shrink-0 mt-1" />
                     </div>
                   </Link>
                 ))}
@@ -190,6 +209,7 @@ export default function BlogPostClient({ post, relatedPosts = [] }: BlogPostClie
             </motion.section>
           )}
         </div>
+        </BlurSection>
       </main>
     </>
   )

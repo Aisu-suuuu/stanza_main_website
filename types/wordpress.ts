@@ -328,6 +328,7 @@ export interface WPCareerPosition {
     type: string
     location: string
     department: string
+    description?: string
     display_order: number
   }
 }

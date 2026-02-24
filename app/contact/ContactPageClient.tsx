@@ -1,17 +1,17 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import { motion } from 'framer-motion'
+import { useRef, useState, useMemo } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { Header } from '@/components/layout'
 import { Button } from '@/components/ui/Button'
 import { cn } from '@/lib/utils'
 import {
   Mail,
-  Phone,
   MapPin,
   Send,
   Building2,
   Globe,
+  Linkedin,
 } from 'lucide-react'
 
 interface ContactPageClientProps {
@@ -53,6 +53,24 @@ const defaultLocations = [
   },
 ]
 
+function BlurSection({ children, className }: { children: React.ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'start center'],
+  })
+  const blurValue = useTransform(scrollYProgress, [0, 1], [6, 0])
+  const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+
+  return (
+    <div ref={ref} className={className}>
+      <motion.div style={{ filter: filterBlur }}>
+        {children}
+      </motion.div>
+    </div>
+  )
+}
+
 // Animation variants
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -87,10 +105,9 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const emailAddress = pageData?.email || 'hello@stanzasoft.com'
-  const phoneNumber = pageData?.phone || '+91 9000888055'
-  const phoneHref = 'tel:' + phoneNumber.replace(/[\s()-]/g, '')
 
   // Contact information
   const contactInfo = useMemo(
@@ -102,13 +119,13 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
         href: `mailto:${emailAddress}`,
       },
       {
-        icon: Phone,
-        label: 'Phone',
-        value: phoneNumber,
-        href: phoneHref,
+        icon: Linkedin,
+        label: 'LinkedIn',
+        value: 'Stanzasoft',
+        href: 'https://www.linkedin.com/company/stanza-soft-inc/',
       },
     ],
-    [emailAddress, phoneNumber, phoneHref]
+    [emailAddress]
   )
 
   // Resolve locations: use WP locations if provided, otherwise defaults
@@ -139,16 +156,28 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
+    setSubmitError('')
 
-    // Simulate form submission (UI only - no backend)
-    await new Promise((resolve) => setTimeout(resolve, 1500))
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
 
-    setIsSubmitting(false)
-    setSubmitSuccess(true)
-    setFormData({ name: '', email: '', company: '', phone: '', message: '' })
+      if (!res.ok) {
+        const data = await res.json()
+        throw new Error(data.error || 'Failed to send message')
+      }
 
-    // Reset success message after 5 seconds
-    setTimeout(() => setSubmitSuccess(false), 5000)
+      setSubmitSuccess(true)
+      setFormData({ name: '', email: '', company: '', phone: '', message: '' })
+      setTimeout(() => setSubmitSuccess(false), 5000)
+    } catch (err) {
+      setSubmitError(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -163,7 +192,7 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
             className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full opacity-30"
             style={{
               background:
-                'radial-gradient(circle at center, #814AC8 0%, transparent 70%)',
+                'radial-gradient(circle at center, var(--primary) 0%, transparent 70%)',
               filter: 'blur(100px)',
             }}
           />
@@ -176,7 +205,7 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
               transition={{ duration: 0.6 }}
             >
               <motion.span
-                className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-primary bg-primary/10 rounded-full border border-primary/20"
+                className="inline-block px-4 py-1.5 mb-6 text-sm font-medium text-foreground bg-primary/10 rounded-full border border-primary/20"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.1, duration: 0.4 }}
@@ -212,6 +241,7 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
         </section>
 
         {/* Contact Form & Info Section */}
+        <BlurSection>
         <section className="py-12 md:py-20">
           <div className="container-custom">
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
@@ -244,6 +274,16 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
                     </motion.div>
                   )}
 
+                  {submitError && (
+                    <motion.div
+                      className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl"
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                    >
+                      <p className="text-red-400 text-sm font-medium">{submitError}</p>
+                    </motion.div>
+                  )}
+
                   <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
                       {/* Name Field */}
@@ -252,7 +292,7 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
                           htmlFor="name"
                           className="block text-sm font-medium text-foreground mb-2"
                         >
-                          Name <span className="text-primary">*</span>
+                          Name <span className="text-foreground">*</span>
                         </label>
                         <input
                           type="text"
@@ -272,7 +312,7 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
                           htmlFor="email"
                           className="block text-sm font-medium text-foreground mb-2"
                         >
-                          Email <span className="text-primary">*</span>
+                          Email <span className="text-foreground">*</span>
                         </label>
                         <input
                           type="email"
@@ -333,7 +373,7 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
                         htmlFor="message"
                         className="block text-sm font-medium text-foreground mb-2"
                       >
-                        Message <span className="text-primary">*</span>
+                        Message <span className="text-foreground">*</span>
                       </label>
                       <textarea
                         id="message"
@@ -353,7 +393,7 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
                       disabled={isSubmitting}
                       className={cn(
                         'w-full sm:w-auto px-8 py-3.5 rounded-xl font-semibold min-h-[48px]',
-                        'bg-gradient-to-r from-primary via-secondary to-accent',
+                        'bg-primary',
                         'text-white shadow-lg shadow-primary/25',
                         'hover:shadow-xl hover:shadow-primary/30 hover:scale-[1.02]',
                         'disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100',
@@ -423,11 +463,11 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
                         )}
                       >
                         <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                          <info.icon className="w-5 h-5 text-primary" />
+                          <info.icon className="w-5 h-5 text-foreground" />
                         </div>
                         <div>
                           <p className="text-sm text-muted">{info.label}</p>
-                          <p className="text-foreground font-medium group-hover:text-primary transition-colors">
+                          <p className="text-foreground font-medium group-hover:text-foreground transition-colors">
                             {info.value}
                           </p>
                         </div>
@@ -452,7 +492,7 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
                       >
                         <div className="flex items-start gap-4">
                           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                            <MapPin className="w-5 h-5 text-primary" />
+                            <MapPin className="w-5 h-5 text-foreground" />
                           </div>
                           <div className="flex-1">
                             <h4 className="text-foreground font-semibold mb-1">
@@ -471,36 +511,89 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
                   </div>
                 </motion.div>
 
-                {/* Map Placeholder */}
+                {/* Global Presence with World Map */}
                 <motion.div
                   variants={itemVariants}
-                  className="bg-surface-card rounded-3xl border border-foreground/10 overflow-hidden"
+                  className="rounded-3xl border border-primary/20 overflow-hidden"
                 >
-                  <div className="aspect-[4/3] relative bg-gradient-to-br from-primary/20 via-secondary/10 to-accent/20">
-                    {/* Map placeholder with decorative elements */}
-                    <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="aspect-[4/3] relative bg-[#0f0a1e]">
+                    {/* Deep purple gradient base */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-primary/15 via-transparent to-primary/10" />
+
+                    {/* World map background */}
+                    <div
+                      className="absolute inset-0 opacity-[0.35]"
+                      style={{
+                        backgroundImage: 'url(/world-map.svg)',
+                        backgroundSize: '90%',
+                        backgroundPosition: 'center 45%',
+                        backgroundRepeat: 'no-repeat',
+                      }}
+                    />
+
+                    {/* Subtle dot grid */}
+                    <div
+                      className="absolute inset-0 opacity-[0.08]"
+                      style={{
+                        backgroundImage: 'radial-gradient(circle, rgba(167,139,250,0.8) 1px, transparent 1px)',
+                        backgroundSize: '20px 20px',
+                      }}
+                    />
+
+                    {/* Glow behind India location */}
+                    <div className="absolute top-[38%] left-[57%] -translate-x-1/2 -translate-y-1/2 w-32 h-32 bg-primary/20 rounded-full blur-[40px]" />
+
+                    {/* Location: India — concentric rings */}
+                    <div className="absolute top-[38%] left-[57%] -translate-x-1/2 -translate-y-1/2 z-[5]">
+                      <div className="absolute -inset-3 w-9 h-9 rounded-full border border-primary/50 animate-[ping_3s_ease-out_infinite]" />
+                      <div className="absolute -inset-6 w-[3.75rem] h-[3.75rem] rounded-full border border-primary/30 animate-[ping_3s_ease-out_0.6s_infinite]" />
+                      <div className="absolute -inset-10 w-[5.25rem] h-[5.25rem] rounded-full border border-primary/15 animate-[ping_3s_ease-out_1.2s_infinite]" />
+                      <div className="w-3 h-3 rounded-full bg-primary shadow-[0_0_16px_4px_rgba(139,92,246,0.6)]" />
+                    </div>
+
+                    {/* Location: USA */}
+                    <div className="absolute top-[28%] left-[20%] -translate-x-1/2 -translate-y-1/2 z-[5]">
+                      <div className="absolute -inset-2.5 w-8 h-8 rounded-full border border-primary/45 animate-[ping_3s_ease-out_0.4s_infinite]" />
+                      <div className="absolute -inset-5 w-[3.25rem] h-[3.25rem] rounded-full border border-primary/25 animate-[ping_3s_ease-out_1s_infinite]" />
+                      <div className="absolute -inset-8 w-[4.5rem] h-[4.5rem] rounded-full border border-primary/12 animate-[ping_3s_ease-out_1.6s_infinite]" />
+                      <div className="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_14px_3px_rgba(139,92,246,0.6)]" />
+                    </div>
+
+                    {/* Location: Australia */}
+                    <div className="absolute top-[68%] left-[78%] -translate-x-1/2 -translate-y-1/2 z-[5]">
+                      <div className="absolute -inset-2 w-7 h-7 rounded-full border border-primary/40 animate-[ping_3s_ease-out_0.8s_infinite]" />
+                      <div className="absolute -inset-4 w-[2.75rem] h-[2.75rem] rounded-full border border-primary/20 animate-[ping_3s_ease-out_1.4s_infinite]" />
+                      <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_12px_3px_rgba(139,92,246,0.6)]" />
+                    </div>
+
+                    {/* Connection lines between locations (curved) */}
+                    <svg className="absolute inset-0 w-full h-full z-[3] opacity-[0.15]" viewBox="0 0 100 100" preserveAspectRatio="none">
+                      <path d="M20,28 Q38,15 57,38" stroke="#a78bfa" strokeWidth="0.3" fill="none" strokeDasharray="1 1" />
+                      <path d="M57,38 Q68,52 78,68" stroke="#a78bfa" strokeWidth="0.3" fill="none" strokeDasharray="1 1" />
+                    </svg>
+
+                    {/* Content overlay */}
+                    <div className="absolute inset-0 flex items-center justify-center z-10">
                       <div className="text-center">
-                        <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-4">
-                          <Globe className="w-8 h-8 text-primary" />
+                        <div className="w-14 h-14 rounded-full bg-primary/20 backdrop-blur-md flex items-center justify-center mx-auto mb-3 border border-primary/30 shadow-[0_0_30px_rgba(139,92,246,0.3)]">
+                          <Globe className="w-7 h-7 text-white" />
                         </div>
-                        <p className="text-foreground font-medium">Global Presence</p>
-                        <p className="text-sm text-muted mt-1">
+                        <p className="text-white font-semibold text-lg tracking-wide">Global Presence</p>
+                        <p className="text-white/50 text-sm mt-1">
                           Serving clients worldwide
                         </p>
                       </div>
                     </div>
-                    {/* Decorative dots */}
-                    <div className="absolute top-1/4 left-1/4 w-3 h-3 rounded-full bg-primary animate-pulse" />
-                    <div className="absolute top-1/3 right-1/3 w-2 h-2 rounded-full bg-secondary animate-pulse delay-300" />
-                    <div className="absolute bottom-1/3 left-1/3 w-2 h-2 rounded-full bg-accent animate-pulse delay-500" />
                   </div>
                 </motion.div>
               </motion.div>
             </div>
           </div>
         </section>
+        </BlurSection>
 
         {/* FAQ CTA Section */}
+        <BlurSection>
         <section className="py-16 md:py-24 bg-background">
           <div className="container-custom">
             <motion.div
@@ -522,7 +615,7 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
                   href={`mailto:${emailAddress}`}
                   className={cn(
                     'inline-flex items-center gap-2 px-6 py-3 rounded-xl',
-                    'bg-primary/10 text-primary font-medium',
+                    'bg-primary/10 text-foreground font-medium',
                     'hover:bg-primary/20 transition-colors duration-200'
                   )}
                 >
@@ -530,20 +623,23 @@ export default function ContactPageClient({ pageData, locations }: ContactPageCl
                   Email Us
                 </a>
                 <a
-                  href={phoneHref}
+                  href="https://www.linkedin.com/company/stanza-soft-inc/"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className={cn(
                     'inline-flex items-center gap-2 px-6 py-3 rounded-xl',
                     'bg-card border border-border text-foreground font-medium',
                     'hover:border-primary/50 transition-colors duration-200'
                   )}
                 >
-                  <Phone className="w-4 h-4" />
-                  Call Us
+                  <Linkedin className="w-4 h-4" />
+                  LinkedIn
                 </a>
               </div>
             </motion.div>
           </div>
         </section>
+        </BlurSection>
       </main>
     </>
   )

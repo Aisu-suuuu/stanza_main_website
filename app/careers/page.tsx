@@ -17,6 +17,7 @@ export default async function CareersPage() {
     type: p.acf.type || 'Full-time',
     location: p.acf.location || 'Remote',
     department: p.acf.department || 'Engineering',
+    description: p.acf.description || '',
   }))
 
   const benefitData = wpBenefits.map((b) => ({

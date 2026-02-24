@@ -2,14 +2,13 @@ import Header from '@/components/layout/Header'
 
 import Hero from '@/components/sections/Hero'
 import { AboutUs } from '@/components/sections/AboutUs'
-import { Stats } from '@/components/sections/Stats'
 import { Products } from '@/components/sections/Products'
-import { Steps } from '@/components/sections/Steps'
+import { OurClients } from '@/components/sections/OurClients'
 import { Process } from '@/components/sections/Process'
+import { Steps } from '@/components/sections/Steps'
 import { FAQ } from '@/components/sections/FAQ'
-import { CTA } from '@/components/sections/CTA'
+import { ContactForm } from '@/components/sections/ContactForm'
 import { getPageBySlug } from '@/lib/api/pages'
-import { getStats } from '@/lib/api/stats'
 import { getProducts } from '@/lib/api/products'
 import { getSteps } from '@/lib/api/steps'
 import { getProcessSteps } from '@/lib/api/process'
@@ -19,9 +18,8 @@ import type { HomePageFields } from '@/types/wordpress'
 import { parseNewlineList, decodeHtmlEntities } from '@/lib/wordpress'
 
 export default async function Home() {
-  const [pageData, stats, products, steps, processSteps, faqItems, clientLogos] = await Promise.all([
+  const [pageData, products, steps, processSteps, faqItems, clientLogos] = await Promise.all([
     getPageBySlug<HomePageFields>('home'),
-    getStats(),
     getProducts(),
     getSteps(),
     getProcessSteps(),
@@ -32,12 +30,21 @@ export default async function Home() {
   const acf = pageData
 
   // Transform WP products to match component interface
-  const productItems = products.map((p, i) => ({
-    title: decodeHtmlEntities(p.title.rendered),
-    description: [p.acf.description, p.acf.description_2].filter(Boolean) as string[],
-    imageUrl: p.acf.product_image || 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&auto=format&fit=crop&q=60',
-    imageOnLeft: i % 2 === 0,
-  }))
+  const productFallbacks: Record<string, string> = {
+    prepmonkey: '/images/prepmonkey.png',
+    agenticaiplatform: '/images/agentic-ai.png',
+  }
+  const productItems = products.map((p, i) => {
+    const title = decodeHtmlEntities(p.title.rendered)
+    const slug = title.toLowerCase().replace(/\s+/g, '')
+    return {
+      title,
+      description: [p.acf.description, p.acf.description_2].filter(Boolean) as string[],
+      imageUrl: p.acf.product_image || productFallbacks[slug] || 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&auto=format&fit=crop&q=60',
+      imageOnLeft: i % 2 === 0,
+      scrollOnHover: slug === 'prepmonkey',
+    }
+  })
 
   // Transform WP steps
   const stepItems = steps.map((s) => ({
@@ -54,13 +61,6 @@ export default async function Home() {
     number: ps.acf.number || 1,
     title: decodeHtmlEntities(ps.title.rendered),
     description: ps.acf.description || '',
-  }))
-
-  // Transform WP stats
-  const statItems = stats.map((s) => ({
-    value: s.acf.value || 0,
-    suffix: s.acf.suffix || '+',
-    label: decodeHtmlEntities(s.title.rendered),
   }))
 
   // Transform WP FAQ items
@@ -92,14 +92,20 @@ export default async function Home() {
           paragraph1={acf?.about_paragraph_1}
           paragraph2={acf?.about_paragraph_2}
           aboutImage={acf?.about_image}
-          clientsTagline={acf?.about_clients_tagline}
-          clients={logoItems.length > 0 ? logoItems : undefined}
         />
-        <Stats stats={statItems.length > 0 ? statItems : undefined} />
         <Products
           heading={acf?.products_section_heading}
           subheading={acf?.products_section_subheading}
           products={productItems.length > 0 ? productItems : undefined}
+        />
+        <OurClients
+          tagline={acf?.about_clients_tagline}
+          clients={logoItems.length > 0 ? logoItems : undefined}
+        />
+        <Process
+          badge={acf?.process_section_badge}
+          heading={acf?.process_section_heading}
+          steps={processItems.length > 0 ? processItems : undefined}
         />
         <Steps
           badge={acf?.steps_section_badge}
@@ -107,22 +113,12 @@ export default async function Home() {
           subheading={acf?.steps_section_subheading}
           steps={stepItems.length > 0 ? stepItems : undefined}
         />
-        <Process
-          badge={acf?.process_section_badge}
-          heading={acf?.process_section_heading}
-          steps={processItems.length > 0 ? processItems : undefined}
-        />
         <FAQ
           heading={acf?.faq_heading}
           subheading={acf?.faq_subheading}
           items={faqItemsList.length > 0 ? faqItemsList : undefined}
         />
-        <CTA
-          heading={acf?.cta_heading}
-          subtext={acf?.cta_subtext}
-          buttonText={acf?.cta_button_text}
-          buttonLink={acf?.cta_button_link}
-        />
+        <ContactForm />
       </main>
     </>
   )

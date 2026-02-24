@@ -13,6 +13,7 @@ interface Product {
   description: string[]
   imageUrl: string
   imageOnLeft: boolean
+  scrollOnHover?: boolean
 }
 
 const defaultProducts: Product[] = [
@@ -22,8 +23,9 @@ const defaultProducts: Product[] = [
       'An AI-powered EdTech platform designed to optimize competitive exam preparation through structured learning paths, performance tracking, and intelligent study assistance.',
       'PrepMonkey empowers students with personalized learning experiences, comprehensive practice materials, and real-time performance insights to achieve their academic goals.',
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&auto=format&fit=crop&q=60',
+    imageUrl: '/images/prepmonkey.png',
     imageOnLeft: true,
+    scrollOnHover: true,
   },
   {
     title: 'Agentic AI Platform',
@@ -31,7 +33,7 @@ const defaultProducts: Product[] = [
       'A comprehensive AI automation platform built to transform operational workflows, reduce inefficiencies, and accelerate business performance.',
       'Our platform develops intelligent AI systems designed to automate workflows, optimize business processes, and enhance operational efficiency at scale.',
     ],
-    imageUrl: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=60',
+    imageUrl: '/images/agentic-ai.png',
     imageOnLeft: false,
   },
 ]
@@ -45,9 +47,17 @@ interface ProductRowProps {
 function ProductRow({ product, index, isInView }: ProductRowProps) {
   const delay = 0.2 + index * 0.2
   const isReversed = !product.imageOnLeft
+  const rowRef = useRef<HTMLDivElement>(null)
+
+  const { scrollYProgress } = useScroll({
+    target: rowRef,
+    offset: ['start end', 'end start'],
+  })
+  const imgY = useTransform(scrollYProgress, [0, 1], [40, -40])
 
   return (
     <motion.div
+      ref={rowRef}
       initial={{ opacity: 0, y: 30 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
       transition={{ duration: 0.6, delay, ease: 'easeOut' }}
@@ -64,23 +74,46 @@ function ProductRow({ product, index, isInView }: ProductRowProps) {
         {/* Image */}
         <div
           className={cn(
-            'relative aspect-[4/3] rounded-2xl overflow-hidden',
+            'relative rounded-2xl overflow-hidden',
+            product.scrollOnHover
+              ? 'aspect-[4/3]'
+              : 'aspect-square',
             isReversed && 'md:order-2'
           )}
         >
-          <Image
-            src={product.imageUrl}
-            alt={product.title}
-            fill
-            className={cn(
-              'object-cover',
-              'transition-transform duration-500 ease-out',
-              'group-hover:scale-105'
-            )}
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
-          />
+          {product.scrollOnHover ? (
+            /* Scroll-on-hover: full landing page preview */
+            <motion.div style={{ y: imgY }} className="absolute inset-0 -top-10 -bottom-10">
+              <Image
+                src={product.imageUrl}
+                alt={product.title}
+                fill
+                className={cn(
+                  'object-cover object-top',
+                  'md:transition-[object-position] md:duration-[40s] md:ease-linear',
+                  'md:group-hover:object-bottom'
+                )}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+              />
+            </motion.div>
+          ) : (
+            /* Standard image — full image visible */
+            <motion.div style={{ y: imgY }} className="absolute inset-0 -top-10 -bottom-10">
+              <Image
+                src={product.imageUrl}
+                alt={product.title}
+                fill
+                className={cn(
+                  'object-contain',
+                  'transition-transform duration-500 ease-out',
+                  'group-hover:scale-105'
+                )}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+              />
+            </motion.div>
+          )}
           {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-transparent to-black/50 opacity-40" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10 pointer-events-none" />
         </div>
 
         {/* Content */}
@@ -97,7 +130,7 @@ function ProductRow({ product, index, isInView }: ProductRowProps) {
             href={`/products`}
             className={cn(
               'inline-flex items-center gap-2',
-              'text-primary font-medium',
+              'text-foreground font-medium',
               'hover:gap-3 transition-all duration-300 mt-2'
             )}
           >
@@ -126,7 +159,7 @@ export function Products({ heading, subheading, products }: ProductsProps) {
     target: ref,
     offset: ['start end', 'start center'],
   })
-  const blurValue = useTransform(scrollYProgress, [0, 1], [8, 0])
+  const blurValue = useTransform(scrollYProgress, [0, 1], [6, 0])
   const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
 
   return (
@@ -182,7 +215,7 @@ export function Products({ heading, subheading, products }: ProductsProps) {
       {/* Decorative background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute left-1/4 top-1/4 h-[500px] w-[500px] rounded-full bg-gradient-to-br from-primary/5 to-transparent blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 h-[500px] w-[500px] rounded-full bg-gradient-to-tl from-secondary/5 to-transparent blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 h-[500px] w-[500px] rounded-full bg-gradient-to-tl from-primary/5 to-transparent blur-3xl" />
       </div>
 
       {/* Top border line */}

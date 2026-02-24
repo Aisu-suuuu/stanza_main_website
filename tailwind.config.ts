@@ -20,15 +20,15 @@ const config: Config = {
           foreground: 'var(--card-foreground)',
         },
         primary: {
-          DEFAULT: '#814AC8',
+          DEFAULT: '#7C3AED',
           foreground: '#FFFFFF',
         },
         secondary: {
-          DEFAULT: '#DF7AFE',
+          DEFAULT: '#7C3AED',
           foreground: '#FFFFFF',
         },
         accent: {
-          DEFAULT: '#06B6D4',
+          DEFAULT: '#7C3AED',
           foreground: '#FFFFFF',
         },
         destructive: {
@@ -36,11 +36,11 @@ const config: Config = {
           foreground: '#FFFFFF',
         },
         brand: {
-          'purple-primary': '#814AC8',
-          'purple-violet': '#814AC8',
-          'purple-light': '#DF7AFE',
-          'purple-dark': '#814AC8',
-          'pink-accent': '#DF7AFE',
+          'purple-primary': '#7C3AED',
+          'purple-violet': '#7C3AED',
+          'purple-light': '#7C3AED',
+          'purple-dark': '#7C3AED',
+          'pink-accent': '#7C3AED',
         },
         surface: {
           dark: 'var(--surface-dark)',
@@ -55,8 +55,8 @@ const config: Config = {
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-        'gradient-purple': 'linear-gradient(135deg, #814AC8 0%, #DF7AFE 50%, #DF7AFE 100%)',
-        'gradient-text': 'linear-gradient(90deg, #814AC8 0%, #DF7AFE 50%, #DF7AFE 100%)',
+        'gradient-purple': 'linear-gradient(135deg, #7C3AED 0%, #7C3AED 100%)',
+        'gradient-text': 'linear-gradient(90deg, #7C3AED 0%, #7C3AED 100%)',
       },
       animation: {
         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -65,7 +65,7 @@ const config: Config = {
         'gradient': 'gradient 8s linear infinite',
         'accordion-down': 'accordion-down 0.3s ease-out',
         'accordion-up': 'accordion-up 0.3s ease-out',
-        'marquee': 'marquee 25s linear infinite',
+        'marquee': 'marquee 30s linear infinite',
       },
       keyframes: {
         float: {
@@ -73,8 +73,8 @@ const config: Config = {
           '50%': { transform: 'translateY(-20px)' },
         },
         glow: {
-          '0%': { boxShadow: '0 0 20px rgba(129, 74, 200, 0.3)' },
-          '100%': { boxShadow: '0 0 40px rgba(129, 74, 200, 0.6)' },
+          '0%': { boxShadow: '0 0 20px rgba(124, 58, 237, 0.3)' },
+          '100%': { boxShadow: '0 0 40px rgba(124, 58, 237, 0.6)' },
         },
         gradient: {
           '0%, 100%': { backgroundPosition: '0% 50%' },

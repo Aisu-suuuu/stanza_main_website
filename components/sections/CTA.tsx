@@ -16,13 +16,14 @@ interface CTAProps {
 export function CTA({ heading, subtext, buttonText, buttonLink }: CTAProps) {
   const ref = useRef<HTMLDivElement>(null)
 
-  // Scroll-driven blur effect
+  // Scroll-driven blur + parallax scale
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start end', 'start center'],
+    offset: ['start end', 'end start'],
   })
-  const blurValue = useTransform(scrollYProgress, [0, 1], [8, 0])
-  const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+  const blurProgress = useTransform(scrollYProgress, [0, 0.3], [6, 0])
+  const filterBlur = useTransform(blurProgress, (v) => `blur(${v}px)`)
+  const cardScale = useTransform(scrollYProgress, [0.1, 0.4], [0.95, 1])
 
   return (
     <section
@@ -39,68 +40,43 @@ export function CTA({ heading, subtext, buttonText, buttonLink }: CTAProps) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
           transition={{ duration: 0.6 }}
+          style={{ scale: cardScale }}
         >
-          {/* Card with animated gradient border */}
-          <div className="relative p-[2px] rounded-3xl overflow-hidden">
-            {/* Animated gradient border */}
-            <motion.div
-              className="absolute inset-0"
-              style={{
-                background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
-              }}
-              animate={{ rotate: 360 }}
-              transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-            />
+          {/* Card with border */}
+          <div className="relative rounded-3xl border border-border bg-surface-card px-8 py-16 md:px-16 md:py-20">
+            <div className="flex flex-col items-center text-center">
+              {/* Headline */}
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
+                {heading || (
+                  <>
+                    Let AI do the Work so you can{' '}
+                    <span className="text-foreground">
+                      Scale Faster
+                    </span>
+                  </>
+                )}
+              </h2>
 
-            {/* Glow effect */}
-            <div className="absolute inset-0 blur-xl opacity-50">
-              <motion.div
-                className="absolute inset-0"
-                style={{
-                  background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
-                }}
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-              />
-            </div>
+              {/* Subtitle */}
+              <p className="text-muted text-lg md:text-xl mb-10 max-w-xl">
+                {subtext || 'Book a Call Today and Start Automating'}
+              </p>
 
-            {/* Inner card content */}
-            <div className="relative bg-surface-card rounded-3xl px-8 py-16 md:px-16 md:py-20">
-              <div className="flex flex-col items-center text-center">
-                {/* Headline */}
-                <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
-                  {heading || (
-                    <>
-                      Let AI do the Work so you can{' '}
-                      <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
-                        Scale Faster
-                      </span>
-                    </>
+              {/* CTA Button */}
+              <Link href={buttonLink || '/contact'}>
+                <Button
+                  size="lg"
+                  className={cn(
+                    'bg-primary text-primary-foreground',
+                    'font-semibold',
+                    'px-7 py-3 text-base rounded-xl',
+                    'hover:opacity-90 hover:scale-105',
+                    'transition-all duration-300'
                   )}
-                </h2>
-
-                {/* Subtitle */}
-                <p className="text-muted text-lg md:text-xl mb-10 max-w-xl">
-                  {subtext || 'Book a Call Today and Start Automating'}
-                </p>
-
-                {/* CTA Button */}
-                <Link href={buttonLink || '/contact'}>
-                  <Button
-                    size="lg"
-                    className={cn(
-                      'bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8]',
-                      'text-white font-semibold',
-                      'px-10 py-5 text-lg rounded-xl',
-                      'shadow-2xl shadow-[#814AC8]/30',
-                      'hover:shadow-[#814AC8]/50 hover:scale-105',
-                      'transition-all duration-300'
-                    )}
-                  >
-                    {buttonText || 'Book a free call'}
-                  </Button>
-                </Link>
-              </div>
+                >
+                  {buttonText || 'Book a free call'}
+                </Button>
+              </Link>
             </div>
           </div>
         </motion.div>

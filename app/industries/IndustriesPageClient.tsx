@@ -1,7 +1,8 @@
 'use client'
 
+import { useRef } from 'react'
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import {
   ArrowRight,
   GraduationCap,
@@ -40,8 +41,8 @@ const industries = [
     description:
       'Building intelligent learning platforms and AI-powered test preparation tools that personalize education and improve student outcomes at scale.',
     features: ['Adaptive Learning', 'AI Test Preparation', 'Performance Analytics', 'LMS Integration'],
-    color: 'from-[#814AC8]/20 to-[#DF7AFE]/20',
-    iconColor: 'text-[#DF7AFE]',
+    color: 'from-primary/20 to-primary/20',
+    iconColor: 'text-secondary',
   },
   {
     icon: Cpu,
@@ -113,6 +114,24 @@ const itemVariants = {
   },
 }
 
+function BlurSection({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start end', 'start center'],
+  })
+  const blurValue = useTransform(scrollYProgress, [0, 1], [6, 0])
+  const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+
+  return (
+    <div ref={ref}>
+      <motion.div style={{ filter: filterBlur }}>
+        {children}
+      </motion.div>
+    </div>
+  )
+}
+
 export default function IndustriesPageClient({ pageData }: IndustriesPageClientProps) {
   return (
     <>
@@ -127,7 +146,7 @@ export default function IndustriesPageClient({ pageData }: IndustriesPageClientP
           <motion.div
             className="absolute -top-40 -left-40 w-[500px] h-[500px] rounded-full pointer-events-none"
             style={{
-              background: 'radial-gradient(circle at 30% 30%, #814AC8 0%, #DF7AFE 40%, transparent 70%)',
+              background: 'radial-gradient(circle at 30% 30%, var(--primary) 0%, var(--primary) 40%, transparent 70%)',
               filter: 'blur(80px)',
             }}
             animate={{
@@ -143,7 +162,7 @@ export default function IndustriesPageClient({ pageData }: IndustriesPageClientP
           <motion.div
             className="absolute -bottom-40 -right-40 w-[400px] h-[400px] rounded-full pointer-events-none"
             style={{
-              background: 'radial-gradient(circle at 70% 70%, #06B6D4 0%, #DF7AFE 50%, transparent 70%)',
+              background: 'radial-gradient(circle at 70% 70%, var(--primary) 0%, var(--primary) 50%, transparent 70%)',
               filter: 'blur(80px)',
             }}
             animate={{
@@ -165,7 +184,7 @@ export default function IndustriesPageClient({ pageData }: IndustriesPageClientP
               transition={{ duration: 0.7 }}
             >
               <motion.span
-                className="inline-block px-4 py-2 mb-6 text-sm font-medium text-primary bg-primary/10 rounded-full"
+                className="inline-block px-4 py-2 mb-6 text-sm font-medium text-foreground bg-primary/10 rounded-full"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
@@ -200,6 +219,7 @@ export default function IndustriesPageClient({ pageData }: IndustriesPageClientP
         </section>
 
         {/* Industries Grid Section */}
+        <BlurSection>
         <section className="py-20 md:py-28">
           <div className="container-custom">
             <motion.div
@@ -232,7 +252,7 @@ export default function IndustriesPageClient({ pageData }: IndustriesPageClientP
                     </div>
 
                     {/* Title */}
-                    <h3 className="text-2xl font-semibold mb-4 group-hover:text-primary transition-colors duration-300">
+                    <h3 className="text-2xl font-semibold mb-4 group-hover:text-foreground transition-colors duration-300">
                       {industry.title}
                     </h3>
 
@@ -252,7 +272,7 @@ export default function IndustriesPageClient({ pageData }: IndustriesPageClientP
                     </div>
 
                     {/* Learn more link */}
-                    <div className="flex items-center gap-2 text-primary font-medium group/link">
+                    <div className="flex items-center gap-2 text-foreground font-medium group/link">
                       <span className="text-sm">Learn more</span>
                       <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
                     </div>
@@ -262,8 +282,10 @@ export default function IndustriesPageClient({ pageData }: IndustriesPageClientP
             </motion.div>
           </div>
         </section>
+        </BlurSection>
 
         {/* Our Approach Section */}
+        <BlurSection>
         <section className="py-20 md:py-28 bg-card/50">
           <div className="container-custom">
             <motion.div
@@ -329,8 +351,10 @@ export default function IndustriesPageClient({ pageData }: IndustriesPageClientP
             </motion.div>
           </div>
         </section>
+        </BlurSection>
 
         {/* Why Choose Us Section */}
+        <BlurSection>
         <section className="py-20 md:py-28">
           <div className="container-custom">
             <div className="bg-surface-card rounded-3xl border border-border/50 p-8 lg:p-12">
@@ -398,7 +422,7 @@ export default function IndustriesPageClient({ pageData }: IndustriesPageClientP
               >
                 <div className="grid grid-cols-2 gap-4">
                   {[
-                    { icon: GraduationCap, label: 'Education', color: 'from-[#814AC8]/20 to-[#DF7AFE]/20' },
+                    { icon: GraduationCap, label: 'Education', color: 'from-primary/20 to-primary/20' },
                     { icon: Cpu, label: 'Technology', color: 'from-cyan-500/20 to-teal-500/20' },
                     { icon: Stethoscope, label: 'Healthcare', color: 'from-red-500/20 to-pink-500/20' },
                     { icon: Building2, label: 'Enterprise', color: 'from-orange-500/20 to-amber-500/20' },
@@ -422,14 +446,16 @@ export default function IndustriesPageClient({ pageData }: IndustriesPageClientP
                   ))}
                 </div>
                 {/* Decorative element */}
-                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-2xl -z-10" />
+                <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-br from-primary/20 to-primary/20 rounded-2xl -z-10" />
               </motion.div>
               </div>
             </div>
           </div>
         </section>
+        </BlurSection>
 
         {/* CTA Section */}
+        <BlurSection>
         <section className="relative py-24 lg:py-32 overflow-hidden bg-background">
           <div className="container-custom relative z-10">
             <motion.div
@@ -439,39 +465,14 @@ export default function IndustriesPageClient({ pageData }: IndustriesPageClientP
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              {/* Card with animated gradient border */}
-              <div className="relative p-[2px] rounded-3xl overflow-hidden">
-                {/* Animated gradient border */}
-                <motion.div
-                  className="absolute inset-0"
-                  style={{
-                    background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
-                  }}
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                />
-
-                {/* Glow effect */}
-                <div className="absolute inset-0 blur-xl opacity-50">
-                  <motion.div
-                    className="absolute inset-0"
-                    style={{
-                      background: 'conic-gradient(from 0deg, #814AC8, #DF7AFE, transparent, transparent, #814AC8)',
-                    }}
-                    animate={{ rotate: 360 }}
-                    transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
-                  />
-                </div>
-
-                {/* Inner card content */}
-                <div className="relative bg-surface-card rounded-3xl px-8 py-16 md:px-16 md:py-20">
+              <div className="bg-surface-card rounded-3xl border border-border px-8 py-16 md:px-16 md:py-20">
                   <div className="flex flex-col items-center text-center">
                     {/* Headline */}
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
                       {pageData?.cta_heading || (
                         <>
                           Let AI do the Work so you can{' '}
-                          <span className="bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8] bg-clip-text text-transparent">
+                          <span className="text-foreground">
                             Scale Faster
                           </span>
                         </>
@@ -488,11 +489,10 @@ export default function IndustriesPageClient({ pageData }: IndustriesPageClientP
                       <Button
                         size="lg"
                         className={cn(
-                          'bg-gradient-to-r from-[#814AC8] via-[#DF7AFE] to-[#814AC8]',
-                          'text-white font-semibold',
+                          'bg-primary text-primary-foreground',
+                          'font-semibold',
                           'px-10 py-5 text-lg rounded-xl',
-                          'shadow-2xl shadow-[#814AC8]/30',
-                          'hover:shadow-[#814AC8]/50 hover:scale-105',
+                          'hover:opacity-90 hover:scale-105',
                           'transition-all duration-300'
                         )}
                       >
@@ -500,11 +500,11 @@ export default function IndustriesPageClient({ pageData }: IndustriesPageClientP
                       </Button>
                     </Link>
                   </div>
-                </div>
               </div>
             </motion.div>
           </div>
         </section>
+        </BlurSection>
       </main>
     </>
   )

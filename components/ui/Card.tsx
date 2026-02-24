@@ -22,7 +22,7 @@ const Card = forwardRef<HTMLDivElement, CardProps>(
           hover && [
             'group',
             'before:absolute before:inset-0 before:rounded-2xl before:p-[1px]',
-            'before:bg-gradient-to-r before:from-primary before:via-secondary before:to-accent',
+            'before:bg-primary',
             'before:opacity-0 before:transition-opacity before:duration-300',
             'hover:before:opacity-100',
             'before:-z-10',

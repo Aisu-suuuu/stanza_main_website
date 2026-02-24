@@ -1,11 +1,21 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 export function AISolutions() {
+  const sectionRef = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start end', 'start center'],
+  })
+  const blurValue = useTransform(scrollYProgress, [0, 1], [6, 0])
+  const filterBlur = useTransform(blurValue, (v) => `blur(${v}px)`)
+
   return (
-    <section className={cn('bg-background py-24 md:py-32')}>
+    <section ref={sectionRef} className={cn('bg-background py-24 md:py-32')}>
+      <motion.div style={{ filter: filterBlur }}>
       <div className="container mx-auto px-4 md:px-6">
         <motion.div
           className="flex flex-col items-center text-center max-w-4xl mx-auto"
@@ -18,7 +28,7 @@ export function AISolutions() {
           <motion.span
             className={cn(
               'inline-block px-4 py-1.5 mb-6',
-              'text-sm font-medium text-primary',
+              'text-sm font-medium text-foreground',
               'bg-primary/10 rounded-full',
               'border border-primary/20'
             )}
@@ -42,7 +52,7 @@ export function AISolutions() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             AI Solutions That Take Your Business to the{' '}
-            <span className="bg-gradient-text bg-clip-text text-transparent">
+            <span className="text-foreground">
               Next Level
             </span>
           </motion.h2>
@@ -63,6 +73,7 @@ export function AISolutions() {
           </motion.p>
         </motion.div>
       </div>
+      </motion.div>
     </section>
   )
 }

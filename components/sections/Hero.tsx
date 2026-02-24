@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { motion, useInView, useAnimation } from 'framer-motion'
+import { motion, useInView, useAnimation, useScroll, useTransform } from 'framer-motion'
 import Link from 'next/link'
 import { ArrowUpRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -156,7 +156,7 @@ const PurpleOrb = () => {
                 rgba(160,100,240,${isLight ? 0.12 : 0.3}) 22%,
                 rgba(180,120,255,${isLight ? 0.18 : 0.4}) 34%,
                 rgba(168,85,247,${isLight ? 0.12 : 0.3}) 46%,
-                rgba(129,74,200,${isLight ? 0.04 : 0.1}) 56%,
+                rgba(124,58,237,${isLight ? 0.04 : 0.1}) 56%,
                 transparent 64%,
                 transparent 100%
               )`,
@@ -190,6 +190,15 @@ export default function Hero({
   const isInView = useInView(ref, { once: true })
   const mainControls = useAnimation()
 
+  // Parallax: content rises slower, background drifts faster
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ['start start', 'end start'],
+  })
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 150])
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, -80])
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0])
+
   useEffect(() => {
     if (isInView) {
       mainControls.start('visible')
@@ -202,13 +211,17 @@ export default function Hero({
       className="relative min-h-screen overflow-hidden flex items-center justify-center"
     >
       {/* Particles/Stars Background */}
-      <ParticlesBackground />
+      <motion.div style={{ y: bgY }} className="absolute inset-0">
+        <ParticlesBackground />
+      </motion.div>
 
       {/* Purple Gradient Orb */}
-      <PurpleOrb />
+      <motion.div style={{ y: bgY }} className="absolute inset-0">
+        <PurpleOrb />
+      </motion.div>
 
       {/* Content */}
-      <div className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
+      <motion.div style={{ y: contentY, opacity }} className="relative z-10 text-center px-4 sm:px-6 max-w-4xl mx-auto">
         {/* Headline — no glow effects */}
         <motion.h1
           className="text-5xl sm:text-6xl md:text-7xl lg:text-[80px] font-display font-bold leading-[0.95] tracking-[-0.05em] mb-6"
@@ -222,11 +235,11 @@ export default function Hero({
             <>
               <span className="block sm:inline">
                 <span className="text-cream">We </span>
-                <span className="text-[#DF7AFE]">
+                <span className="text-foreground">
                   think
                 </span>
                 <span className="text-cream">, you </span>
-                <span className="text-[#DF7AFE]">
+                <span className="text-foreground">
                   grow
                 </span>
               </span>
@@ -258,10 +271,10 @@ export default function Hero({
             <button
               className={cn(
                 'inline-flex items-center gap-2 px-5 py-2.5',
-                'bg-[#814AC8] text-white text-[15px] font-medium',
+                'bg-primary text-white text-[15px] font-medium',
                 'rounded-md border border-white/10',
                 'shadow-[0px_0.7px_0.7px_-0.6px_rgba(0,0,0,0.15),0px_1.8px_1.8px_-1.25px_rgba(0,0,0,0.14),0px_3.6px_3.6px_-1.9px_rgba(0,0,0,0.14),0px_6.9px_6.9px_-2.5px_rgba(0,0,0,0.13),0px_13.6px_13.6px_-3.1px_rgba(0,0,0,0.11),0px_30px_30px_-3.75px_rgba(0,0,0,0.05)]',
-                'hover:bg-[#9659d9] transition-colors duration-200'
+                'hover:bg-[#6D28D9] transition-colors duration-200'
               )}
             >
               {ctaPrimaryText || 'Get in touch'}
@@ -284,7 +297,7 @@ export default function Hero({
             </button>
           </Link>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   )
 }

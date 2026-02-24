@@ -28,7 +28,7 @@ export const fallbackBlogPosts: FallbackBlogPost[] = [
     readTime: '8 min read',
     featured: true,
     image:
-      'https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=1400&h=800&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=1400&h=800&fit=crop&q=80',
     content: `
       <h2>The AI-First Enterprise</h2>
       <p>In 2026, the question is no longer whether businesses should adopt AI — it's how deeply they can embed it into every layer of their operations. From Fortune 500 companies to lean startups, organizations are discovering that AI integration isn't a single project; it's an ongoing transformation.</p>
@@ -58,7 +58,7 @@ export const fallbackBlogPosts: FallbackBlogPost[] = [
     readTime: '6 min read',
     featured: false,
     image:
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&h=800&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1400&h=800&fit=crop&q=80',
     content: `
       <h2>Beyond Basic Automation</h2>
       <p>Traditional automation follows rigid rules: if X happens, do Y. Smart workflows go further — they learn, adapt, and make decisions based on context, historical patterns, and real-time data.</p>
@@ -87,7 +87,7 @@ export const fallbackBlogPosts: FallbackBlogPost[] = [
     readTime: '10 min read',
     featured: false,
     image:
-      'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1400&h=800&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1518770660439-4636190af475?w=1400&h=800&fit=crop&q=80',
     content: `
       <h2>What Makes AI "Agentic"?</h2>
       <p>Traditional AI systems respond to prompts. Agentic AI systems take initiative. They can break complex goals into subtasks, execute multi-step plans, use tools, and adapt their approach based on intermediate results — all with minimal human oversight.</p>
@@ -117,7 +117,7 @@ export const fallbackBlogPosts: FallbackBlogPost[] = [
     readTime: '7 min read',
     featured: false,
     image:
-      'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1400&h=800&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=1400&h=800&fit=crop&q=80',
     content: `
       <h2>Einstein Copilot: Your AI-Powered CRM Assistant</h2>
       <p>Salesforce Einstein Copilot represents a paradigm shift in how sales teams interact with their CRM. Instead of manually searching for data, writing follow-up emails, and updating records, teams can now delegate these tasks to an AI assistant that understands the full context of every customer relationship.</p>
@@ -146,7 +146,7 @@ export const fallbackBlogPosts: FallbackBlogPost[] = [
     readTime: '9 min read',
     featured: false,
     image:
-      'https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=1400&h=800&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1526628953301-3e589a6a8b74?w=1400&h=800&fit=crop&q=80',
     content: `
       <h2>AI-First vs AI-Added</h2>
       <p>There's a fundamental difference between products that use AI and products built around AI. AI-added products treat intelligence as a feature — a chatbot here, a recommendation there. AI-first products are designed from the ground up with AI at the core of the user experience.</p>
@@ -176,7 +176,7 @@ export const fallbackBlogPosts: FallbackBlogPost[] = [
     readTime: '5 min read',
     featured: false,
     image:
-      'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=1400&h=800&fit=crop&q=80',
+      'https://images.unsplash.com/photo-1551434678-e076c223a692?w=1400&h=800&fit=crop&q=80',
     content: `
       <h2>The Business Case for Automation</h2>
       <p>Workflow automation isn't just about efficiency — it's about creating measurable business impact. Organizations that strategically implement automation consistently report significant returns across multiple dimensions: reduced operational costs, faster cycle times, improved accuracy, and better employee satisfaction.</p>

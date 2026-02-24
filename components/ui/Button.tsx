@@ -13,8 +13,8 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles: Record<ButtonVariant, string> = {
   primary: cn(
-    'bg-gradient-to-r from-[#814AC8] to-[#DF7AFE] text-white',
-    'hover:from-[#6E3EAD] hover:to-[#D066E8]',
+    'bg-primary text-primary-foreground',
+    'hover:bg-primary/90',
     'shadow-lg shadow-primary/25 hover:shadow-primary/40',
     'border border-transparent'
   ),
