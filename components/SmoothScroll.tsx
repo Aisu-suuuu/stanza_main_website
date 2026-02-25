@@ -5,6 +5,13 @@ import { usePathname } from 'next/navigation'
 import Lenis from 'lenis'
 import 'lenis/dist/lenis.css'
 
+// Expose Lenis instance globally so modals can stop/start scroll
+declare global {
+  interface Window {
+    __lenis?: Lenis
+  }
+}
+
 export default function SmoothScroll() {
   const lenisRef = useRef<Lenis | null>(null)
   const pathname = usePathname()
@@ -17,9 +24,11 @@ export default function SmoothScroll() {
       autoRaf: true,
     })
     lenisRef.current = lenis
+    window.__lenis = lenis
 
     return () => {
       lenis.destroy()
+      window.__lenis = undefined
     }
   }, [])
 

@@ -449,14 +449,20 @@ export default function CareersPageClient({ pageData, positions, benefits }: Car
   const [showApplyModal, setShowApplyModal] = useState(false)
   const [viewJdId, setViewJdId] = useState<number | null>(null)
 
-  // Lock body scroll when any modal is open
+  // Lock body scroll + stop Lenis when any modal is open
   useEffect(() => {
-    if (showApplyModal || viewJdId !== null) {
+    const isOpen = showApplyModal || viewJdId !== null
+    if (isOpen) {
       document.body.style.overflow = 'hidden'
+      window.__lenis?.stop()
     } else {
       document.body.style.overflow = ''
+      window.__lenis?.start()
     }
-    return () => { document.body.style.overflow = '' }
+    return () => {
+      document.body.style.overflow = ''
+      window.__lenis?.start()
+    }
   }, [showApplyModal, viewJdId])
   const activePositions = positions && positions.length > 0 ? positions : defaultPositions
 
@@ -514,7 +520,6 @@ export default function CareersPageClient({ pageData, positions, benefits }: Car
         </section>
 
         {/* Why Work With Us Section */}
-        <BlurSection>
         <section className="py-20 md:py-28">
           <div className="container-custom">
             <motion.div
@@ -561,10 +566,8 @@ export default function CareersPageClient({ pageData, positions, benefits }: Car
             </div>
           </div>
         </section>
-        </BlurSection>
 
         {/* Open Positions Section */}
-        <BlurSection>
         <section className="py-20 md:py-28 bg-background">
           <div className="container-custom">
             <motion.div
@@ -668,10 +671,8 @@ export default function CareersPageClient({ pageData, positions, benefits }: Car
             )}
           </div>
         </section>
-        </BlurSection>
 
         {/* Team Culture Section */}
-        <BlurSection>
         <section className="py-20 md:py-28">
           <div className="container-custom">
             <motion.div
@@ -730,10 +731,8 @@ export default function CareersPageClient({ pageData, positions, benefits }: Car
             </motion.div>
           </div>
         </section>
-        </BlurSection>
 
         {/* CTA Section */}
-        <BlurSection>
         <section className="relative py-24 lg:py-32 overflow-hidden bg-background">
           <div className="container-custom relative z-10">
             <motion.div
@@ -782,7 +781,6 @@ export default function CareersPageClient({ pageData, positions, benefits }: Car
             </motion.div>
           </div>
         </section>
-        </BlurSection>
       </main>
 
       {/* Apply Modal */}
@@ -854,9 +852,11 @@ export default function CareersPageClient({ pageData, positions, benefits }: Car
         {viewJdId !== null && jdContent[viewJdId] && (
           <motion.div
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            data-lenis-prevent
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            onWheel={(e) => e.stopPropagation()}
           >
             {/* Backdrop */}
             <motion.div
@@ -867,14 +867,16 @@ export default function CareersPageClient({ pageData, positions, benefits }: Car
               exit={{ opacity: 0 }}
             />
 
-            {/* Popup box */}
+            {/* Popup box — constrained height, internal scroll */}
             <motion.div
               className="relative bg-surface-card rounded-3xl border border-foreground/10 shadow-2xl w-full max-w-2xl max-h-[85vh] flex flex-col"
+              style={{ overscrollBehavior: 'contain' }}
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ duration: 0.3, ease: [0.25, 0.4, 0.25, 1] }}
               onClick={(e) => e.stopPropagation()}
+              onWheel={(e) => e.stopPropagation()}
             >
               {/* Close button */}
               <button
@@ -884,8 +886,13 @@ export default function CareersPageClient({ pageData, positions, benefits }: Car
                 <X className="w-4 h-4 text-muted" />
               </button>
 
-              {/* Scrollable content */}
-              <div className="overflow-y-auto p-6 sm:p-8">
+              {/* Scrollable content inside the card */}
+              <div
+                className="overflow-y-auto p-6 sm:p-8"
+                style={{ overscrollBehavior: 'contain' }}
+                data-lenis-prevent
+                onWheel={(e) => e.stopPropagation()}
+              >
                 {/* Title */}
                 <h3 className="text-2xl font-bold text-foreground mb-1 pr-10">
                   {activePositions.find((p) => p.id === viewJdId)?.title}

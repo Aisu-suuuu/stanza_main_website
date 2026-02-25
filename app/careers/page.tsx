@@ -12,7 +12,7 @@ export default async function CareersPage() {
   ])
 
   const positionData = wpPositions.map((p, i) => ({
-    id: p.id || i + 1,
+    id: i + 1,
     title: decodeHtmlEntities(p.title.rendered),
     type: p.acf.type || 'Full-time',
     location: p.acf.location || 'Remote',
