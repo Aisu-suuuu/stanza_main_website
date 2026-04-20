@@ -11,14 +11,17 @@ export default async function CareersPage() {
     getCareerBenefits(),
   ])
 
-  const positionData = wpPositions.map((p, i) => ({
-    id: i + 1,
-    title: decodeHtmlEntities(p.title.rendered),
-    type: p.acf.type || 'Full-time',
-    location: p.acf.location || 'Remote',
-    department: p.acf.department || 'Engineering',
-    description: p.acf.description || '',
-  }))
+  const removedRoles = ['IT Sales Executive', 'DevOps Engineer', 'SaaS Marketing & BD Manager', 'Full Stack Developer']
+  const positionData = wpPositions
+    .filter((p) => !removedRoles.includes(decodeHtmlEntities(p.title.rendered)))
+    .map((p, i) => ({
+      id: i + 1,
+      title: decodeHtmlEntities(p.title.rendered),
+      type: p.acf.type || 'Full-time',
+      location: p.acf.location || 'Remote',
+      department: p.acf.department || 'Engineering',
+      description: p.acf.description || '',
+    }))
 
   const benefitData = wpBenefits.map((b) => ({
     title: decodeHtmlEntities(b.title.rendered),
