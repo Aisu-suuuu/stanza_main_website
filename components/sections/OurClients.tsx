@@ -10,7 +10,7 @@ const defaultClients = [
   { name: 'Juniper Networks', logo: '/logos/juniper.svg' },
   { name: 'RingCentral', logo: '/logos/ringcentral.svg' },
   { name: 'Samsung', logo: '/logos/samsung.svg' },
-  { name: 'Sysco', logo: '/logos/sysco.svg' },
+  { name: 'Cisco', logo: '/logos/cisco.png' },
 ]
 
 interface OurClientsProps {
