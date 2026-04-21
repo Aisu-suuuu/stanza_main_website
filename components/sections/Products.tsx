@@ -14,6 +14,7 @@ interface Product {
   imageUrl: string
   imageOnLeft: boolean
   scrollOnHover?: boolean
+  externalUrl?: string
 }
 
 const defaultProducts: Product[] = [
@@ -26,6 +27,7 @@ const defaultProducts: Product[] = [
     imageUrl: '/images/prepmonkey.png',
     imageOnLeft: true,
     scrollOnHover: true,
+    externalUrl: 'https://prepmonkey.com/',
   },
   {
     title: 'Agentic AI Platform',
@@ -72,49 +74,64 @@ function ProductRow({ product, index, isInView }: ProductRowProps) {
         )}
       >
         {/* Image */}
-        <div
-          className={cn(
-            'relative rounded-2xl overflow-hidden',
-            product.scrollOnHover
-              ? 'aspect-[4/3]'
-              : 'aspect-square',
-            isReversed && 'md:order-2'
-          )}
-        >
-          {product.scrollOnHover ? (
-            /* Scroll-on-hover: full landing page preview */
-            <motion.div style={{ y: imgY }} className="absolute inset-0 -top-10 -bottom-10">
-              <Image
-                src={product.imageUrl}
-                alt={product.title}
-                fill
-                className={cn(
-                  'object-cover object-top',
-                  'md:transition-[object-position] md:duration-[40s] md:ease-linear',
-                  'md:group-hover:object-bottom'
-                )}
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
-              />
-            </motion.div>
+        {(() => {
+          const imageInner = (
+            <>
+              {product.scrollOnHover ? (
+                /* Scroll-on-hover: full landing page preview */
+                <motion.div style={{ y: imgY }} className="absolute inset-0 -top-10 -bottom-10">
+                  <Image
+                    src={product.imageUrl}
+                    alt={product.title}
+                    fill
+                    className={cn(
+                      'object-cover object-top',
+                      'md:transition-[object-position] md:duration-[40s] md:ease-linear',
+                      'md:group-hover:object-bottom'
+                    )}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+                  />
+                </motion.div>
+              ) : (
+                /* Standard image — full image visible */
+                <motion.div style={{ y: imgY }} className="absolute inset-0 -top-10 -bottom-10">
+                  <Image
+                    src={product.imageUrl}
+                    alt={product.title}
+                    fill
+                    className={cn(
+                      'object-contain',
+                      'transition-transform duration-500 ease-out',
+                      'group-hover:scale-105'
+                    )}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+                  />
+                </motion.div>
+              )}
+              {/* Subtle gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10 pointer-events-none" />
+            </>
+          )
+          const wrapperClass = cn(
+            'relative rounded-2xl overflow-hidden block',
+            product.scrollOnHover ? 'aspect-[4/3]' : 'aspect-square',
+            isReversed && 'md:order-2',
+            product.externalUrl && 'cursor-pointer'
+          )
+          return product.externalUrl ? (
+            <a
+              href={product.externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visit ${product.title}`}
+              className={wrapperClass}
+            >
+              {imageInner}
+            </a>
           ) : (
-            /* Standard image — full image visible */
-            <motion.div style={{ y: imgY }} className="absolute inset-0 -top-10 -bottom-10">
-              <Image
-                src={product.imageUrl}
-                alt={product.title}
-                fill
-                className={cn(
-                  'object-contain',
-                  'transition-transform duration-500 ease-out',
-                  'group-hover:scale-105'
-                )}
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
-              />
-            </motion.div>
-          )}
-          {/* Subtle gradient overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10 pointer-events-none" />
-        </div>
+            <div className={wrapperClass}>{imageInner}</div>
+          )
+        })()}
 
         {/* Content */}
         <div className={cn('py-2 md:py-4', isReversed && 'md:order-1')}>

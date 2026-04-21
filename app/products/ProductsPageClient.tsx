@@ -39,9 +39,10 @@ const products = [
       'Practice tests & mock exams',
       'AI-powered recommendations',
     ],
-    imageUrl:
-      'https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=1200&auto=format&fit=crop&q=80',
+    imageUrl: '/images/prepmonkey.png',
     gradient: 'from-primary to-primary',
+    externalUrl: 'https://prepmonkey.com/',
+    scrollOnHover: true,
   },
   {
     id: 'agentic-ai-platform',
@@ -195,39 +196,58 @@ function ProductCard({ product, index, isInView }: ProductCardProps) {
         whileHover={{ scale: 1.02 }}
         transition={{ duration: 0.4 }}
       >
-        <div
-          className={cn(
-            'relative aspect-[4/3] rounded-2xl overflow-hidden',
+        {(() => {
+          const hasExternal = 'externalUrl' in product && !!product.externalUrl
+          const isScroll = 'scrollOnHover' in product && !!product.scrollOnHover
+          const imageInner = (
+            <>
+              <Image
+                src={product.imageUrl}
+                alt={product.title}
+                fill
+                className={cn(
+                  isScroll ? 'object-cover object-top' : 'object-cover',
+                  isScroll
+                    ? 'md:transition-[object-position] md:duration-[40s] md:ease-linear md:group-hover:object-bottom'
+                    : 'transition-transform duration-700 ease-out group-hover:scale-110'
+                )}
+              />
+              {/* Overlay gradient */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent pointer-events-none" />
+              {/* Product label */}
+              <div className="absolute bottom-6 left-6 pointer-events-none">
+                <span
+                  className={cn(
+                    'inline-flex items-center px-4 py-2 rounded-full',
+                    'bg-foreground/10 backdrop-blur-sm border border-foreground/20',
+                    'text-sm font-medium text-foreground'
+                  )}
+                >
+                  Featured Product
+                </span>
+              </div>
+            </>
+          )
+          const wrapperClass = cn(
+            'relative aspect-[4/3] rounded-2xl overflow-hidden block',
             'border border-border',
-            'shadow-2xl shadow-primary/10'
-          )}
-        >
-          <Image
-            src={product.imageUrl}
-            alt={product.title}
-            fill
-            className={cn(
-              'object-cover',
-              'transition-transform duration-700 ease-out',
-              'group-hover:scale-110'
-            )}
-          />
-          {/* Overlay gradient */}
-          <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
-
-          {/* Product label */}
-          <div className="absolute bottom-6 left-6">
-            <span
-              className={cn(
-                'inline-flex items-center px-4 py-2 rounded-full',
-                'bg-foreground/10 backdrop-blur-sm border border-foreground/20',
-                'text-sm font-medium text-foreground'
-              )}
+            'shadow-2xl shadow-primary/10',
+            hasExternal && 'cursor-pointer'
+          )
+          return hasExternal ? (
+            <a
+              href={(product as { externalUrl?: string }).externalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Visit ${product.title}`}
+              className={wrapperClass}
             >
-              Featured Product
-            </span>
-          </div>
-        </div>
+              {imageInner}
+            </a>
+          ) : (
+            <div className={wrapperClass}>{imageInner}</div>
+          )
+        })()}
 
         {/* Decorative gradient blur */}
         <div
