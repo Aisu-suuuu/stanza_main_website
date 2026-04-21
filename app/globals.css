@@ -318,3 +318,13 @@ body {
     padding: 0 4rem;
   }
 }
+
+/* Auto-scrolling website preview (PrepMonkey product card) */
+@keyframes scroll-preview {
+  0%, 5% { object-position: top; }
+  95%, 100% { object-position: bottom; }
+}
+
+.scroll-preview-image {
+  animation: scroll-preview 40s linear infinite alternate;
+}

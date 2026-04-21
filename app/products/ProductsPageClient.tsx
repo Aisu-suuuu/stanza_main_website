@@ -206,10 +206,8 @@ function ProductCard({ product, index, isInView }: ProductCardProps) {
                 alt={product.title}
                 fill
                 className={cn(
-                  isScroll ? 'object-cover object-top' : 'object-cover',
-                  isScroll
-                    ? 'md:transition-[object-position] md:duration-[40s] md:ease-linear md:group-hover:object-bottom'
-                    : 'transition-transform duration-700 ease-out group-hover:scale-110'
+                  isScroll ? 'object-cover object-top scroll-preview-image' : 'object-cover',
+                  !isScroll && 'transition-transform duration-700 ease-out group-hover:scale-110'
                 )}
               />
               {/* Overlay gradient */}

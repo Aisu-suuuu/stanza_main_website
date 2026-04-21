@@ -78,16 +78,14 @@ function ProductRow({ product, index, isInView }: ProductRowProps) {
           const imageInner = (
             <>
               {product.scrollOnHover ? (
-                /* Scroll-on-hover: full landing page preview */
+                /* Auto-scrolling full landing page preview (works on all devices) */
                 <motion.div style={{ y: imgY }} className="absolute inset-0 -top-10 -bottom-10">
                   <Image
                     src={product.imageUrl}
                     alt={product.title}
                     fill
                     className={cn(
-                      'object-cover object-top',
-                      'md:transition-[object-position] md:duration-[40s] md:ease-linear',
-                      'md:group-hover:object-bottom'
+                      'object-cover object-top scroll-preview-image'
                     )}
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
                   />
