@@ -56,8 +56,7 @@ const products = [
       'Scalable AI infrastructure',
       'Seamless system integration',
     ],
-    imageUrl:
-      'https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=1200&auto=format&fit=crop&q=80',
+    imageUrl: '/images/agentic-ai.png',
     gradient: 'from-primary to-primary',
   },
 ]
