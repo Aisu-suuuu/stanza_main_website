@@ -31,7 +31,7 @@ const products = [
     id: 'prepmonkey',
     title: 'PrepMonkey',
     description:
-      'An AI-powered EdTech platform designed to optimize competitive exam preparation through structured learning paths, performance tracking, and intelligent study assistance.',
+      'PrepMonkey is a structured preparation system built for serious UPSC aspirants. We focus on clarity, discipline, and consistent progress. No exaggerated promises. No shortcuts.',
     features: [
       'Structured learning paths',
       'Performance tracking & analytics',
@@ -198,7 +198,6 @@ function ProductCard({ product, index, isInView }: ProductCardProps) {
       >
         {(() => {
           const hasExternal = 'externalUrl' in product && !!product.externalUrl
-          const isScroll = 'scrollOnHover' in product && !!product.scrollOnHover
           const imageInner = (
             <>
               <Image
@@ -206,8 +205,8 @@ function ProductCard({ product, index, isInView }: ProductCardProps) {
                 alt={product.title}
                 fill
                 className={cn(
-                  isScroll ? 'object-cover object-top scroll-preview-image' : 'object-cover',
-                  !isScroll && 'transition-transform duration-700 ease-out group-hover:scale-110'
+                  'object-cover',
+                  'transition-transform duration-700 ease-out group-hover:scale-110'
                 )}
               />
               {/* Overlay gradient */}

@@ -21,8 +21,7 @@ const defaultProducts: Product[] = [
   {
     title: 'PrepMonkey',
     description: [
-      'An AI-powered EdTech platform designed to optimize competitive exam preparation through structured learning paths, performance tracking, and intelligent study assistance.',
-      'PrepMonkey empowers students with personalized learning experiences, comprehensive practice materials, and real-time performance insights to achieve their academic goals.',
+      'PrepMonkey is a structured preparation system built for serious UPSC aspirants. We focus on clarity, discipline, and consistent progress. No exaggerated promises. No shortcuts.',
     ],
     imageUrl: '/images/prepmonkey.png',
     imageOnLeft: true,
@@ -77,35 +76,19 @@ function ProductRow({ product, index, isInView }: ProductRowProps) {
         {(() => {
           const imageInner = (
             <>
-              {product.scrollOnHover ? (
-                /* Auto-scrolling full landing page preview (works on all devices) */
-                <motion.div style={{ y: imgY }} className="absolute inset-0 -top-10 -bottom-10">
-                  <Image
-                    src={product.imageUrl}
-                    alt={product.title}
-                    fill
-                    className={cn(
-                      'object-cover object-top scroll-preview-image'
-                    )}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
-                  />
-                </motion.div>
-              ) : (
-                /* Standard image — full image visible */
-                <motion.div style={{ y: imgY }} className="absolute inset-0 -top-10 -bottom-10">
-                  <Image
-                    src={product.imageUrl}
-                    alt={product.title}
-                    fill
-                    className={cn(
-                      'object-contain',
-                      'transition-transform duration-500 ease-out',
-                      'group-hover:scale-105'
-                    )}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
-                  />
-                </motion.div>
-              )}
+              <motion.div style={{ y: imgY }} className="absolute inset-0">
+                <Image
+                  src={product.imageUrl}
+                  alt={product.title}
+                  fill
+                  className={cn(
+                    product.scrollOnHover ? 'object-cover' : 'object-contain',
+                    'transition-transform duration-500 ease-out',
+                    'group-hover:scale-105'
+                  )}
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 50vw"
+                />
+              </motion.div>
               {/* Subtle gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-black/10 pointer-events-none" />
             </>

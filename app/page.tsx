@@ -34,15 +34,26 @@ export default async function Home() {
     prepmonkey: '/images/prepmonkey.png',
     agenticaiplatform: '/images/agentic-ai.png',
   }
+  const productOverrides: Record<string, { description?: string[]; imageUrl?: string; externalUrl?: string }> = {
+    prepmonkey: {
+      description: [
+        'PrepMonkey is a structured preparation system built for serious UPSC aspirants. We focus on clarity, discipline, and consistent progress. No exaggerated promises. No shortcuts.',
+      ],
+      imageUrl: '/images/prepmonkey.png',
+      externalUrl: 'https://prepmonkey.com/',
+    },
+  }
   const productItems = products.map((p, i) => {
     const title = decodeHtmlEntities(p.title.rendered)
     const slug = title.toLowerCase().replace(/\s+/g, '')
+    const override = productOverrides[slug] || {}
     return {
       title,
-      description: [p.acf.description, p.acf.description_2].filter(Boolean) as string[],
-      imageUrl: p.acf.product_image || productFallbacks[slug] || 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&auto=format&fit=crop&q=60',
+      description: override.description ?? ([p.acf.description, p.acf.description_2].filter(Boolean) as string[]),
+      imageUrl: override.imageUrl ?? (p.acf.product_image || productFallbacks[slug] || 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=800&auto=format&fit=crop&q=60'),
       imageOnLeft: i % 2 === 0,
       scrollOnHover: slug === 'prepmonkey',
+      externalUrl: override.externalUrl,
     }
   })
 
