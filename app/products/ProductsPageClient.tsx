@@ -204,7 +204,7 @@ function ProductCard({ product, index, isInView }: ProductCardProps) {
                 alt={product.title}
                 fill
                 className={cn(
-                  'object-cover',
+                  product.id === 'agentic-ai-platform' ? 'object-contain' : 'object-cover',
                   'transition-transform duration-700 ease-out group-hover:scale-110'
                 )}
               />
