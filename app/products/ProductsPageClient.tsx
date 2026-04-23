@@ -245,13 +245,6 @@ function ProductCard({ product, index, isInView }: ProductCardProps) {
           )
         })()}
 
-        {/* Decorative gradient blur */}
-        <div
-          className={cn(
-            'absolute -inset-4 -z-10 rounded-3xl opacity-50 blur-2xl',
-            `bg-gradient-to-r ${product.gradient}`
-          )}
-        />
       </motion.div>
 
       {/* Content Section */}
