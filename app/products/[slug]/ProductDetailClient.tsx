@@ -13,6 +13,15 @@ import {
 import { cn } from '@/lib/utils'
 import Header from '@/components/layout/Header'
 import { Button } from '@/components/ui/Button'
+import PrepMonkeyScreenCarousel from '@/components/prepmonkey/PrepMonkeyScreenCarousel'
+
+const PREPMONKEY_CAROUSEL_SLIDES = [
+  { src: '/prepmonkey-screens/1.mp4', caption: 'Structured learning paths tailored to specific competitive exams' },
+  { src: '/prepmonkey-screens/2.mp4', caption: 'AI-powered performance tracking and gap analysis' },
+  { src: '/prepmonkey-screens/3.mp4', caption: 'Adaptive practice tests with difficulty scaling' },
+  { src: '/prepmonkey-screens/4.mp4', caption: 'Detailed analytics dashboards for students and educators' },
+  { src: '/prepmonkey-screens/5.mp4', caption: 'Intelligent study schedule optimization' },
+]
 
 interface ProductDetailClientProps {
   product: {
@@ -185,29 +194,40 @@ export default function ProductDetailClient({
                 </h2>
               </motion.div>
 
-              <motion.div
-                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-              >
-                {product.features.map((feature, index) => (
-                  <motion.div
-                    key={index}
-                    variants={itemVariants}
-                    className={cn(
-                      'group p-6 lg:p-8',
-                      'bg-surface-card rounded-3xl border border-border/50',
-                      'hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10',
-                      'transition-all duration-300 hover:-translate-y-1'
-                    )}
-                  >
-                    <CheckCircle className="w-6 h-6 text-foreground mb-4 group-hover:scale-110 transition-transform" />
-                    <p className="text-foreground font-medium">{feature}</p>
-                  </motion.div>
-                ))}
-              </motion.div>
+              {product.slug === 'prepmonkey' ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                >
+                  <PrepMonkeyScreenCarousel slides={PREPMONKEY_CAROUSEL_SLIDES} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                  variants={containerVariants}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true }}
+                >
+                  {product.features.map((feature, index) => (
+                    <motion.div
+                      key={index}
+                      variants={itemVariants}
+                      className={cn(
+                        'group p-6 lg:p-8',
+                        'bg-surface-card rounded-3xl border border-border/50',
+                        'hover:border-primary/50 hover:shadow-lg hover:shadow-primary/10',
+                        'transition-all duration-300 hover:-translate-y-1'
+                      )}
+                    >
+                      <CheckCircle className="w-6 h-6 text-foreground mb-4 group-hover:scale-110 transition-transform" />
+                      <p className="text-foreground font-medium">{feature}</p>
+                    </motion.div>
+                  ))}
+                </motion.div>
+              )}
             </div>
           </section>
           </BlurSection>
